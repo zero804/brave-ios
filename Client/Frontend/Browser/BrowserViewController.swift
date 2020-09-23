@@ -2141,6 +2141,43 @@ extension BrowserViewController: ToolbarDelegate {
         showAddTabContextMenu(sourceView: toolbar ?? topToolbar, button: button)
     }
     
+    private static var zoomLevel: CGFloat = 1.0
+    
+    func tabToolbarDidPressZoom(_ tabToolbar: ToolbarProtocol) {
+        if let webView = tabManager.selectedTab?.webView {
+            
+//            //ZOOM the current page.. IE: Same as Safari & Chrome's: Command +/-
+            let zoomLevel = BrowserViewController.zoomLevel
+            
+//            webViewContainer.setNeedsLayout()
+//            webView.frame.size = CGSize(width: webViewContainer.bounds.width * (1.0/zoomLevel), height: webViewContainer.bounds.height * (1.0/zoomLevel))
+//
+//            webView.scrollView.layer.transform = CATransform3DMakeScale(zoomLevel, zoomLevel, 1.0)
+//            webViewContainer.layoutIfNeeded()
+            
+//            webView.evaluateJavaScript("document.body.style.webkitTextSizeAdjust = `\(zoomLevel * 100)%`", completionHandler: { _, error in
+//                print(error)
+//            })
+            
+            let script =
+            """
+                /*function showVal(a){
+                   var zoomScale = \(zoomLevel);
+                   setZoom(zoomScale,document.body);
+                }
+
+                showVal(\(zoomLevel));*/
+            
+                bigger();
+            """
+            
+            webView.evaluateJavaScript(script) { _, error in
+                print(error)
+            }
+            BrowserViewController.zoomLevel += 0.5
+        }
+    }
+    
     private func addTabAlertActions() -> [UIAlertAction] {
         var actions: [UIAlertAction] = []
         if !PrivateBrowsingManager.shared.isPrivateBrowsing {
@@ -2441,9 +2478,10 @@ extension BrowserViewController: TabManagerDelegate {
 
             scrollController.tab = selected
             webViewContainer.addSubview(webView)
-            webView.snp.makeConstraints { make in
-                make.left.right.top.bottom.equalTo(self.webViewContainer)
-            }
+            webView.frame = webViewContainer.bounds
+//            webView.snp.makeConstraints { make in
+//                make.left.right.top.bottom.equalTo(self.webViewContainer)
+//            }
             webView.accessibilityLabel = Strings.webContentAccessibilityLabel
             webView.accessibilityIdentifier = "contentView"
             webView.accessibilityElementsHidden = false

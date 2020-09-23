@@ -14,6 +14,7 @@ protocol ToolbarProtocol: class {
     var addTabButton: ToolbarButton { get }
     var searchButton: ToolbarButton { get }
     var menuButton: ToolbarButton { get }
+    var zoomButton: ToolbarButton { get }
     var actionButtons: [Themeable & UIButton] { get }
     
     func updateBackStatus(_ canGoBack: Bool)
@@ -52,4 +53,5 @@ protocol ToolbarDelegate: class {
     func tabToolbarDidPressSearch(_ tabToolbar: ToolbarProtocol, button: UIButton)
     func tabToolbarDidLongPressAddTab(_ tabToolbar: ToolbarProtocol, button: UIButton)
     func tabToolbarDidSwipeToChangeTabs(_ tabToolbar: ToolbarProtocol, direction: UISwipeGestureRecognizer.Direction)
+    func tabToolbarDidPressZoom(_ tabToolbar: ToolbarProtocol)
 }

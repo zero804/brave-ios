@@ -107,6 +107,42 @@ function onReady(fn) {
     }
 }
 
+function setZoom(zoom,el) {
+      
+      transformOrigin = [0,0];
+        el = el || instance.getContainer();
+        var p = ["webkit", "moz", "ms", "o"],
+            s = "scale(" + zoom + ")",
+            oString = (transformOrigin[0] * 100) + "% " + (transformOrigin[1] * 100) + "%";
+
+        for (var i = 0; i < p.length; i++) {
+            el.style[p[i] + "Transform"] = s;
+            el.style[p[i] + "TransformOrigin"] = oString;
+        }
+
+        el.style["transform"] = s;
+        el.style["transformOrigin"] = oString;
+      
+}
+
+var zoom = 1;
+var width = 100;
+
+function bigger() {
+    zoom = zoom + 0.1;
+    width = 100 / zoom;
+    document.body.style.transformOrigin = "left top";
+    document.body.style.transform = "scale(" + zoom + ")";
+    document.body.style.width = width + "%";
+}
+function smaller() {
+    zoom = zoom - 0.1;
+    width = 100 / zoom;
+    document.body.style.transformOrigin = "left top";
+    document.body.style.transform = "scale(" + zoom + ")";
+    document.body.style.width = width + "%";
+}
+
 //TODO: Modify to not use mutation observers
 //TODO: Modify to not use intervals
 //^ Fix all of the above using a node.add and node.insert hook instead.

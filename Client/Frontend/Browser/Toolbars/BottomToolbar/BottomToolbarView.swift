@@ -18,6 +18,7 @@ class BottomToolbarView: UIView, ToolbarProtocol {
     let searchButton = ToolbarButton(top: false).then {
         $0.isHidden = true
     }
+    let zoomButton = ToolbarButton(top: false)
     let menuButton = ToolbarButton(top: false)
     let actionButtons: [Themeable & UIButton]
 
@@ -25,7 +26,7 @@ class BottomToolbarView: UIView, ToolbarProtocol {
     private let contentView = UIStackView()
 
     fileprivate override init(frame: CGRect) {
-        actionButtons = [backButton, forwardButton, addTabButton, searchButton, tabsButton, menuButton]
+        actionButtons = [zoomButton, backButton, forwardButton, addTabButton, searchButton, tabsButton, menuButton]
         super.init(frame: frame)
         setupAccessibility()
 
@@ -42,6 +43,7 @@ class BottomToolbarView: UIView, ToolbarProtocol {
         didSet {
             addTabButton.isHidden = isSearchButtonEnabled
             searchButton.isHidden = !addTabButton.isHidden
+            zoomButton.isHidden = isSearchButtonEnabled
         }
     }
     

@@ -147,6 +147,7 @@ class TopToolbarView: UIView, ToolbarProtocol {
     var addTabButton = ToolbarButton(top: true)
     // Do nothing with this, just required for protocol conformance
     var searchButton = ToolbarButton(top: true)
+    var zoomButton = ToolbarButton(top: true)
     lazy var menuButton = ToolbarButton(top: true).then {
         $0.contentMode = .center
         $0.accessibilityIdentifier = "topToolbarView-menuButton"

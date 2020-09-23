@@ -13,6 +13,9 @@ class ToolbarHelper: NSObject {
         self.toolbar = toolbar
         super.init()
         
+        toolbar.zoomButton.setImage(#imageLiteral(resourceName: "quick_action_new_private_tab").template, for: .normal)
+        toolbar.zoomButton.addTarget(self, action: #selector(didClickZoom), for: UIControl.Event.touchUpInside)
+        
         toolbar.backButton.setImage(#imageLiteral(resourceName: "nav-back").template, for: .normal)
         toolbar.backButton.accessibilityLabel = Strings.tabToolbarBackButtonAccessibilityLabel
         let longPressGestureBackButton = UILongPressGestureRecognizer(target: self, action: #selector(didLongPressBack))
@@ -97,5 +100,9 @@ class ToolbarHelper: NSObject {
         if longPress.state == .began {
             toolbar.tabToolbarDelegate?.tabToolbarDidLongPressAddTab(toolbar, button: toolbar.shareButton)
         }
+    }
+    
+    func didClickZoom() {
+        toolbar.tabToolbarDelegate?.tabToolbarDidPressZoom(toolbar)
     }
 }
