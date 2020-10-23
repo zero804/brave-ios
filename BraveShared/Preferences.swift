@@ -113,6 +113,7 @@ extension Preferences {
         public static let isUsingBAP = Option<Bool?>(key: "rewards.is-using-bap", default: nil)
         public static let checkedPreviousCycleForAdsViewing = Option<Bool>(key: "rewards.checked-previous-ads-cycle", default: false)
         public static let seenDataMigrationFailureError = Option<Bool>(key: "rewards.seen-data-migration-failure-error", default: false)
+        public static let migratedLegacyWallet = Option<Bool>(key: "rewards.migrated-legacy-wallet", default: false)
         
         public enum EnvironmentOverride: Int {
             case none
