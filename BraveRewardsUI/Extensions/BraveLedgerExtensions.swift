@@ -259,9 +259,6 @@ extension BraveLedger {
             
             self.attestPromotion(promotion.id, solution: solution) { result, promotion in
               if result == .ledgerOk {
-                if promotion?.type == .ads {
-                  MonthlyAdsGrantReminder.cancelCurrentMonth()
-                }
                 self.updatePendingAndFinishedPromotions {
                   completion(true)
                 }

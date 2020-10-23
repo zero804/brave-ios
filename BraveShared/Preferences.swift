@@ -111,7 +111,6 @@ extension Preferences {
         public static let hideRewardsIcon = Option<Bool>(key: "rewards.hide-rewards-icon", default: false)
         public static let panelOpened = Option<Bool>(key: "rewards.rewards-panel-opened", default: false)
         public static let isUsingBAP = Option<Bool?>(key: "rewards.is-using-bap", default: nil)
-        public static let checkedPreviousCycleForAdsViewing = Option<Bool>(key: "rewards.checked-previous-ads-cycle", default: false)
         public static let seenDataMigrationFailureError = Option<Bool>(key: "rewards.seen-data-migration-failure-error", default: false)
         public static let migratedLegacyWallet = Option<Bool>(key: "rewards.migrated-legacy-wallet", default: false)
         

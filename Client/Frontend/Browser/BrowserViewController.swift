@@ -314,13 +314,6 @@ class BrowserViewController: UIViewController {
         
         setupRewardsObservers()
         
-        if !Preferences.Rewards.checkedPreviousCycleForAdsViewing.value {
-            Preferences.Rewards.checkedPreviousCycleForAdsViewing.value = true
-            if rewards.ads.hasViewedAdsInPreviousCycle() {
-                MonthlyAdsGrantReminder.schedule(for: .previous)
-            }
-        }
-        
         Preferences.NewTabPage.attemptToShowClaimRewardsNotification.value = true
         
         notificationsHandler = AdsNotificationHandler(ads: rewards.ads, presentingController: self)

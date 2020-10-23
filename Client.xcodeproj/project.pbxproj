@@ -421,7 +421,6 @@
 		27A586E1214C0DDD000CAE3C /* PreferencesTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A586E0214C0DDD000CAE3C /* PreferencesTest.swift */; };
 		27A9068923D65A10005D7609 /* PendingContributionListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A9068823D65A10005D7609 /* PendingContributionListController.swift */; };
 		27A9068B23D65E0E005D7609 /* PendingContributionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A9068A23D65E0E005D7609 /* PendingContributionCell.swift */; };
-		27AC169323834175004BE19C /* MonthlyAdsGrantReminder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27AC168F23833A16004BE19C /* MonthlyAdsGrantReminder.swift */; };
 		27AC169823834510004BE19C /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27AC169623834510004BE19C /* UserNotifications.framework */; };
 		27AC7CFA24C77EBC00441317 /* FeedActionAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27AC7CF924C77EBC00441317 /* FeedActionAlertView.swift */; };
 		27B0C7B523D24BAA00B9EA3D /* AutoContributeExclusionListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27B0C7B323D24BAA00B9EA3D /* AutoContributeExclusionListController.swift */; };
@@ -1824,7 +1823,6 @@
 		27A586E0214C0DDD000CAE3C /* PreferencesTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesTest.swift; sourceTree = "<group>"; };
 		27A9068823D65A10005D7609 /* PendingContributionListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingContributionListController.swift; sourceTree = "<group>"; };
 		27A9068A23D65E0E005D7609 /* PendingContributionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingContributionCell.swift; sourceTree = "<group>"; };
-		27AC168F23833A16004BE19C /* MonthlyAdsGrantReminder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyAdsGrantReminder.swift; sourceTree = "<group>"; };
 		27AC169623834510004BE19C /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		27AC7CF724C759BE00441317 /* Enterprise.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Enterprise.entitlements; sourceTree = "<group>"; };
 		27AC7CF924C77EBC00441317 /* FeedActionAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedActionAlertView.swift; sourceTree = "<group>"; };
@@ -3878,14 +3876,6 @@
 			path = "Pending Contributions";
 			sourceTree = "<group>";
 		};
-		27AC169223834134004BE19C /* Rewards */ = {
-			isa = PBXGroup;
-			children = (
-				27AC168F23833A16004BE19C /* MonthlyAdsGrantReminder.swift */,
-			);
-			path = Rewards;
-			sourceTree = "<group>";
-		};
 		27B0C7B123D24B9400B9EA3D /* Exclusion List */ = {
 			isa = PBXGroup;
 			children = (
@@ -4628,7 +4618,6 @@
 			children = (
 				27A1AC0324855D2000344503 /* Private CDN */,
 				F9B23EE323F61380000EB3D8 /* PaymentRequest */,
-				27AC169223834134004BE19C /* Rewards */,
 				0AD4FEE8223A998700E00C05 /* Javascript */,
 				0AD4FED9223A8AF800E00C05 /* Extensions */,
 				0AD5E9BB2200590C00D0D91B /* Shields */,
@@ -6736,7 +6725,6 @@
 				5DE768A720B345C600FF5533 /* BraveStrings.swift in Sources */,
 				0AD4FEF2223AA6CA00E00C05 /* JSContextExtensions.swift in Sources */,
 				0AD4FEF4223AC32200E00C05 /* JSValueExtensions.swift in Sources */,
-				27AC169323834175004BE19C /* MonthlyAdsGrantReminder.swift in Sources */,
 				0AD4FEEE223AA09D00E00C05 /* BrowserifyExposable.swift in Sources */,
 				0A917388231D11960069A08B /* AppReview.swift in Sources */,
 				5D6DDEF3214003A6001FF0AE /* DAU.swift in Sources */,
