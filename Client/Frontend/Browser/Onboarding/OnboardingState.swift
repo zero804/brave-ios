@@ -25,6 +25,4 @@ enum OnboardingProgress: Int {
     case searchEngine
     /// The user has completed the rewards onboarding.
     case rewards
-    /// The user has completed the ads onboarding.
-    case ads
 }

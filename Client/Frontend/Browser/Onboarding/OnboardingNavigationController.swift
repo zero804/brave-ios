@@ -53,15 +53,11 @@ class OnboardingNavigationController: UINavigationController {
                 switch self {
                 case .newUser(let progress):
                     //The user already made it to rewards and agreed so they should only see ads countdown
-                    if progress == .rewards || progress == .ads {
-                        return BraveAds.isCurrentLocaleSupported() ? [.adsCountdown] : [.rewardsAgreement]
+                    if progress == .rewards {
+                        return [.rewardsAgreement]
                     }
                     
                     var newUserScreens: [Screens] = [.searchEnginePicker, .shieldsInfo, .rewardsAgreement]
-                    
-                    if BraveAds.isCurrentLocaleSupported() {
-                        newUserScreens.append(.adsCountdown)
-                    }
                     
                     // FIXME: Update to iOS14 clipboard api once ready (#2838)
                     if Preferences.URP.referralCode.value == nil && UIPasteboard.general.hasStrings {
@@ -71,16 +67,16 @@ class OnboardingNavigationController: UINavigationController {
                     return newUserScreens
                 case .existingUserRewardsOff(let progress):
                     //The user already made it to rewards and agreed so they should only see ads countdown
-                    if progress == .rewards || progress == .ads {
-                        return BraveAds.isCurrentLocaleSupported() ? [.adsCountdown] : []
+                    if progress == .rewards {
+                        return []
                     }
-                    return BraveAds.isCurrentLocaleSupported() ? [.rewardsAgreement, .adsCountdown] : [.rewardsAgreement]
+                    return [.rewardsAgreement]
                 case .existingUserRewardsOn(let progress):
                     //The user already made it to rewards and agreed so they should only see ads countdown
-                    if progress == .rewards || progress == .ads {
-                        return BraveAds.isCurrentLocaleSupported() ? [.adsCountdown] : []
+                    if progress == .rewards {
+                        return []
                     }
-                    return BraveAds.isCurrentLocaleSupported() ? [.existingRewardsTurnOnAds, .adsCountdown] : []
+                    return [.existingRewardsTurnOnAds]
                 }
             } else {
                 switch self {
@@ -97,7 +93,6 @@ class OnboardingNavigationController: UINavigationController {
         case shieldsInfo
         case existingRewardsTurnOnAds
         case rewardsAgreement
-        case adsCountdown
         
         /// Returns new ViewController associated with the screen type
         func viewController(with profile: Profile, rewards: BraveRewards?, theme: Theme) -> OnboardingViewController {
@@ -111,8 +106,6 @@ class OnboardingNavigationController: UINavigationController {
                 return OnboardingAdsAvailableController(profile: profile, rewards: rewards, theme: theme)
             case .rewardsAgreement:
                 return OnboardingRewardsAgreementViewController(profile: profile, rewards: rewards, theme: theme)
-            case .adsCountdown:
-                return OnboardingAdsCountdownViewController(profile: profile, rewards: rewards, theme: theme)
             }
         }
         
@@ -123,7 +116,6 @@ class OnboardingNavigationController: UINavigationController {
             case .shieldsInfo: return OnboardingShieldsViewController.self
             case .existingRewardsTurnOnAds: return OnboardingAdsAvailableController.self
             case .rewardsAgreement: return OnboardingRewardsAgreementViewController.self
-            case .adsCountdown: return OnboardingAdsCountdownViewController.self
             }
         }
     }
