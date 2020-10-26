@@ -12748,7 +12748,7 @@
 					"-framework",
 					CoreMedia,
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = brave.brandonanthony.local;
+				PRODUCT_BUNDLE_IDENTIFIER = com.brave.ios.BrowserDev;
 				PRODUCT_MODULE_NAME = Client;
 				PRODUCT_NAME = Client;
 				PROVISIONING_PROFILE_SPECIFIER = "";
