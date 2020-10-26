@@ -168,7 +168,7 @@ class Tab: NSObject {
     /// tab instance, queue it for later until we become foregrounded.
     fileprivate var alertQueue = [JSAlertInfo]()
     
-    var playlistItems = Observable<[PlaylistInfo]>([])
+    var playlistItems = PlaylistObservable<[PlaylistInfo]>([])
 
     init(configuration: WKWebViewConfiguration, type: TabType = .regular) {
         self.configuration = configuration

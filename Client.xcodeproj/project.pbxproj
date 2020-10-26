@@ -434,7 +434,6 @@
 		27C405E924255A2B00347246 /* BraveShared.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DE7688420B3456C00FF5533 /* BraveShared.framework */; };
 		27C461DE211B76500088A441 /* ShieldsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C461DD211B76500088A441 /* ShieldsView.swift */; };
 		27C46201211CD8D20088A441 /* DeferredTestUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = A176323020CF2A6000126F25 /* DeferredTestUtils.swift */; };
-		27CFB71424E1F67B008DFC8C /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CFB71324E1F67B008DFC8C /* Observable.swift */; };
 		27D114D42358FBBF00166534 /* BraveRewardsSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D114D32358FBBF00166534 /* BraveRewardsSettingsViewController.swift */; };
 		27D114D62358FCA400166534 /* SettingsRowViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D114D52358FCA400166534 /* SettingsRowViews.swift */; };
 		27D3155223D7A95C00219462 /* SettingsMonthlyTipsSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D3155123D7A95C00219462 /* SettingsMonthlyTipsSectionView.swift */; };
@@ -785,7 +784,6 @@
 		5DE7689A20B3456E00FF5533 /* BraveShared.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 5DE7688420B3456C00FF5533 /* BraveShared.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		5DE768A520B3458400FF5533 /* Shared.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288A2D861AB8B3260023ABC3 /* Shared.framework */; };
 		5DE768A620B345C300FF5533 /* SharedExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE7687120B3417A00FF5533 /* SharedExtensions.swift */; };
-		5DE768A720B345C600FF5533 /* BraveStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE7687C20B342E600FF5533 /* BraveStrings.swift */; };
 		5DE768A920B3461300FF5533 /* BraveUX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE768A820B3461200FF5533 /* BraveUX.swift */; };
 		5DE768AB20B346B800FF5533 /* BraveGlobalShieldStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE768AA20B346B700FF5533 /* BraveGlobalShieldStats.swift */; };
 		5DE768AC20B43F9000FF5533 /* BraveShared.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DE7688420B3456C00FF5533 /* BraveShared.framework */; };
@@ -813,6 +811,8 @@
 		5E4845C222DE3DF800372022 /* WindowRenderHelperScript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4845C122DE3DF800372022 /* WindowRenderHelperScript.swift */; };
 		5E4E078324A0E4D700B01720 /* YoutubeAdblock.js in Resources */ = {isa = PBXBuildFile; fileRef = 5E4E078224A0E4D700B01720 /* YoutubeAdblock.js */; };
 		5E5780B0243FA98F005D4EB1 /* PlaylistParticleEmitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5780AF243FA98F005D4EB1 /* PlaylistParticleEmitter.swift */; };
+		5E59DF2E25468E2E00AE59D5 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CFB71324E1F67B008DFC8C /* Observable.swift */; };
+		5E59DF4325468F4900AE59D5 /* BraveStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE7687C20B342E600FF5533 /* BraveStrings.swift */; };
 		5E6683A923D61CF7005B3A6C /* NTPDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6683A823D61CF7005B3A6C /* NTPDownloader.swift */; };
 		5E66CCB82432588B0076BA78 /* VideoPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E66CCB72432588B0076BA78 /* VideoPlayer.swift */; };
 		5E66CCBB243259390076BA78 /* PlaylistNowPlayingBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E66CCBA243259390076BA78 /* PlaylistNowPlayingBar.swift */; };
@@ -832,7 +832,8 @@
 		5EAB745C230456F0006055F5 /* BookmarkValidation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAB745B230456F0006055F5 /* BookmarkValidation.swift */; };
 		5EC1DDBC2356883800CA4028 /* onboarding-shields.json in Resources */ = {isa = PBXBuildFile; fileRef = 0A6E095E230E05BC00AB3F19 /* onboarding-shields.json */; };
 		5EC1DDBD2356888000CA4028 /* onboarding-rewards.json in Resources */ = {isa = PBXBuildFile; fileRef = 5E1D8C6E232C0BDB00BDE662 /* onboarding-rewards.json */; };
-		5EC1DDBE2356892900CA4028 /* onboarding-ads.json in Resources */ = {isa = PBXBuildFile; fileRef = 5E11C3FF23314D970003C363 /* onboarding-ads.json */; };5ED3F388239AD7EC0048CE56 /* Playlist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED3F387239AD7EC0048CE56 /* Playlist.swift */; };
+		5EC1DDBE2356892900CA4028 /* onboarding-ads.json in Resources */ = {isa = PBXBuildFile; fileRef = 5E11C3FF23314D970003C363 /* onboarding-ads.json */; };
+		5ED3F388239AD7EC0048CE56 /* Playlist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED3F387239AD7EC0048CE56 /* Playlist.swift */; };
 		5ED3F38F239AD9A30048CE56 /* PlaylistItem+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED3F38D239AD9A30048CE56 /* PlaylistItem+CoreDataClass.swift */; };
 		5ED3F390239AD9A30048CE56 /* PlaylistItem+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED3F38E239AD9A30048CE56 /* PlaylistItem+CoreDataProperties.swift */; };
 		5EE5918123A290E000E8E8DE /* CoreNFC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F926647A234D4EF400359492 /* CoreNFC.framework */; };
@@ -2437,7 +2438,8 @@
 		5EA8438D234F802C00076A91 /* expired.badssl.com-leaf.cer */ = {isa = PBXFileReference; lastKnownFileType = file; path = "expired.badssl.com-leaf.cer"; sourceTree = "<group>"; };
 		5EAB745B230456F0006055F5 /* BookmarkValidation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkValidation.swift; sourceTree = "<group>"; };
 		5EB57D0122FDC0CB00A07325 /* FullscreenHelper.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = FullscreenHelper.js; sourceTree = "<group>"; };
-		5EC594EC232C2C8F00922111 /* OnboardingWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingWebViewController.swift; sourceTree = "<group>"; };5ED3F387239AD7EC0048CE56 /* Playlist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Playlist.swift; sourceTree = "<group>"; };
+		5EC594EC232C2C8F00922111 /* OnboardingWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingWebViewController.swift; sourceTree = "<group>"; };
+		5ED3F387239AD7EC0048CE56 /* Playlist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Playlist.swift; sourceTree = "<group>"; };
 		5ED3F38B239AD89D0048CE56 /* Playlist.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Playlist.xcdatamodel; sourceTree = "<group>"; };
 		5ED3F38D239AD9A30048CE56 /* PlaylistItem+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlaylistItem+CoreDataClass.swift"; sourceTree = "<group>"; };
 		5ED3F38E239AD9A30048CE56 /* PlaylistItem+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlaylistItem+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -6767,13 +6769,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				5DE768A620B345C300FF5533 /* SharedExtensions.swift in Sources */,
-				5DE768A720B345C600FF5533 /* BraveStrings.swift in Sources */,
 				0AD4FEF2223AA6CA00E00C05 /* JSContextExtensions.swift in Sources */,
 				0AD4FEF4223AC32200E00C05 /* JSValueExtensions.swift in Sources */,
 				27AC169323834175004BE19C /* MonthlyAdsGrantReminder.swift in Sources */,
 				0AD4FEEE223AA09D00E00C05 /* BrowserifyExposable.swift in Sources */,
 				0A917388231D11960069A08B /* AppReview.swift in Sources */,
 				5D6DDEF3214003A6001FF0AE /* DAU.swift in Sources */,
+				5E59DF4325468F4900AE59D5 /* BraveStrings.swift in Sources */,
 				0AD4FEEC223A9C1300E00C05 /* BrowserifiedJS.swift in Sources */,
 				278C467C23EE2B450083347F /* UIStackViewExtensions.swift in Sources */,
 				0A4214FF21AC0D6C006B8E39 /* TimeExtensions.swift in Sources */,
@@ -6988,7 +6990,6 @@
 				0A3C78A1230597DA0022F6D8 /* OnboardingShieldsViewController.swift in Sources */,
 				27FCA8E3244770AB00A8CA48 /* FavoritesOverflowSectionProvider.swift in Sources */,
 				27EA04C2249D4336004F5D2E /* FeedCardContent.swift in Sources */,
-				A1CDF22D20BDDB66005C6E58 /* BasicAnimationController.swift in Sources */,
 				5E8B486923983BFC0075A4EF /* CarplayMediaManager.swift in Sources */,
 				0BF1B7E31AC60DEA00A7B407 /* InsetButton.swift in Sources */,
 				D0C95EF6201A55A800E4E51C /* BrowserViewController+UIDropInteractionDelegate.swift in Sources */,
@@ -7100,6 +7101,7 @@
 				E6D8D5E71B569D70009E5A58 /* BrowserTrayAnimators.swift in Sources */,
 				4422D4B121BFFB7600BF1855 /* bloom.cc in Sources */,
 				4422D4FD21BFFB7600BF1855 /* dumpfile.cc in Sources */,
+				5E59DF2E25468E2E00AE59D5 /* Observable.swift in Sources */,
 				0A19365423508756002E2B81 /* LinkPreviewViewController.swift in Sources */,
 				E65075611E37F77D006961AC /* MenuHelper.swift in Sources */,
 				E63ED7D81BFCD9990097D08E /* LoginTableViewCell.swift in Sources */,
@@ -7119,7 +7121,6 @@
 				D03F8EB22004014E003C2224 /* FaviconHandler.swift in Sources */,
 				78A9D0962407B4A90077576C /* BraveGetUA.swift in Sources */,
 				0AC77600242A282C00139377 /* BuyVPNViewController.swift in Sources */,
-				5E6B9A402395752300E6720C /* PlaylistManager.swift in Sources */,
 				0AB2442C22AA789B00B4D9DD /* ReaderModeButton.swift in Sources */,
 				4422D55E21BFFB7F00BF1855 /* mimics_pcre.cc in Sources */,
 				5E2DF91D24194779000A8943 /* PlaylistCacheLoader.swift in Sources */,
@@ -7209,9 +7210,7 @@
 				4422D56A21BFFB7F00BF1855 /* simplify.cc in Sources */,
 				274398E724E483AD00E79605 /* FeedItemMenu.swift in Sources */,
 				27B16C5924E1D72600E0CF2C /* NewTabPageFeedOverlayView.swift in Sources */,
-				27CFB71424E1F67B008DFC8C /* Observable.swift in Sources */,
 				5E22D0812418DBEF0005D8C5 /* PlaylistManager.swift in Sources */,
-				5EC594F1232C697200922111 /* OnboardingAdsCountdownView.swift in Sources */,
 				A134B88A20DA98BB00A581D0 /* ClientPreferences.swift in Sources */,
 				D3BE7B261B054D4400641031 /* main.swift in Sources */,
 				0A4BEF5D221AF1910005551A /* AdblockResourceDownloader.swift in Sources */,
@@ -7256,7 +7255,6 @@
 				27953F7723F5DF5D00B4B595 /* AboutShieldsViewController.swift in Sources */,
 				0A1E84442190A57F0042F782 /* SyncCameraView.swift in Sources */,
 				A1CA29C420E1746A00CB9126 /* OptionSelectionViewController.swift in Sources */,
-				5EC594ED232C2C8F00922111 /* OnboardingWebViewController.swift in Sources */,
 				0A4B012420D0321A004D4011 /* UX.swift in Sources */,
 				4422D55521BFFB7E00BF1855 /* nfa.cc in Sources */,
 				E663D5781BB341C4001EF30E /* ToggleButton.swift in Sources */,

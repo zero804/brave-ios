@@ -104,13 +104,13 @@ class MenuViewController: UITableViewController {
         var title: String {
             switch self {
             case .vpn: return Strings.VPN.vpnMenuItemTitle
-            case .bookmarks: return Strings.BookmarksMenuItem
-            case .history: return Strings.HistoryMenuItem
-            case .settings: return Strings.SettingsMenuItem
-            case .add: return Strings.AddToMenuItem
-            case .share: return Strings.ShareWithMenuItem
-            case .downloads: return Strings.DownloadsMenuItem
-            case .playlist: return Strings.PlaylistMenuItem
+            case .bookmarks: return Strings.bookmarksMenuItem
+            case .history: return Strings.historyMenuItem
+            case .settings: return Strings.settingsMenuItem
+            case .add: return Strings.addToMenuItem
+            case .share: return Strings.shareWithMenuItem
+            case .downloads: return Strings.downloadsMenuItem
+            case .playlist: return Strings.playlistMenuItem
             }
         }
         

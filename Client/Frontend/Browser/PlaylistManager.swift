@@ -36,7 +36,7 @@ private class DisposableReference: Disposable {
     }
 }
 
-public class Observable<T> {
+public class PlaylistObservable<T> {
     public typealias Observer = (_ newValue: T, _ oldValue: T?) -> Void
     private var subscribers = [(Observer, AnyObject)]()
     

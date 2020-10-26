@@ -13,7 +13,7 @@ class Playlist {
     static let shared = Playlist()
     private let dbLock = NSRecursiveLock()
     
-    public var currentlyPlayingInfo = Observable<PlaylistInfo?>(nil)
+    public var currentlyPlayingInfo = PlaylistObservable<PlaylistInfo?>(nil)
     
     func updateItem(mediaSrc: String, item: PlaylistInfo, completion: @escaping () -> Void) {
         if self.itemExists(item: item) {
