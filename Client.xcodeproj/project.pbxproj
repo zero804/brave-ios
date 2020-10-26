@@ -812,6 +812,9 @@
 		5E4845C222DE3DF800372022 /* WindowRenderHelperScript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4845C122DE3DF800372022 /* WindowRenderHelperScript.swift */; };
 		5E4E078324A0E4D700B01720 /* YoutubeAdblock.js in Resources */ = {isa = PBXBuildFile; fileRef = 5E4E078224A0E4D700B01720 /* YoutubeAdblock.js */; };
 		5E6683A923D61CF7005B3A6C /* NTPDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6683A823D61CF7005B3A6C /* NTPDownloader.swift */; };
+		5E66CCB82432588B0076BA78 /* VideoPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E66CCB72432588B0076BA78 /* VideoPlayer.swift */; };
+		5E66CCBB243259390076BA78 /* PlaylistNowPlayingBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E66CCBA243259390076BA78 /* PlaylistNowPlayingBar.swift */; };
+		5E66CCBD24336D2D0076BA78 /* PlaylistMultipleSelectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E66CCBC24336D2D0076BA78 /* PlaylistMultipleSelectionController.swift */; };
 		5E6B9A3D239573D100E6720C /* Playlist.js in Resources */ = {isa = PBXBuildFile; fileRef = 5E6B9A3C239573D100E6720C /* Playlist.js */; };
 		5E6B9A4223957DB800E6720C /* PlaylistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6B9A4123957DB800E6720C /* PlaylistViewController.swift */; };
 		5E77F9A8236B362800E1649C /* DeviceCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E856FE7235E083B0094E113 /* DeviceCheck.swift */; };
@@ -2413,6 +2416,9 @@
 		5E4845C122DE3DF800372022 /* WindowRenderHelperScript.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowRenderHelperScript.swift; sourceTree = "<group>"; };
 		5E4E078224A0E4D700B01720 /* YoutubeAdblock.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = YoutubeAdblock.js; sourceTree = "<group>"; };
 		5E6683A823D61CF7005B3A6C /* NTPDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NTPDownloader.swift; sourceTree = "<group>"; };
+		5E66CCB72432588B0076BA78 /* VideoPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayer.swift; sourceTree = "<group>"; };
+		5E66CCBA243259390076BA78 /* PlaylistNowPlayingBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistNowPlayingBar.swift; sourceTree = "<group>"; };
+		5E66CCBC24336D2D0076BA78 /* PlaylistMultipleSelectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistMultipleSelectionController.swift; sourceTree = "<group>"; };
 		5E6B9A3C239573D100E6720C /* Playlist.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Playlist.js; sourceTree = "<group>"; };
 		5E6B9A4123957DB800E6720C /* PlaylistViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistViewController.swift; sourceTree = "<group>"; };
 		5E77F9DC236BB68700E1649C /* AttestationDebugger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttestationDebugger.swift; sourceTree = "<group>"; };
@@ -4689,6 +4695,9 @@
 				5ED3F38E239AD9A30048CE56 /* PlaylistItem+CoreDataProperties.swift */,
 				5E2DF91C24194779000A8943 /* PlaylistCacheLoader.swift */,
 				5ED3F38A239AD89D0048CE56 /* Playlist.xcdatamodeld */,
+				5E66CCB72432588B0076BA78 /* VideoPlayer.swift */,
+				5E66CCBA243259390076BA78 /* PlaylistNowPlayingBar.swift */,
+				5E66CCBC24336D2D0076BA78 /* PlaylistMultipleSelectionController.swift */,
 			);
 			path = Playlists;
 			sourceTree = "<group>";
@@ -6904,6 +6913,7 @@
 				0BF0DB941A8545800039F300 /* TopToolbarView.swift in Sources */,
 				4422D4C321BFFB7600BF1855 /* coding.cc in Sources */,
 				595E0EE121CAEF5B00813D49 /* FileManagerExtension.swift in Sources */,
+				5E66CCBB243259390076BA78 /* PlaylistNowPlayingBar.swift in Sources */,
 				C615FAD9212A1E2600A8168C /* WebImageCache.swift in Sources */,
 				0A56108424324B2A00B39107 /* BraveVPNSettingsViewController.swift in Sources */,
 				C615FAED212ACAD200A8168C /* BraveWebView.swift in Sources */,
@@ -7232,7 +7242,9 @@
 				44331DBB22521013007E3E93 /* MenuViewController.swift in Sources */,
 				4422D4BC21BFFB7600BF1855 /* testharness.cc in Sources */,
 				3BE7275D1CCFE8B60099189F /* CustomSearchHandler.swift in Sources */,
+				5E66CCBD24336D2D0076BA78 /* PlaylistMultipleSelectionController.swift in Sources */,
 				F930CDD72270F14300A23FE1 /* WebAuthnUtils.swift in Sources */,
+				5E66CCB82432588B0076BA78 /* VideoPlayer.swift in Sources */,
 				A1FEEE2020BF28D900298DA2 /* Then.swift in Sources */,
 				27953F7723F5DF5D00B4B595 /* AboutShieldsViewController.swift in Sources */,
 				0A1E84442190A57F0042F782 /* SyncCameraView.swift in Sources */,
