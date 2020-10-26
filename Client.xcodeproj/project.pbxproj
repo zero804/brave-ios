@@ -812,6 +812,7 @@
 		5E4845C022DE381200372022 /* WindowRenderHelper.js in Resources */ = {isa = PBXBuildFile; fileRef = 5E4845BF22DE381200372022 /* WindowRenderHelper.js */; };
 		5E4845C222DE3DF800372022 /* WindowRenderHelperScript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4845C122DE3DF800372022 /* WindowRenderHelperScript.swift */; };
 		5E4E078324A0E4D700B01720 /* YoutubeAdblock.js in Resources */ = {isa = PBXBuildFile; fileRef = 5E4E078224A0E4D700B01720 /* YoutubeAdblock.js */; };
+		5E5780B0243FA98F005D4EB1 /* PlaylistParticleEmitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5780AF243FA98F005D4EB1 /* PlaylistParticleEmitter.swift */; };
 		5E6683A923D61CF7005B3A6C /* NTPDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6683A823D61CF7005B3A6C /* NTPDownloader.swift */; };
 		5E66CCB82432588B0076BA78 /* VideoPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E66CCB72432588B0076BA78 /* VideoPlayer.swift */; };
 		5E66CCBB243259390076BA78 /* PlaylistNowPlayingBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E66CCBA243259390076BA78 /* PlaylistNowPlayingBar.swift */; };
@@ -2417,6 +2418,7 @@
 		5E4845BF22DE381200372022 /* WindowRenderHelper.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = WindowRenderHelper.js; sourceTree = "<group>"; };
 		5E4845C122DE3DF800372022 /* WindowRenderHelperScript.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowRenderHelperScript.swift; sourceTree = "<group>"; };
 		5E4E078224A0E4D700B01720 /* YoutubeAdblock.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = YoutubeAdblock.js; sourceTree = "<group>"; };
+		5E5780AF243FA98F005D4EB1 /* PlaylistParticleEmitter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistParticleEmitter.swift; sourceTree = "<group>"; };
 		5E6683A823D61CF7005B3A6C /* NTPDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NTPDownloader.swift; sourceTree = "<group>"; };
 		5E66CCB72432588B0076BA78 /* VideoPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayer.swift; sourceTree = "<group>"; };
 		5E66CCBA243259390076BA78 /* PlaylistNowPlayingBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistNowPlayingBar.swift; sourceTree = "<group>"; };
@@ -4701,6 +4703,7 @@
 				5E66CCBA243259390076BA78 /* PlaylistNowPlayingBar.swift */,
 				5E66CCBC24336D2D0076BA78 /* PlaylistMultipleSelectionController.swift */,
 				5E3B876D243F0D79009BA5F5 /* DataURIParser.swift */,
+				5E5780AF243FA98F005D4EB1 /* PlaylistParticleEmitter.swift */,
 			);
 			path = Playlists;
 			sourceTree = "<group>";
@@ -6867,6 +6870,7 @@
 				E4A960061ABB9C450069AD6F /* ReaderModeUtils.swift in Sources */,
 				0A1E843E2190A57F0042F782 /* SyncCodewordsView.swift in Sources */,
 				E68F36981EA694000048CF44 /* PanelDataObservers.swift in Sources */,
+				5E5780B0243FA98F005D4EB1 /* PlaylistParticleEmitter.swift in Sources */,
 				0A3C789F23056C910022F6D8 /* OnboardingSearchEnginesView.swift in Sources */,
 				27A1AC0024855C1700344503 /* FeedCardCell.swift in Sources */,
 				278C467B23EDF0940083347F /* ShieldsSwitch.swift in Sources */,
