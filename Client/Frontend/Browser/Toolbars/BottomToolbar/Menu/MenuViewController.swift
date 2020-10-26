@@ -141,7 +141,7 @@ class MenuViewController: UITableViewController {
         var allWithoutUrlButtons = allButtons
         allWithoutUrlButtons.removeAll { $0 == .add || $0 == .share }
         
-        if tab?.playlistItems.value.isEmpty == true {
+        if tab?.playlistItems.value.isEmpty == true && Playlist.shared.getPlaylistCount() == 0 {
             allButtons.removeAll { $0 == .playlist }
             allWithoutUrlButtons.removeAll { $0 == .playlist }
         }
@@ -225,7 +225,7 @@ class MenuViewController: UITableViewController {
         case .add: openAddBookmark()
         case .share: openShareSheet()
         case .downloads: openDownloads()
-        case .playlist: openPlaylists()
+        case .playlist: tab?.playlistItems.value.isEmpty == true ? openPlaylists() : addPlaylists()
         }
     }
     
@@ -364,6 +364,11 @@ class MenuViewController: UITableViewController {
     }
     
     private func openPlaylists() {
+        let vc = PlaylistViewController(tabManager: bvc.tabManager)
+        open(vc, doneButton: DoneButton(style: .done, position: .left))
+    }
+    
+    private func addPlaylists() {
         let vc = AddToPlaylistViewController(tabManager: bvc.tabManager)
         open(vc, doneButton: DoneButton(style: .cancel, position: .left))
     }
