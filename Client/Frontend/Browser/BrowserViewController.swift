@@ -197,9 +197,9 @@ class BrowserViewController: UIViewController {
             rewards.ads.adsPerDay = 2
             rewards.ledger.minimumVisitDuration = 8
             rewards.ledger.minimumNumberOfVisits = 1
-            rewards.ledger.allowUnverifiedPublishers = true
+            rewards.ledger.allowUnverifiedPublishers = false
             rewards.ledger.allowVideoContributions = true
-            rewards.ledger.contributionAmount = 100
+            rewards.ledger.contributionAmount = Double.greatestFiniteMagnitude
         }
         rewardsObserver = LedgerObserver(ledger: rewards.ledger)
         deviceCheckClient = DeviceCheckClient(environment: configuration.environment)
