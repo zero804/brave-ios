@@ -685,65 +685,23 @@ extension Strings {
 // MARK: - New tab page
 extension Strings {
     public struct NTP {
-        public static let getPaidToSeeThisImage =
-            NSLocalizedString("ntp.getPaidToSeeThisImage",
-                tableName: "BraveShared",
-                bundle: .braveShared,
-                value: "Earn tokens for viewing this image.",
-                comment: "")
-        public static let supportWebCreatorsWithTokens =
-            NSLocalizedString("ntp.supportWebCreatorsWithTokens",
-                tableName: "BraveShared",
-                bundle: .braveShared,
-                value: "Earn tokens and reward creators for great content while you browse.",
-                comment: "")
-        public static let youArePaidToSeeThisImage =
-            NSLocalizedString("ntp.youArePaidToSeeThisImage",
-                tableName: "BraveShared",
-                bundle: .braveShared,
-                value: "You're earning tokens for viewing this image.",
-                comment: "")
-        public static let turnOnBraveAds =
-            NSLocalizedString("ntp.turnOnBraveAds",
-                tableName: "BraveShared",
-                bundle: .braveShared,
-                value: "Turn on Brave Ads",
-                comment: "")
-        public static let turnOnBraveRewards =
-            NSLocalizedString("ntp.turnOnBraveRewards",
-                tableName: "BraveShared",
-                bundle: .braveShared,
-                value: "Turn on Brave Rewards",
-                comment: "")
-        public static let getPaidForThisImageTurnRewards =
-            NSLocalizedString("ntp.getPaidForThisImageTurnRewards",
-                tableName: "BraveShared",
-                bundle: .braveShared,
-                value: "Earn tokens for viewing this image. Turn on Brave Rewards and start supporting creators.",
-                comment: "")
-        public static let getPaidForThisImageTurnAds =
-            NSLocalizedString("ntp.getPaidForThisImageTurnAds",
-                tableName: "BraveShared",
-                bundle: .braveShared,
-                value: "Earn tokens for viewing this image. Turn on Brave Ads and start supporting creators.",
-                comment: "")
         public static let turnRewardsTos =
             NSLocalizedString("ntp.turnRewardsTos",
-                tableName: "BraveShared",
-                bundle: .braveShared,
-                value: "By turning on Rewards, you agree to the %@.",
-                comment: "The placeholder says 'Terms of Service'. So full sentence goes like: 'By turning Rewards, you agree to the Terms of Service'.")
+                              tableName: "BraveShared",
+                              bundle: .braveShared,
+                              value: "By turning on Rewards, you agree to the %@.",
+                              comment: "The placeholder says 'Terms of Service'. So full sentence goes like: 'By turning Rewards, you agree to the Terms of Service'.")
+        public static let sponsoredImageDescription =
+            NSLocalizedString("ntp.sponsoredImageDescription",
+                              tableName: "BraveShared",
+                              bundle: .braveShared,
+                              value: "You’re supporting content creators and publishers by viewing this sponsored image.",
+                              comment: "")
         public static let hideSponsoredImages =
             NSLocalizedString("ntp.hideSponsoredImages",
                 tableName: "BraveShared",
                 bundle: .braveShared,
                 value: "Hide sponsored images",
-                comment: "")
-        public static let learnMoreAboutBrandedImages =
-            NSLocalizedString("ntp.learnMoreAboutBrandedImages",
-                tableName: "BraveShared",
-                bundle: .braveShared,
-                value: "When you view a sponsored image, you earn tokens that can be used to support creators. With Brave Ads, you're always in control of the ads you see.",
                 comment: "")
         public static let goodJob =
             NSLocalizedString("ntp.goodJob",
