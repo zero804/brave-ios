@@ -1,4 +1,4 @@
 build: Release
-brave-browser: 1.15.x (dae7941496593dd747ca2618bdccaa82f4a4c423)
-brave-core: 1.15.x (b366ad1270da73b5cadfa13614b3d6608b2761ee)
-  latest tag: v1.15.74
+brave-browser: 1.16.x (2ea90fce171ade5f57a0189ff5674544bbc9f665)
+brave-core: claim-ios-16 (d1d0e698e4596c660cb3f28c7c6cd96ec0045849)
+  latest tag: v1.16.68

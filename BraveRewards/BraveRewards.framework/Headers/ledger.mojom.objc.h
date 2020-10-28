@@ -245,7 +245,7 @@ typedef NS_ENUM(NSInteger, BATInlineTipsPlatforms) {
 
 
 
-@class BATContributionInfo, BATContributionPublisher, BATPublisherInfo, BATPublisherBanner, BATPendingContribution, BATPendingContributionInfo, BATVisitData, BATRewardsParameters, BATBalance, BATAutoContributeProperties, BATMediaEventInfo, BATExternalWallet, BATBalanceReportInfo, BATActivityInfoFilterOrderPair, BATActivityInfoFilter, BATRewardsInternalsInfo, BATServerPublisherInfo, BATTransferFee, BATContributionQueue, BATContributionQueuePublisher, BATPromotion, BATUnblindedToken, BATClientInfo, BATRecurringTip, BATTransactionReportInfo, BATContributionReportInfo, BATMonthlyReportInfo, BATCredsBatch, BATSKUOrder, BATSKUOrderItem, BATSKUTransaction, BATUrlRequest, BATUrlResponse, BATEventLog;
+@class BATContributionInfo, BATContributionPublisher, BATPublisherInfo, BATPublisherBanner, BATPendingContribution, BATPendingContributionInfo, BATVisitData, BATRewardsParameters, BATBalance, BATAutoContributeProperties, BATMediaEventInfo, BATUpholdWallet, BATBalanceReportInfo, BATActivityInfoFilterOrderPair, BATActivityInfoFilter, BATRewardsInternalsInfo, BATServerPublisherInfo, BATContributionQueue, BATContributionQueuePublisher, BATPromotion, BATUnblindedToken, BATClientInfo, BATRecurringTip, BATTransactionReportInfo, BATContributionReportInfo, BATMonthlyReportInfo, BATCredsBatch, BATSKUOrder, BATSKUOrderItem, BATSKUTransaction, BATUrlRequest, BATUrlResponse, BATEventLog, BATBraveWallet;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -278,7 +278,6 @@ NS_SWIFT_NAME(PublisherInfo)
 @property (nonatomic) uint32_t percent;
 @property (nonatomic) double weight;
 @property (nonatomic) BATPublisherExclude excluded;
-@property (nonatomic) int32_t category;
 @property (nonatomic) uint64_t reconcileStamp;
 @property (nonatomic) BATPublisherStatus status;
 @property (nonatomic) uint64_t statusUpdatedAt;
@@ -373,9 +372,8 @@ NS_SWIFT_NAME(MediaEventInfo)
 @property (nonatomic, copy) NSString * status;
 @end
 
-NS_SWIFT_NAME(ExternalWallet)
-@interface BATExternalWallet : NSObject <NSCopying>
-@property (nonatomic, copy) NSString * type;
+NS_SWIFT_NAME(UpholdWallet)
+@interface BATUpholdWallet : NSObject <NSCopying>
 @property (nonatomic, copy) NSString * token;
 @property (nonatomic, copy) NSString * address;
 @property (nonatomic) BATWalletStatus status;
@@ -386,6 +384,7 @@ NS_SWIFT_NAME(ExternalWallet)
 @property (nonatomic, copy) NSString * userName;
 @property (nonatomic, copy) NSString * accountUrl;
 @property (nonatomic, copy) NSString * loginUrl;
+@property (nonatomic, copy) NSDictionary<NSString *, NSNumber *> * fees;
 @end
 
 NS_SWIFT_NAME(BalanceReportInfo)
@@ -430,12 +429,6 @@ NS_SWIFT_NAME(ServerPublisherInfo)
 @property (nonatomic, copy) NSString * address;
 @property (nonatomic) uint64_t updatedAt;
 @property (nonatomic, copy, nullable) BATPublisherBanner * banner;
-@end
-
-NS_SWIFT_NAME(TransferFee)
-@interface BATTransferFee : NSObject <NSCopying>
-@property (nonatomic, copy) NSString * id;
-@property (nonatomic) double amount;
 @end
 
 NS_SWIFT_NAME(ContributionQueue)
@@ -597,6 +590,12 @@ NS_SWIFT_NAME(EventLog)
 @property (nonatomic, copy) NSString * key;
 @property (nonatomic, copy) NSString * value;
 @property (nonatomic) uint64_t createdAt;
+@end
+
+NS_SWIFT_NAME(BraveWallet)
+@interface BATBraveWallet : NSObject <NSCopying>
+@property (nonatomic, copy) NSString * paymentId;
+@property (nonatomic, copy) NSArray<NSNumber *> * recoverySeed;
 @end
 
 NS_ASSUME_NONNULL_END

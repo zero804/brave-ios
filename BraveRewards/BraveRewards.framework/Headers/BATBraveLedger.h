@@ -88,7 +88,7 @@ NS_SWIFT_NAME(BraveLedger)
 - (void)createWallet:(nullable void (^)(NSError * _Nullable error))completion;
 
 /// Get the brave wallet's payment ID and seed for ads confirmations
-- (void)currentWalletInfo:(void (^)(NSString *_Nullable paymentId, NSString *_Nullable seed))completion;
+- (void)currentWalletInfo:(void (^)(BATBraveWallet *_Nullable wallet))completion;
 
 /// Get parameters served from the server
 - (void)getRewardsParameters:(nullable void (^)(BATRewardsParameters * _Nullable))completion;
@@ -116,13 +116,17 @@ NS_SWIFT_NAME(BraveLedger)
 /// Returns reserved amount of pending contributions to publishers.
 - (void)pendingContributionsTotal:(void (^)(double amount))completion NS_SWIFT_NAME(pendingContributionsTotal(completion:));
 
+/// Links a desktop brave wallet given some payment ID
+- (void)linkBraveWalletToPaymentId:(NSString *)paymentId
+                        completion:(void (^)(BATResult result))completion
+    NS_SWIFT_NAME(linkBraveWallet(paymentId:completion:));
+
 #pragma mark - User Wallets
 
 /// The last updated external wallet if a user has hooked one up
-@property (nonatomic, readonly) NSDictionary<BATWalletType, BATExternalWallet *> *externalWallets;
+@property (nonatomic, readonly, nullable) BATUpholdWallet *upholdWallet;
 
-- (void)fetchExternalWalletForType:(BATWalletType)walletType
-                        completion:(nullable void (^)(BATExternalWallet * _Nullable wallet))completion;
+- (void)fetchUpholdWallet:(nullable void (^)(BATUpholdWallet * _Nullable wallet))completion;
 
 - (void)disconnectWalletOfType:(BATWalletType)walletType
                     completion:(nullable void (^)(BATResult result))completion;
