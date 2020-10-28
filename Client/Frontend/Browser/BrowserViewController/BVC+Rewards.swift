@@ -54,6 +54,14 @@ extension BrowserViewController {
             rewards: rewards,
             legacyWallet: legacyWallet
         )
+        braveRewardsPanel.rewardsTransferTapped = { [weak self, weak braveRewardsPanel] in
+            guard let legacyWallet = self?.legacyWallet else { return }
+            braveRewardsPanel?.dismiss(animated: true) {
+                let controller = WalletTransferViewController(legacyWallet: legacyWallet)
+                let container = UINavigationController(rootViewController: controller)
+                self?.present(container, animated: true)
+            }
+        }
         
         let popover = PopoverController(contentController: braveRewardsPanel, contentSizeBehavior: .autoLayout)
         popover.addsConvenientDismissalMargins = false

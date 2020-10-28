@@ -70,6 +70,7 @@ class BraveRewardsViewController: UIViewController, Themeable {
         }
         
         rewardsView.rewardsToggle.addTarget(self, action: #selector(rewardsToggleValueChanged), for: .valueChanged)
+        rewardsView.legacyWalletTransferButton.addTarget(self, action: #selector(tappedRewardsTransfer), for: .touchUpInside)
         
         view.snp.makeConstraints {
             $0.width.equalTo(360)
@@ -106,6 +107,11 @@ class BraveRewardsViewController: UIViewController, Themeable {
             rewardsView.supportedCountView.isHidden = !rewardsView.rewardsToggle.isOn
             rewardsView.supportedCountView.alpha = rewardsView.rewardsToggle.isOn ? 1 : 0
         }
+    }
+    
+    var rewardsTransferTapped: (() -> Void)?
+    @objc private func tappedRewardsTransfer() {
+        rewardsTransferTapped?()
     }
 }
 
