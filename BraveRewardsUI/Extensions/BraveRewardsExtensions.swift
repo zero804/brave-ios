@@ -15,4 +15,16 @@ extension BraveRewards {
     return DCDevice.current.isSupported
     #endif
   }
+  
+  /// Whether or not rewards is enabled
+  public var isEnabled: Bool {
+    get {
+      ledger.isWalletCreated && ledger.isEnabled && ads.isEnabled
+    }
+    set {
+      ledger.isEnabled = newValue
+      ledger.isAutoContributeEnabled = newValue
+      ads.isEnabled = newValue
+    }
+  }
 }

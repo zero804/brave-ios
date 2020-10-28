@@ -47,18 +47,15 @@ extension BrowserViewController {
         
         UIDevice.current.forcePortraitIfIphone(for: UIApplication.shared)
         
-        guard let tab = tabManager.selectedTab, let url = tab.webView?.url else { return }
-        let braveRewardsPanel = RewardsPanelController(
-            rewards,
-            tabId: UInt64(tab.rewardsId),
-            url: url,
-            faviconURL: url,
-            delegate: self,
-            dataSource: self,
-            initialPage: initialPage
+        guard let tab = tabManager.selectedTab else { return }
+        
+        let braveRewardsPanel = BraveRewardsViewController(
+            tab: tab,
+            rewards: rewards,
+            legacyWallet: legacyWallet
         )
         
-        let popover = PopoverController(contentController: braveRewardsPanel, contentSizeBehavior: .preferredContentSize)
+        let popover = PopoverController(contentController: braveRewardsPanel, contentSizeBehavior: .autoLayout)
         popover.addsConvenientDismissalMargins = false
         popover.present(from: topToolbar.locationView.rewardsButton, on: self)
         popover.popoverDidDismiss = { [weak self] _ in
