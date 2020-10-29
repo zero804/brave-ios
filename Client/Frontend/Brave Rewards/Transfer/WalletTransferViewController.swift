@@ -30,6 +30,8 @@ class WalletTransferViewController: UIViewController, Themeable {
         applyTheme(Theme.of(nil))
     }
     
+    private var isTransferring: Bool = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -37,11 +39,15 @@ class WalletTransferViewController: UIViewController, Themeable {
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(tappedDone))
         
         transferView.cameraView.scanCallback = { [weak self] paymentId in
-            self?.legacyWallet.linkBraveWallet(paymentId: paymentId) { [weak self] result in
+            guard let self = self, !paymentId.isEmpty, !self.isTransferring else { return }
+            self.isTransferring = true
+            self.legacyWallet.linkBraveWallet(paymentId: paymentId) { [weak self] result in
                 guard let self = self else { return }
                 if result != .ledgerOk {
                     let alert = UIAlertController(title: "Error", message: "Failed (\(result.rawValue) - \(String(describing: result))", preferredStyle: .alert)
-                    alert.addAction(.init(title: "OK", style: .default, handler: nil))
+                    alert.addAction(.init(title: "OK", style: .default, handler: { _ in
+                        self.isTransferring = false
+                    }))
                     self.present(alert, animated: true)
                     return
                 }
