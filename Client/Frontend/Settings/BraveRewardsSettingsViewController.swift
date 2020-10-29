@@ -50,20 +50,25 @@ class BraveRewardsSettingsViewController: TableViewController {
             )
         ]
         
-        if legacyWallet != nil {
-            dataSource.sections += [
-                .init(
-                    header: .title("Wallet Transfer"),
-                    rows: [
-                        Row(text: "Legacy Wallet Transfer", selection: { [unowned self] in
-                            guard let legacyWallet = self.legacyWallet else { return }
-                            let controller = WalletTransferViewController(legacyWallet: legacyWallet)
-                            let container = UINavigationController(rootViewController: controller)
-                            self.present(container, animated: true)
-                        }, image: UIImage(imageLiteralResourceName: "rewards-qr-code").template)
+        if let legacyWallet = legacyWallet {
+            legacyWallet.fetchBalance({ [weak self] balance in
+                guard let self = self, let balance = balance else { return }
+                if balance.total > 0 {
+                    self.dataSource.sections += [
+                        .init(
+                            header: .title("Wallet Transfer"),
+                            rows: [
+                                Row(text: "Legacy Wallet Transfer", selection: { [unowned self] in
+                                    guard let legacyWallet = self.legacyWallet else { return }
+                                    let controller = WalletTransferViewController(legacyWallet: legacyWallet)
+                                    let container = UINavigationController(rootViewController: controller)
+                                    self.present(container, animated: true)
+                                }, image: UIImage(imageLiteralResourceName: "rewards-qr-code").template)
+                            ]
+                        )
                     ]
-                )
-            ]
+                }
+            })
         }
         
         if rewards.ledger.isWalletCreated {

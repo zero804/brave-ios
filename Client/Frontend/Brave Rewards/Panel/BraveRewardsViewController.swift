@@ -7,6 +7,9 @@ import Foundation
 import BraveRewards
 import BraveUI
 import BraveShared
+import Shared
+
+private let log = Logger.rewardsLogger
 
 class BraveRewardsViewController: UIViewController, Themeable, PopoverContentComponent {
     let tab: Tab
@@ -60,6 +63,27 @@ class BraveRewardsViewController: UIViewController, Themeable, PopoverContentCom
         
         if !rewards.isEnabled {
             rewardsView.supportedCountView.isHidden = true
+        }
+        
+        rewardsView.legacyWalletTransferButton.isHidden = true
+        if let legacyWallet = legacyWallet {
+            legacyWallet.fetchBalance({ [weak self] balance in
+                guard let self = self, let balance = balance else { return }
+                if balance.total > 0 {
+                    self.rewardsView.legacyWalletTransferButton.isHidden = false
+                }
+            })
+        }
+        
+        rewards.ledger.fetchPromotions { promotions in
+            promotions.forEach { promo in
+                if promo.status == .active {
+                    self.rewards.ledger.claimPromotion(promo) { success in
+                        log.info("[BraveRewards] Claim promotion! - \(success)")
+                        log.info("[BraveRewards] Claim promotion! - \(promo.approximateValue)")
+                    }
+                }
+            }
         }
         
         rewardsView.publisherView.hostLabel.text = tab.url?.baseDomain
