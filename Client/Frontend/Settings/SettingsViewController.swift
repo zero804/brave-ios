@@ -48,7 +48,6 @@ protocol SettingsDelegate: class {
     func settingsOpenURLInNewTab(_ url: URL)
     func settingsOpenURLs(_ urls: [URL])
     func settingsDidFinish(_ settingsViewController: SettingsViewController)
-    func settingsOpenRewardsSettings(_ settingsViewController: SettingsViewController)
 }
 
 class SettingsViewController: TableViewController {
@@ -57,13 +56,15 @@ class SettingsViewController: TableViewController {
     private let profile: Profile
     private let tabManager: TabManager
     private let rewards: BraveRewards?
+    private let legacyWallet: BraveLedger?
     private let feedDataSource: FeedDataSource
     
-    init(profile: Profile, tabManager: TabManager, feedDataSource: FeedDataSource, rewards: BraveRewards? = nil) {
+    init(profile: Profile, tabManager: TabManager, feedDataSource: FeedDataSource, rewards: BraveRewards? = nil, legacyWallet: BraveLedger? = nil) {
         self.profile = profile
         self.tabManager = tabManager
         self.feedDataSource = feedDataSource
         self.rewards = rewards
+        self.legacyWallet = legacyWallet
         
         if #available(iOS 13.0, *) {
             super.init(style: .insetGrouped)
@@ -181,10 +182,7 @@ class SettingsViewController: TableViewController {
         if BraveRewards.isAvailable, let rewards = rewards {
             section.rows += [
                 Row(text: Strings.braveRewardsTitle, selection: { [unowned self] in
-                    let rewardsVC = BraveRewardsSettingsViewController(rewards)
-                    rewardsVC.tappedShowRewardsSettings = { [unowned self] in
-                        self.settingsDelegate?.settingsOpenRewardsSettings(self)
-                    }
+                    let rewardsVC = BraveRewardsSettingsViewController(rewards, legacyWallet: self.legacyWallet)
                     self.navigationController?.pushViewController(rewardsVC, animated: true)
                 }, image: #imageLiteral(resourceName: "settings-brave-rewards"), accessory: .disclosureIndicator),
             ]

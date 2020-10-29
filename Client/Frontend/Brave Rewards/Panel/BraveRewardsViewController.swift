@@ -8,7 +8,7 @@ import BraveRewards
 import BraveUI
 import BraveShared
 
-class BraveRewardsViewController: UIViewController, Themeable {
+class BraveRewardsViewController: UIViewController, Themeable, PopoverContentComponent {
     let tab: Tab
     let rewards: BraveRewards
     let legacyWallet: BraveLedger?
@@ -83,23 +83,7 @@ class BraveRewardsViewController: UIViewController, Themeable {
     private var isCreatingWallet: Bool = false
     @objc private func rewardsToggleValueChanged() {
         let isOn = rewardsView.rewardsToggle.isOn
-        if rewards.ledger.isWalletCreated {
-            rewards.isEnabled = isOn
-        } else if isOn {
-            if isCreatingWallet { return }
-            isCreatingWallet = true
-            rewardsView.rewardsToggle.isEnabled = false
-            rewards.ledger.createWalletAndFetchDetails { [weak self] success in
-                guard let self = self else { return }
-                self.isCreatingWallet = false
-                self.rewardsView.rewardsToggle.isEnabled = true
-                if success {
-                    self.rewards.isEnabled = isOn
-                } else {
-                    self.rewardsView.rewardsToggle.isOn = false
-                }
-            }
-        }
+        rewards.isEnabled = isOn
         if rewardsView.rewardsToggle.isOn {
             rewardsView.supportedCountView.alpha = 0
         }
@@ -112,11 +96,5 @@ class BraveRewardsViewController: UIViewController, Themeable {
     var rewardsTransferTapped: (() -> Void)?
     @objc private func tappedRewardsTransfer() {
         rewardsTransferTapped?()
-    }
-}
-
-extension BraveRewardsViewController: PopoverContentComponent {
-    var extendEdgeIntoArrow: Bool {
-        false
     }
 }
