@@ -57,17 +57,12 @@ class RewardsInternalsViewController: TableViewController {
         let dateFormatter = DateFormatter().then {
             $0.dateStyle = .short
         }
-        let batFormatter = NumberFormatter().then {
-            $0.minimumIntegerDigits = 1
-            $0.minimumFractionDigits = 1
-            $0.maximumFractionDigits = 3
-        }
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(tappedShare)).then {
             $0.accessibilityLabel = Strings.RewardsInternals.shareInternalsTitle
         }
         
-        var sections: [Static.Section] = [
+        let sections: [Static.Section] = [
             .init(
                 rows: [
                     Row(text: Strings.RewardsInternals.sharingWarningTitle, detailText: Strings.RewardsInternals.sharingWarningMessage, cellClass: WarningCell.self)
@@ -89,43 +84,6 @@ class RewardsInternalsViewController: TableViewController {
                 ]
             )
         ]
-        
-        if let balance = rewards.ledger.balance {
-            let keyMaps = [
-                "anonymous": Strings.RewardsInternals.anonymous,
-                "blinded": "Rewards \(Strings.BAT)"
-            ]
-            let walletRows = balance.wallets.lazy.filter({ $0.key != "uphold" }).map { (key, value) -> Row in
-                Row(text: keyMaps[key] ?? key, detailText: "\(batFormatter.string(from: value) ?? "0.0") \(Strings.BAT)")
-            }
-            sections.append(
-                .init(
-                    header: .title(Strings.RewardsInternals.balanceInfoHeader),
-                    rows: [
-                        Row(text: Strings.RewardsInternals.totalBalance, detailText: "\(batFormatter.string(from: NSNumber(value: balance.total)) ?? "0.0") \(Strings.BAT)")
-                    ] + walletRows
-                )
-            )
-        }
-        
-        sections.append(
-            .init(
-                rows: [
-//                    Row(text: Strings.RewardsInternals.logsTitle, selection: { [unowned self] in
-//                        let controller = RewardsInternalsLogController(rewards: self.rewards)
-//                        self.navigationController?.pushViewController(controller, animated: true)
-//                    }, accessory: .disclosureIndicator),
-                    Row(text: Strings.RewardsInternals.promotionsTitle, selection: { [unowned self] in
-                        let controller = RewardsInternalsPromotionListController(rewards: self.rewards)
-                        self.navigationController?.pushViewController(controller, animated: true)
-                    }, accessory: .disclosureIndicator),
-                    Row(text: Strings.RewardsInternals.contributionsTitle, selection: { [unowned self] in
-                        let controller = RewardsInternalsContributionListController(rewards: self.rewards)
-                        self.navigationController?.pushViewController(controller, animated: true)
-                    }, accessory: .disclosureIndicator)
-                ]
-            )
-        )
         
         dataSource.sections = sections
     }
@@ -162,8 +120,7 @@ struct RewardsInternalsBasicInfoGenerator: RewardsInternalsFileGenerator {
                 "DeviceCheck Enrollment State": DeviceCheckClient.isDeviceEnrolled() ? "Enrolled" : "Not enrolled",
                 "OS": "\(UIDevice.current.systemName) \(UIDevice.current.systemVersion)",
                 "Model": UIDevice.current.model,
-            ],
-            "Balance Info": builder.rewards.ledger.balance?.wallets ?? ""
+            ]
         ]
         
         do {

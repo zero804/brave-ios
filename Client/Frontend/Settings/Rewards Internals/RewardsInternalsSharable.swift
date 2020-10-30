@@ -87,16 +87,12 @@ struct RewardsInternalsSharable: Equatable {
     
     /// The default set of sharables when sharing from the main Rewards Internals screen
     static let `default`: [RewardsInternalsSharable] = [
-        .basic,
-        .promotions,
-        .contributions
+        .basic
     ]
     
     /// A set of all the available sharables
     static let all: [RewardsInternalsSharable] = [
-        .basic,
-        .promotions,
-        .contributions,
+        .basic
     ]
 }
 
