@@ -142,6 +142,7 @@ class BrowserViewController: UIViewController {
     let rewards: BraveRewards
     let legacyWallet: BraveLedger?
     let rewardsObserver: LedgerObserver
+    private var promotionFetchTimer: Timer?
     private var notificationsHandler: AdsNotificationHandler?
     private(set) var publisher: PublisherInfo?
     
@@ -313,6 +314,16 @@ class BrowserViewController: UIViewController {
         contentBlockListDeferred = ContentBlockerHelper.compileBundledLists()
         
         setupRewardsObservers()
+        promotionFetchTimer = Timer.scheduledTimer(
+            withTimeInterval: 1.hours,
+            repeats: true,
+            block: { [weak self] _ in
+                guard let self = self else { return }
+                if self.rewards.isEnabled {
+                    self.rewards.ledger.fetchPromotions(nil)
+                }
+            }
+        )
         
         Preferences.NewTabPage.attemptToShowClaimRewardsNotification.value = true
         
@@ -405,6 +416,9 @@ class BrowserViewController: UIViewController {
                     self.displayMyFirstAdIfAvailable()
                 }
             }
+        }
+        rewardsObserver.promotionsAdded = { [weak self] promotions in
+            self?.claimPendingPromotions()
         }
         rewardsObserver.fetchedPanelPublisher = { [weak self] publisher, tabId in
             guard let self = self, self.isViewLoaded, let tab = self.tabManager.selectedTab, tab.rewardsId == tabId else { return }

@@ -80,6 +80,16 @@ extension BrowserViewController {
         rewards.ledger.fetchPromotions(nil)
     }
     
+    func claimPendingPromotions() {
+        rewards.ledger.pendingPromotions.forEach { promo in
+            if promo.status == .active {
+                self.rewards.ledger.claimPromotion(promo) { success in
+                    log.info("[BraveRewards] Auto-Claim Promotion - \(success) for \(promo.approximateValue)")
+                }
+            }
+        }
+    }
+    
     func authorizeUpholdWallet(from tab: Tab, queryItems items: [String: String]) {
         rewards.ledger.authorizeExternalWallet(
             ofType: .uphold,

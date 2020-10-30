@@ -75,17 +75,6 @@ class BraveRewardsViewController: UIViewController, Themeable, PopoverContentCom
             })
         }
         
-        rewards.ledger.fetchPromotions { promotions in
-            promotions.forEach { promo in
-                if promo.status == .active {
-                    self.rewards.ledger.claimPromotion(promo) { success in
-                        log.info("[BraveRewards] Claim promotion! - \(success)")
-                        log.info("[BraveRewards] Claim promotion! - \(promo.approximateValue)")
-                    }
-                }
-            }
-        }
-        
         rewardsView.publisherView.hostLabel.text = tab.url?.baseDomain
         if let url = tab.url {
             rewardsView.publisherView.faviconImageView.loadFavicon(for: url)
