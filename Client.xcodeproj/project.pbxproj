@@ -375,6 +375,7 @@
 		2777274022EB44B300F0214C /* StringExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2777273F22EB44B300F0214C /* StringExtensionTests.swift */; };
 		2777275A22EB4C7700F0214C /* BraveShared.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DE7688420B3456C00FF5533 /* BraveShared.framework */; };
 		277771D42419726100E9E3D8 /* SKUEnableRewardsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277771D32419726100E9E3D8 /* SKUEnableRewardsViewController.swift */; };
+		277C5B21254CAD790032DEF2 /* BraveRewardsExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277C5B16254CAD2A0032DEF2 /* BraveRewardsExtensions.swift */; };
 		27829DE92548AA4F007CF0B2 /* BraveRewardsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27829DE82548AA4F007CF0B2 /* BraveRewardsViewController.swift */; };
 		27829E092548AA8B007CF0B2 /* BraveRewardsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27829E082548AA8B007CF0B2 /* BraveRewardsView.swift */; };
 		27829E152548AD52007CF0B2 /* LegacyWalletTransferButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27829E142548AD52007CF0B2 /* LegacyWalletTransferButton.swift */; };
@@ -1795,6 +1796,7 @@
 		2777273622EB43A100F0214C /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		2777273F22EB44B300F0214C /* StringExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensionTests.swift; sourceTree = "<group>"; };
 		277771D32419726100E9E3D8 /* SKUEnableRewardsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKUEnableRewardsViewController.swift; sourceTree = "<group>"; };
+		277C5B16254CAD2A0032DEF2 /* BraveRewardsExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BraveRewardsExtensions.swift; sourceTree = "<group>"; };
 		27829DE82548AA4F007CF0B2 /* BraveRewardsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BraveRewardsViewController.swift; sourceTree = "<group>"; };
 		27829E082548AA8B007CF0B2 /* BraveRewardsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BraveRewardsView.swift; sourceTree = "<group>"; };
 		27829E142548AD52007CF0B2 /* LegacyWalletTransferButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegacyWalletTransferButton.swift; sourceTree = "<group>"; };
@@ -4043,6 +4045,7 @@
 		28EADE5C1AFC3A6D007FB2FB /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				277C5B16254CAD2A0032DEF2 /* BraveRewardsExtensions.swift */,
 				F9B23EE423F613E8000EB3D8 /* PaymentRequestExtension.swift */,
 				E650754D1E37F6AE006961AC /* GeometryExtensions.swift */,
 				D83821FF1FC7961D00303C12 /* DispatchQueueExtensions.swift */,
@@ -7028,6 +7031,7 @@
 				4422D55821BFFB7F00BF1855 /* unicode_casefold.cc in Sources */,
 				C6620BBB213BCEC6009FE75A /* TabType.swift in Sources */,
 				F930CDB82270040D00A23FE1 /* WebAuthnClientData.swift in Sources */,
+				277C5B21254CAD790032DEF2 /* BraveRewardsExtensions.swift in Sources */,
 				4422D50721BFFB7600BF1855 /* port_posix.cc in Sources */,
 				2746D26F24A291FD00E38852 /* RewardsInternalsViewController.swift in Sources */,
 				27384CAE254360120086922F /* OnboardingRewardsAgreementView.swift in Sources */,
