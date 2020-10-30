@@ -7,7 +7,6 @@ import Foundation
 import BraveRewards
 import Static
 import Shared
-import BraveRewardsUI
 
 extension RewardsType {
     fileprivate var displayText: String {

@@ -41,7 +41,7 @@ extension BrowserViewController {
         self.topToolbar.locationView.rewardsButton.forceShowBadge = !Preferences.Rewards.panelOpened.value
     }
 
-    func showBraveRewardsPanel(initialPage: RewardsPanelController.InitialPage = .default) {
+    func showBraveRewardsPanel() {
         Preferences.Rewards.panelOpened.value = true
         updateRewardsButtonState()
         

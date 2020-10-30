@@ -5,7 +5,6 @@
 import UIKit
 import Shared
 import BraveShared
-import BraveRewardsUI
 import BraveRewards
 
 class NTPNotificationViewController: TranslucentBottomSheet {
