@@ -32,7 +32,7 @@ extension BraveRewards {
   }
   
   public func createWalletIfNeeded(_ completion: @escaping () -> Void) {
-    if !ledger.isEnabled || ledger.isWalletCreated {
+    if ledger.isWalletCreated {
       completion()
       return
     }
