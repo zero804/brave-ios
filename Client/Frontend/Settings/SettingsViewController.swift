@@ -103,7 +103,7 @@ class SettingsViewController: TableViewController {
     
     private func displayRewardsDebugMenu() {
         guard let rewards = rewards else { return }
-        let settings = QASettingsViewController(rewards: rewards)
+        let settings = QASettingsViewController(rewards: rewards, legacyWallet: legacyWallet)
         navigationController?.pushViewController(settings, animated: true)
     }
     

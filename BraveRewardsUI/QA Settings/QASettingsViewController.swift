@@ -15,9 +15,12 @@ private typealias EnvironmentOverride = Preferences.Rewards.EnvironmentOverride
 public class QASettingsViewController: TableViewController {
   
   public let rewards: BraveRewards
+  public let legacyWallet: BraveLedger?
   
-  public init(rewards: BraveRewards) {
+  public init(rewards: BraveRewards, legacyWallet: BraveLedger?) {
     self.rewards = rewards
+    self.legacyWallet = legacyWallet
+    
     super.init(style: .grouped)
   }
   
@@ -159,7 +162,7 @@ public class QASettingsViewController: TableViewController {
       Section(
         header: .title("Wallet"),
         rows: [
-          Row(text: "Recovery Key", detailText: obfuscatedPassphrase ?? "—", selection: {
+          Row(text: "Recovery Key", detailText: obfuscatedPassphrase ?? "—", selection: { [unowned self] in
             if let passphrase = self.rewards.ledger.walletPassphrase {
               let sheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
               sheet.popoverPresentationController?.sourceView = self.view
@@ -171,8 +174,16 @@ public class QASettingsViewController: TableViewController {
               self.present(sheet, animated: true, completion: nil)
             }
           }),
-          Row(text: "Restore Wallet", selection: {
+          Row(text: "Restore Wallet", selection: { [unowned self] in
             self.tappedRestoreWallet()
+          }, cellClass: ButtonCell.self)
+        ]
+      ),
+      Section(
+        header: .title("Legacy Wallet"),
+        rows: [
+          Row(text: "Make Legacy Wallet", selection: { [unowned self] in
+            self.createLegacyLedger()
           }, cellClass: ButtonCell.self)
         ]
       ),
@@ -185,7 +196,7 @@ public class QASettingsViewController: TableViewController {
       Section(
         header: .title("Attestation Data"),
         rows: [
-          Row(text: "Device Check Debugger", selection: {
+          Row(text: "Device Check Debugger", selection: { [unowned self] in
             guard let paymentId = self.rewards.ledger.paymentId, !paymentId.isEmpty else {
               self.displayAlert(message: "Enable Rewards First")
               return
@@ -216,6 +227,34 @@ public class QASettingsViewController: TableViewController {
         ]
       )
     ]
+  }
+  
+  private func createLegacyLedger() {
+    let fm = FileManager.default
+    let stateStorage = URL(fileURLWithPath: NSSearchPathForDirectoriesInDomains(.applicationSupportDirectory, .userDomainMask, true).first!)
+    let legacyLedger = stateStorage.appendingPathComponent("legacy_ledger")
+    let ledgerFolder = stateStorage.appendingPathComponent("ledger")
+    
+    do {
+      // Check if we've already migrated the users wallet to the `legacy_rewards` folder
+      if fm.fileExists(atPath: legacyLedger.path) {
+        // Reset it if so
+        try fm.removeItem(atPath: legacyLedger.path)
+      }
+      // Copy the current `ledger` directory into the new legacy state storage path
+      try fm.copyItem(at: ledgerFolder, to: legacyLedger)
+      // Remove the old Rewards DB so that it starts fresh
+      try fm.removeItem(atPath: ledgerFolder.appendingPathComponent("Rewards.db").path)
+      // And remove the sqlite journal file if it exists
+      let journalPath = ledgerFolder.appendingPathComponent("Rewards.db-journal").path
+      if fm.fileExists(atPath: journalPath) {
+        try fm.removeItem(atPath: journalPath)
+      }
+      
+      showResetRewardsAlert()
+    } catch {
+      print("Failed to migrate legacy wallet into a new folder: \(error)")
+    }
   }
   
   private func displayAlert(title: String? = nil, message: String) {
