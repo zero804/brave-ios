@@ -293,11 +293,14 @@ class SettingsViewController: TableViewController {
             display.rows.append(row)
         }
         
-        display.rows.append(
+        display.rows.append(contentsOf: [
             .boolRow(title: Strings.showBookmarkButtonInTopToolbar,
                      option: Preferences.General.showBookmarkToolbarShortcut,
-                     image: #imageLiteral(resourceName: "settings-bookmarks-shortcut").template)
-        )
+                     image: #imageLiteral(resourceName: "settings-bookmarks-shortcut").template),
+            .boolRow(title: Strings.hideRewardsIcon,
+                     option: Preferences.Rewards.hideRewardsIcon,
+                     image: #imageLiteral(resourceName: "settings-rewards-icon").template)
+        ])
         
         return display
     }()
