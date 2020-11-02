@@ -51,7 +51,8 @@ class WalletTransferViewController: UIViewController, Themeable {
                     self.present(alert, animated: true)
                     return
                 }
-                self.dismiss(animated: true)
+                let completedVC = WalletTransferCompleteViewController()
+                self.navigationController?.pushViewController(completedVC, animated: true)
             }
         }
         transferView.learnMoreButton.addTarget(self, action: #selector(tappedLearnMoreButton), for: .touchUpInside)
