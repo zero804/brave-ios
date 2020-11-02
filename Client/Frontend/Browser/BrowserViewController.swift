@@ -194,6 +194,9 @@ class BrowserViewController: UIViewController {
             rewards.ledger.isEnabled = false
             rewards.ads.isEnabled = false
         } else {
+            if rewards.isEnabled && !Preferences.Rewards.rewardsToggledOnce.value {
+                Preferences.Rewards.rewardsToggledOnce.value = true
+            }
             // Update defaults
             rewards.ads.adsPerDay = 2
             rewards.ledger.minimumVisitDuration = 8
@@ -294,6 +297,8 @@ class BrowserViewController: UIViewController {
             tab.newTabPageViewController = nil
         }
     }
+    
+    private var rewardsEnabledObserveration: NSKeyValueObservation?
 
     fileprivate func didInit() {
         screenshotHelper = ScreenshotHelper(controller: self)
@@ -309,6 +314,10 @@ class BrowserViewController: UIViewController {
         Preferences.Shields.allShields.forEach { $0.observe(from: self) }
         Preferences.Privacy.blockAllCookies.observe(from: self)
         Preferences.Rewards.hideRewardsIcon.observe(from: self)
+        Preferences.Rewards.rewardsToggledOnce.observe(from: self)
+        rewardsEnabledObserveration = rewards.observe(\.isEnabled, options: [.new]) { [weak self] _, _ in
+            self?.updateRewardsButtonState()
+        }
         Preferences.NewTabPage.selectedCustomTheme.observe(from: self)
         // Lists need to be compiled before attempting tab restoration
         contentBlockListDeferred = ContentBlockerHelper.compileBundledLists()
@@ -423,18 +432,6 @@ class BrowserViewController: UIViewController {
         rewardsObserver.fetchedPanelPublisher = { [weak self] publisher, tabId in
             guard let self = self, self.isViewLoaded, let tab = self.tabManager.selectedTab, tab.rewardsId == tabId else { return }
             self.publisher = publisher
-            self.updateRewardsButtonState()
-        }
-        rewardsObserver.notificationAdded = { [weak self] _ in
-            guard let self = self, self.isViewLoaded else { return }
-            self.updateRewardsButtonState()
-        }
-        rewardsObserver.notificationsRemoved = { [weak self] _ in
-            guard let self = self, self.isViewLoaded else { return }
-            self.updateRewardsButtonState()
-        }
-        rewardsObserver.rewardsEnabledStateUpdated = { [weak self] _ in
-            self?.updateRewardsButtonState()
         }
     }
     
@@ -3738,7 +3735,8 @@ extension BrowserViewController: PreferencesObserver {
             } else {
                 tabManager.reloadSelectedTab()
             }
-        case Preferences.Rewards.hideRewardsIcon.key:
+        case Preferences.Rewards.hideRewardsIcon.key,
+             Preferences.Rewards.rewardsToggledOnce.key:
             updateRewardsButtonState()
         case Preferences.NewTabPage.selectedCustomTheme.key:
             Preferences.NTP.ntpCheckDate.value = nil
