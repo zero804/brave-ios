@@ -51,9 +51,9 @@ class BraveRewardsSettingsViewController: TableViewController {
         ]
         
         if let legacyWallet = legacyWallet {
-            legacyWallet.fetchBalance({ [weak self] balance in
-                guard let self = self, let balance = balance else { return }
-                if balance.total > 0 {
+            legacyWallet.transferrableAmount({ [weak self] total in
+                guard let self = self else { return }
+                if total > 0 {
                     self.dataSource.sections.insert(.init(
                         header: .title("Wallet Transfer"),
                         rows: [
