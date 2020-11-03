@@ -15,6 +15,7 @@ class BraveRewardsViewController: UIViewController, Themeable, PopoverContentCom
     let tab: Tab
     let rewards: BraveRewards
     let legacyWallet: BraveLedger?
+    var rewardsTransferTapped: (() -> Void)?
     
     init(tab: Tab, rewards: BraveRewards, legacyWallet: BraveLedger?) {
         self.tab = tab
@@ -106,7 +107,6 @@ class BraveRewardsViewController: UIViewController, Themeable, PopoverContentCom
         }
     }
     
-    var rewardsTransferTapped: (() -> Void)?
     @objc private func tappedRewardsTransfer() {
         rewardsTransferTapped?()
     }

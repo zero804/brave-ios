@@ -45,7 +45,7 @@ class WalletTransferViewController: UIViewController, Themeable {
                 guard let self = self else { return }
                 if result != .ledgerOk {
                     let alert = UIAlertController(title: "Error", message: "Failed (\(result.rawValue) - \(String(describing: result))", preferredStyle: .alert)
-                    alert.addAction(.init(title: "OK", style: .default, handler: { _ in
+                    alert.addAction(.init(title: "OK", style: .default, handler: { [unowned self] _ in
                         self.isTransferring = false
                     }))
                     self.present(alert, animated: true)

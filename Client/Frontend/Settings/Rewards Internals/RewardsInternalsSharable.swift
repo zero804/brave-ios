@@ -10,7 +10,7 @@ import Shared
 /// A set of helpers for `RewardsInternalsFileGenerator` to use to generate data to share with support
 struct RewardsInternalsSharableBuilder {
     /// The rewards instance that we are generating the data from
-    var rewards: BraveRewards
+    var ledger: BraveLedger
     /// A formatter to use when adding dates to a file
     var dateFormatter: DateFormatter
     /// A formatter to use when adding dates and times to a file
@@ -94,6 +94,14 @@ struct RewardsInternalsSharable: Equatable {
     static let all: [RewardsInternalsSharable] = [
         .basic
     ]
+    
+    /// A set of sharables for QA
+    static let qa: [RewardsInternalsSharable] = [
+        .basic,
+        .promotions,
+        .contributions,
+        .database
+    ]
 }
 
 enum RewardsInternalsSharableError: Error {
@@ -105,7 +113,7 @@ private struct RewardsInternalsDatabaseGenerator: RewardsInternalsFileGenerator 
     func generateFiles(at path: String, using builder: RewardsInternalsSharableBuilder, completion: @escaping (Error?) -> Void) {
         // Move Rewards database to path
         do {
-            let dbPath = URL(fileURLWithPath: builder.rewards.ledger.rewardsDatabasePath)
+            let dbPath = URL(fileURLWithPath: builder.ledger.rewardsDatabasePath)
             let newPath = URL(fileURLWithPath: path).appendingPathComponent(dbPath.lastPathComponent)
             try FileManager.default.copyItem(atPath: dbPath.path, toPath: newPath.path)
             completion(nil)

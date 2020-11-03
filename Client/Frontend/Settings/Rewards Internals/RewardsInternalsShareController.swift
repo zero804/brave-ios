@@ -35,10 +35,10 @@ private class RewardsInternalsSharableCell: UITableViewCell, TableViewReusable, 
 class RewardsInternalsShareController: UITableViewController {
     private(set) var initiallySelectedSharables: [Int]
     
-    private let rewards: BraveRewards
+    private let ledger: BraveLedger
     
-    init(rewards: BraveRewards, initiallySelectedSharables sharables: [RewardsInternalsSharable]) {
-        self.rewards = rewards
+    init(ledger: BraveLedger, initiallySelectedSharables sharables: [RewardsInternalsSharable]) {
+        self.ledger = ledger
         self.initiallySelectedSharables = sharables
             .compactMap { sharable in
                 RewardsInternalsSharable.all.firstIndex(where: { $0.id == sharable.id })
@@ -142,7 +142,7 @@ class RewardsInternalsShareController: UITableViewController {
             $0.dateStyle = .long
             $0.timeStyle = .long
         }
-        let builder = RewardsInternalsSharableBuilder(rewards: self.rewards, dateFormatter: dateFormatter, dateAndTimeFormatter: dateAndTimeFormatter)
+        let builder = RewardsInternalsSharableBuilder(ledger: self.ledger, dateFormatter: dateFormatter, dateAndTimeFormatter: dateAndTimeFormatter)
         do {
             if FileManager.default.fileExists(atPath: dropDirectory.path) {
                 try FileManager.default.removeItem(at: dropDirectory)

@@ -49,14 +49,13 @@ extension BrowserViewController {
             rewards: rewards,
             legacyWallet: legacyWallet
         )
-        braveRewardsPanel.rewardsTransferTapped = { [weak self, weak braveRewardsPanel] in
+        braveRewardsPanel.rewardsTransferTapped = { [weak self, unowned braveRewardsPanel] in
             guard let legacyWallet = self?.legacyWallet else { return }
-            braveRewardsPanel?.dismiss(animated: true) {
+            braveRewardsPanel.dismiss(animated: true) {
                 let controller = WalletTransferViewController(legacyWallet: legacyWallet)
-                controller.learnMoreHandler = { [weak self] in
-                    guard let self = self else { return }
+                controller.learnMoreHandler = { [weak self, unowned controller] in
                     controller.dismiss(animated: true) {
-                        self.loadNewTabWithURL(BraveUX.braveRewardsLearnMoreURL)
+                        self?.loadNewTabWithURL(BraveUX.braveRewardsLearnMoreURL)
                     }
                 }
                 let container = UINavigationController(rootViewController: controller)

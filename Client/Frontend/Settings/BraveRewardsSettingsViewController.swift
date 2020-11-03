@@ -77,7 +77,7 @@ class BraveRewardsSettingsViewController: TableViewController {
             dataSource.sections += [
                 Section(rows: [
                     Row(text: Strings.RewardsInternals.title, selection: {
-                        let controller = RewardsInternalsViewController(rewards: self.rewards)
+                        let controller = RewardsInternalsViewController(ledger: self.rewards.ledger)
                         self.navigationController?.pushViewController(controller, animated: true)
                     }, accessory: .disclosureIndicator)
                 ])
