@@ -183,6 +183,14 @@ class SettingsViewController: TableViewController {
             section.rows += [
                 Row(text: Strings.braveRewardsTitle, selection: { [unowned self] in
                     let rewardsVC = BraveRewardsSettingsViewController(rewards, legacyWallet: self.legacyWallet)
+                    rewardsVC.walletTransferLearnMoreTapped = { [weak self] in
+                        guard let self = self else { return }
+                        self.dismiss(animated: true) {
+                            self.presentingViewController?.dismiss(animated: true) {
+                                self.settingsDelegate?.settingsOpenURLInNewTab(BraveUX.braveRewardsLearnMoreURL)
+                            }
+                        }
+                    }
                     self.navigationController?.pushViewController(rewardsVC, animated: true)
                 }, image: #imageLiteral(resourceName: "settings-brave-rewards"), accessory: .disclosureIndicator),
             ]

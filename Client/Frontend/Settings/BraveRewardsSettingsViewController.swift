@@ -14,6 +14,7 @@ class BraveRewardsSettingsViewController: TableViewController {
     
     let rewards: BraveRewards
     let legacyWallet: BraveLedger?
+    var walletTransferLearnMoreTapped: (() -> Void)?
     
     init(_ rewards: BraveRewards, legacyWallet: BraveLedger?) {
         self.rewards = rewards
@@ -60,6 +61,9 @@ class BraveRewardsSettingsViewController: TableViewController {
                             Row(text: "Legacy Wallet Transfer", selection: { [unowned self] in
                                 guard let legacyWallet = self.legacyWallet else { return }
                                 let controller = WalletTransferViewController(legacyWallet: legacyWallet)
+                                controller.learnMoreHandler = { [weak self] in
+                                    self?.walletTransferLearnMoreTapped?()
+                                }
                                 let container = UINavigationController(rootViewController: controller)
                                 self.present(container, animated: true)
                             }, image: UIImage(imageLiteralResourceName: "rewards-qr-code").template)
