@@ -228,6 +228,7 @@ class BrowserViewController: UIViewController {
 
         // Check if we've already migrated the users wallet to the `legacy_rewards` folder
         if fm.fileExists(atPath: legacyLedger.path) {
+            BraveLedger.environment = config.environment
             return BraveLedger(stateStoragePath: legacyLedger.path)
         }
         
@@ -258,6 +259,7 @@ class BrowserViewController: UIViewController {
             }
             
             Preferences.Rewards.migratedLegacyWallet.value = true
+            BraveLedger.environment = config.environment
             return BraveLedger(stateStoragePath: legacyLedger.path)
         } catch {
             log.error("Failed to migrate legacy wallet into a new folder: \(error)")
@@ -2195,6 +2197,10 @@ extension BrowserViewController: TopToolbarDelegate {
     
     func topToolbarDidTapBraveRewardsButton(_ topToolbar: TopToolbarView) {
         showBraveRewardsPanel()
+    }
+    
+    func topToolbarDidLongPressBraveRewardsButton(_ topToolbar: TopToolbarView) {
+        showRewardsDebugSettings()
     }
     
     func topToolbarDidTapMenuButton(_ topToolbar: TopToolbarView) {

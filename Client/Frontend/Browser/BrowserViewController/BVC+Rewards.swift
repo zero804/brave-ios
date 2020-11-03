@@ -37,6 +37,14 @@ extension BrowserViewController {
             (rewards.isEnabled || rewards.isCreatingWallet ? .enabled : .disabled) : .initial
     }
 
+    func showRewardsDebugSettings() {
+        if AppConstants.buildChannel.isPublic { return }
+        
+        let settings = RewardsDebugSettingsViewController(rewards: rewards, legacyWallet: legacyWallet)
+        let container = UINavigationController(rootViewController: settings)
+        present(container, animated: true)
+    }
+    
     func showBraveRewardsPanel() {
         updateRewardsButtonState()
         

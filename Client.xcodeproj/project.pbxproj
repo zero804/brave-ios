@@ -237,7 +237,6 @@
 		271DECD3234CC7EF009DAC37 /* AdContentButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 271DEC52234CC7EE009DAC37 /* AdContentButton.swift */; };
 		271DECD4234CC7EF009DAC37 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 271DEC54234CC7EE009DAC37 /* Strings.swift */; };
 		271DECD5234CC7EF009DAC37 /* RewardsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 271DEC55234CC7EE009DAC37 /* RewardsDataSource.swift */; };
-		271DECD6234CC7EF009DAC37 /* QASettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 271DEC57234CC7EE009DAC37 /* QASettingsViewController.swift */; };
 		271DECD7234CC7EF009DAC37 /* TippingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 271DEC59234CC7EE009DAC37 /* TippingViewController.swift */; };
 		271DECD8234CC7EF009DAC37 /* TippingConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 271DEC5A234CC7EE009DAC37 /* TippingConfirmationView.swift */; };
 		271DECD9234CC7EF009DAC37 /* InsufficientFundsButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 271DEC5B234CC7EE009DAC37 /* InsufficientFundsButton.swift */; };
@@ -354,6 +353,7 @@
 		275218FC23E0BB7500E416B4 /* PendingContributionDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 275218FB23E0BB7500E416B4 /* PendingContributionDetailController.swift */; };
 		2755AB7D23107BC600F0721F /* AdsReporting.js in Resources */ = {isa = PBXBuildFile; fileRef = 2755AB7C23107BC600F0721F /* AdsReporting.js */; };
 		2755AB8623107DBD00F0721F /* AdsMediaReporting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2755AB8523107DBD00F0721F /* AdsMediaReporting.swift */; };
+		2755EA9C2551F94B0033C43F /* RewardsInternalsAutoContributeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2755EA9B2551F94B0033C43F /* RewardsInternalsAutoContributeController.swift */; };
 		275965E224EEC4EA0051A827 /* FeedFillStrategyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 275965E124EEC4EA0051A827 /* FeedFillStrategyTests.swift */; };
 		2760D2BF215ACCE20068E131 /* BundleExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2760D2BE215ACCE20068E131 /* BundleExtensions.swift */; };
 		2765825D2171263A00754B2F /* UserReferralProgram.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2765825C2171263A00754B2F /* UserReferralProgram.swift */; };
@@ -444,6 +444,7 @@
 		27C647772550AE16006D72FC /* WalletTransferCompleteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C647762550AE16006D72FC /* WalletTransferCompleteViewController.swift */; };
 		27C647832550AF34006D72FC /* WalletTransferCompleteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C647822550AF34006D72FC /* WalletTransferCompleteView.swift */; };
 		27C6478F2551CD2B006D72FC /* RewardsInternalsDebugViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C6478E2551CD2B006D72FC /* RewardsInternalsDebugViewController.swift */; };
+		27C647A62551F082006D72FC /* RewardsDebugSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C647A52551F082006D72FC /* RewardsDebugSettingsViewController.swift */; };
 		27CFB71424E1F67B008DFC8C /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CFB71324E1F67B008DFC8C /* Observable.swift */; };
 		27D114D42358FBBF00166534 /* BraveRewardsSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D114D32358FBBF00166534 /* BraveRewardsSettingsViewController.swift */; };
 		27D114D62358FCA400166534 /* SettingsRowViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D114D52358FCA400166534 /* SettingsRowViews.swift */; };
@@ -1655,7 +1656,6 @@
 		271DEC52234CC7EE009DAC37 /* AdContentButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdContentButton.swift; sourceTree = "<group>"; };
 		271DEC54234CC7EE009DAC37 /* Strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		271DEC55234CC7EE009DAC37 /* RewardsDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RewardsDataSource.swift; sourceTree = "<group>"; };
-		271DEC57234CC7EE009DAC37 /* QASettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QASettingsViewController.swift; sourceTree = "<group>"; };
 		271DEC59234CC7EE009DAC37 /* TippingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TippingViewController.swift; sourceTree = "<group>"; };
 		271DEC5A234CC7EE009DAC37 /* TippingConfirmationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TippingConfirmationView.swift; sourceTree = "<group>"; };
 		271DEC5B234CC7EE009DAC37 /* InsufficientFundsButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InsufficientFundsButton.swift; sourceTree = "<group>"; };
@@ -1777,6 +1777,7 @@
 		275218FB23E0BB7500E416B4 /* PendingContributionDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingContributionDetailController.swift; sourceTree = "<group>"; };
 		2755AB7C23107BC600F0721F /* AdsReporting.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = AdsReporting.js; sourceTree = "<group>"; };
 		2755AB8523107DBD00F0721F /* AdsMediaReporting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdsMediaReporting.swift; sourceTree = "<group>"; };
+		2755EA9B2551F94B0033C43F /* RewardsInternalsAutoContributeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardsInternalsAutoContributeController.swift; sourceTree = "<group>"; };
 		275965E124EEC4EA0051A827 /* FeedFillStrategyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedFillStrategyTests.swift; sourceTree = "<group>"; };
 		2760D2BE215ACCE20068E131 /* BundleExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BundleExtensions.swift; sourceTree = "<group>"; };
 		2765825C2171263A00754B2F /* UserReferralProgram.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserReferralProgram.swift; sourceTree = "<group>"; };
@@ -1853,6 +1854,7 @@
 		27C647762550AE16006D72FC /* WalletTransferCompleteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletTransferCompleteViewController.swift; sourceTree = "<group>"; };
 		27C647822550AF34006D72FC /* WalletTransferCompleteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletTransferCompleteView.swift; sourceTree = "<group>"; };
 		27C6478E2551CD2B006D72FC /* RewardsInternalsDebugViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardsInternalsDebugViewController.swift; sourceTree = "<group>"; };
+		27C647A52551F082006D72FC /* RewardsDebugSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardsDebugSettingsViewController.swift; sourceTree = "<group>"; };
 		27CFB71324E1F67B008DFC8C /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		27D114D32358FBBF00166534 /* BraveRewardsSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BraveRewardsSettingsViewController.swift; sourceTree = "<group>"; };
 		27D114D52358FCA400166534 /* SettingsRowViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsRowViews.swift; sourceTree = "<group>"; };
@@ -3402,7 +3404,6 @@
 		271DEC56234CC7EE009DAC37 /* QA Settings */ = {
 			isa = PBXGroup;
 			children = (
-				271DEC57234CC7EE009DAC37 /* QASettingsViewController.swift */,
 				5E77F9DC236BB68700E1649C /* AttestationDebugger.swift */,
 			);
 			path = "QA Settings";
@@ -3690,9 +3691,9 @@
 		2746D26C24A291ED00E38852 /* Rewards Internals */ = {
 			isa = PBXGroup;
 			children = (
+				27C647A42551F071006D72FC /* QA */,
 				2746D28224A4FB7400E38852 /* RewardsInternalsSharable.swift */,
 				2746D26E24A291FD00E38852 /* RewardsInternalsViewController.swift */,
-				27C6478E2551CD2B006D72FC /* RewardsInternalsDebugViewController.swift */,
 				2746D27C24A3E44900E38852 /* RewardsInternalsLogController.swift */,
 				2746D27024A2A12700E38852 /* RewardsInternalsPromotionListController.swift */,
 				2746D27224A2A5DA00E38852 /* RewardsInternalsContributionListController.swift */,
@@ -3951,6 +3952,16 @@
 				271DEC95234CC7EF009DAC37 /* AutoContributeCell.swift */,
 			);
 			path = "Supported List";
+			sourceTree = "<group>";
+		};
+		27C647A42551F071006D72FC /* QA */ = {
+			isa = PBXGroup;
+			children = (
+				27C647A52551F082006D72FC /* RewardsDebugSettingsViewController.swift */,
+				27C6478E2551CD2B006D72FC /* RewardsInternalsDebugViewController.swift */,
+				2755EA9B2551F94B0033C43F /* RewardsInternalsAutoContributeController.swift */,
+			);
+			path = QA;
 			sourceTree = "<group>";
 		};
 		27D3154F23D7A94100219462 /* Monthly Tips */ = {
@@ -6498,7 +6509,6 @@
 				271DECE6234CC7EF009DAC37 /* WalletAlertNotificationView.swift in Sources */,
 				27325A6924105FF100790DC6 /* SKUPurchaseButtonView.swift in Sources */,
 				27D3155223D7A95C00219462 /* SettingsMonthlyTipsSectionView.swift in Sources */,
-				271DECD6234CC7EF009DAC37 /* QASettingsViewController.swift in Sources */,
 				271DED17234CC7EF009DAC37 /* Then.swift in Sources */,
 				271DED14234CC7EF009DAC37 /* CreateWalletButton.swift in Sources */,
 				271DECCF234CC7EF009DAC37 /* AdsViewController.swift in Sources */,
@@ -6996,6 +7006,7 @@
 				27A1ABFF24855C1700344503 /* FeedGroupViews.swift in Sources */,
 				44331DD622551E15007E3E93 /* ToolbarProtocols.swift in Sources */,
 				0A1E84422190A57F0042F782 /* SyncPairCameraViewController.swift in Sources */,
+				27C647A62551F082006D72FC /* RewardsDebugSettingsViewController.swift in Sources */,
 				27829E752549FF13007CF0B2 /* WalletTransferViewController.swift in Sources */,
 				44331DDC22561F34007E3E93 /* ToolbarUrlActionsDelegate.swift in Sources */,
 				27C6478F2551CD2B006D72FC /* RewardsInternalsDebugViewController.swift in Sources */,
@@ -7213,6 +7224,7 @@
 				4422D56A21BFFB7F00BF1855 /* simplify.cc in Sources */,
 				274398E724E483AD00E79605 /* FeedItemMenu.swift in Sources */,
 				27B16C5924E1D72600E0CF2C /* NewTabPageFeedOverlayView.swift in Sources */,
+				2755EA9C2551F94B0033C43F /* RewardsInternalsAutoContributeController.swift in Sources */,
 				27CFB71424E1F67B008DFC8C /* Observable.swift in Sources */,
 				A134B88A20DA98BB00A581D0 /* ClientPreferences.swift in Sources */,
 				D3BE7B261B054D4400641031 /* main.swift in Sources */,

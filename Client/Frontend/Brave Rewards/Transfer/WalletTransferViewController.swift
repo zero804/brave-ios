@@ -72,6 +72,18 @@ class WalletTransferViewController: UIViewController, Themeable {
         transferView.applyTheme(theme)
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        transferView.cameraView.stopRunning()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        transferView.cameraView.startRunning()
+    }
+    
     // MARK: - Actions
     
     @objc private func tappedDone() {

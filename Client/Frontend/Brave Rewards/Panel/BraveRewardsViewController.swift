@@ -56,6 +56,8 @@ class BraveRewardsViewController: UIViewController, Themeable, PopoverContentCom
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        rewards.ledger.fetchPromotions(nil)
+        
         if tab.url?.isLocal == true {
             rewardsView.publisherView.isHidden = true
         }

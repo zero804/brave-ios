@@ -101,6 +101,10 @@ class RewardsInternalsDebugViewController: TableViewController {
                     Row(text: Strings.RewardsInternals.contributionsTitle, selection: { [unowned self] in
                         let controller = RewardsInternalsContributionListController(ledger: self.ledger)
                         self.navigationController?.pushViewController(controller, animated: true)
+                    }, accessory: .disclosureIndicator),
+                    Row(text: "Auto-Contribute", selection: { [unowned self] in
+                        let controller = RewardsInternalsAutoContributeController(ledger: self.ledger)
+                        self.navigationController?.pushViewController(controller, animated: true)
                     }, accessory: .disclosureIndicator)
                 ]
             )
@@ -110,7 +114,7 @@ class RewardsInternalsDebugViewController: TableViewController {
     }
     
     @objc private func tappedShare() {
-        let controller = RewardsInternalsShareController(ledger: self.ledger, initiallySelectedSharables: RewardsInternalsSharable.default)
+        let controller = RewardsInternalsShareController(ledger: self.ledger, initiallySelectedSharables: RewardsInternalsSharable.qa, sharables: RewardsInternalsSharable.qa)
         let container = UINavigationController(rootViewController: controller)
         present(container, animated: true)
     }
