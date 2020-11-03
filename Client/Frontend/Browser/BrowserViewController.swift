@@ -186,6 +186,13 @@ class BrowserViewController: UIViewController {
             // Legacy ledger is disabled by default
             wallet.isEnabled = false
             wallet.isAutoContributeEnabled = false
+            // Ensure we remove any pending contributions or recurring tips from the legacy wallet
+            wallet.removeAllPendingContributions { _ in }
+            wallet.listRecurringTips { publishers in
+                publishers.forEach {
+                    wallet.removeRecurringTip(publisherId: $0.id)
+                }
+            }
         }
         rewards = BraveRewards(configuration: configuration)
         if !BraveRewards.isAvailable {
