@@ -36,22 +36,7 @@ class RewardsInternalsAutoContributeController: UITableViewController {
         tableView.register(AutoContributePublisherCell.self)
         title = "Auto-Contribute"
         
-        let filter: ActivityInfoFilter = {
-            let sort = ActivityInfoFilterOrderPair().then {
-                $0.propertyName = "percent"
-                $0.ascending = false
-            }
-            let filter = ActivityInfoFilter().then {
-                $0.id = ""
-                $0.excluded = .filterAllExceptExcluded
-                $0.percent = 1 //exclude 0% sites.
-                $0.orderBy = [sort]
-                $0.nonVerified = ledger.allowUnverifiedPublishers
-                $0.reconcileStamp = ledger.autoContributeProperties.reconcileStamp
-            }
-            return filter
-        }()
-        ledger.listActivityInfo(fromStart: 0, limit: 0, filter: filter) { [weak self] list in
+        ledger.listAutoContributePublishers { [weak self] list in
             guard let self = self else { return }
             self.publishers = list
             self.tableView.reloadData()
@@ -87,7 +72,7 @@ class RewardsInternalsAutoContributeController: UITableViewController {
             return cell
         case 1:
             guard let publisher = publishers[safe: indexPath.item] else { return cell }
-            cell.textLabel?.text = publisher.id
+            cell.textLabel?.text = publisher.displayName
             cell.detailTextLabel?.text = percentFormatter.string(from: NSNumber(value: Double(publisher.percent) / 100.0))
             return cell
         default:

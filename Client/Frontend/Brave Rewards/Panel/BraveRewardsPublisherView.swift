@@ -21,14 +21,15 @@ class BraveRewardsPublisherView: UIStackView, Themeable {
     }
     
     let hostLabel = UILabel().then {
-        $0.font = .systemFont(ofSize: 20.0)
+        $0.font = .systemFont(ofSize: 18)
         $0.textAlignment = .left
+        $0.numberOfLines = 0
     }
     
     let bodyLabel = UILabel().then {
         $0.text = "You are supporting content creators like this one."
         $0.numberOfLines = 0
-        $0.font = .systemFont(ofSize: 16)
+        $0.font = .systemFont(ofSize: 15, weight: .medium)
     }
     
     func applyTheme(_ theme: Theme) {

@@ -17,12 +17,31 @@ class BraveRewardsViewController: UIViewController, Themeable, PopoverContentCom
     let legacyWallet: BraveLedger?
     var rewardsTransferTapped: (() -> Void)?
     
+    private var ledgerObserver: LedgerObserver?
+    private var publisher: PublisherInfo? {
+        didSet {
+            rewardsView.publisherView.isHidden = publisher?.status != .verified
+            rewardsView.publisherView.hostLabel.text = publisher?.displayName
+        }
+    }
+    
     init(tab: Tab, rewards: BraveRewards, legacyWallet: BraveLedger?) {
         self.tab = tab
         self.rewards = rewards
         self.legacyWallet = legacyWallet
         
         super.init(nibName: nil, bundle: nil)
+        
+        let observer = LedgerObserver(ledger: rewards.ledger)
+        rewards.ledger.add(observer)
+        ledgerObserver = observer
+        
+        observer.fetchedPanelPublisher = { [weak self] publisher, tabId in
+            guard let self = self else { return }
+            if tabId == tab.rewardsId {
+                self.publisher = publisher
+            }
+        }
     }
     
     @available(*, unavailable)
@@ -58,7 +77,9 @@ class BraveRewardsViewController: UIViewController, Themeable, PopoverContentCom
         
         rewards.ledger.fetchPromotions(nil)
         
-        if tab.url?.isLocal == true {
+        if let url = tab.url, !url.isLocal {
+            rewards.ledger.fetchPublisherActivity(from: url, faviconURL: nil, publisherBlob: nil, tabId: UInt64(tab.rewardsId))
+        } else {
             rewardsView.publisherView.isHidden = true
         }
         
@@ -78,7 +99,12 @@ class BraveRewardsViewController: UIViewController, Themeable, PopoverContentCom
             })
         }
         
-        rewardsView.publisherView.hostLabel.text = tab.url?.baseDomain
+        rewards.ledger.listAutoContributePublishers { [weak self] list in
+            guard let self = self else { return }
+            self.rewardsView.supportedCountView.countLabel.text = "\(list.count)"
+        }
+        
+        rewardsView.publisherView.hostLabel.text = publisher?.displayName
         if let url = tab.url {
             rewardsView.publisherView.faviconImageView.loadFavicon(for: url)
         } else {
