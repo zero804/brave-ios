@@ -6,6 +6,7 @@
 import Foundation
 import BraveShared
 import BraveUI
+import Shared
 
 extension BraveRewardsViewController {
     class BraveRewardsView: UIStackView, Themeable {
@@ -15,11 +16,11 @@ extension BraveRewardsViewController {
             $0.appearanceOnTintColor = Colors.blurple400
         }
         private let titleLabel = UILabel().then {
-            $0.text = "Brave Rewards"
+            $0.text = Strings.braveRewardsTitle
             $0.font = .systemFont(ofSize: 20)
         }
-        private let subtitleLabel = UILabel().then {
-            $0.text = "You are supporting content creators"
+        let subtitleLabel = UILabel().then {
+            $0.text = Strings.Rewards.disabledBody
             $0.font = .systemFont(ofSize: 12)
         }
         private let dividerView = UIView().then {

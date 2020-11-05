@@ -40,14 +40,14 @@ class BraveRewardsSettingsViewController: TableViewController {
         dataSource.sections = [
             .init(
                 rows: [
-                    Row(text: "Brave Rewards",
-                        detailText: "Support content creators and publishers automatically by enabling Brave Private Ads. Brave Private Ads are privacy-respecting ads that give back to content creators.",
+                    Row(text: Strings.braveRewardsTitle,
+                        detailText: Strings.Rewards.settingsToggleMessage,
                         accessory: .switchToggle(value: rewards.isEnabled, { [unowned self] isOn in
                             self.rewards.isEnabled = isOn
                         }),
                         cellClass: MultilineSubtitleCell.self)
                 ],
-                footer: .title("Brave Rewards payouts are temporarily unavailable on this device. Transfer your existing wallet funds to a desktop wallet to keep your tokens.")
+                footer: .title(Strings.Rewards.settingsFooterMessage)
             )
         ]
         
@@ -56,9 +56,9 @@ class BraveRewardsSettingsViewController: TableViewController {
                 guard let self = self else { return }
                 if total > 0 {
                     self.dataSource.sections.insert(.init(
-                        header: .title("Wallet Transfer"),
+                        header: .title(Strings.Rewards.walletTransferTitle),
                         rows: [
-                            Row(text: "Legacy Wallet Transfer", selection: { [unowned self] in
+                            Row(text: Strings.Rewards.legacyWalletTransfer, selection: { [unowned self] in
                                 guard let legacyWallet = self.legacyWallet else { return }
                                 let controller = WalletTransferViewController(legacyWallet: legacyWallet)
                                 controller.learnMoreHandler = { [weak self] in

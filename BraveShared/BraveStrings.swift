@@ -1517,3 +1517,93 @@ extension Strings {
     public static let sharingWarningMessage = NSLocalizedString("RewardsInternalsSharingWarningMessage", bundle: Bundle.braveShared, value: "Data on this page may be sensitive. Treat them as you would your wallet private keys. Be careful who you share them with.", comment: "")
   }
 }
+
+// MARK: - Rewards
+extension Strings {
+    public struct Rewards {
+        public static let enabledBody = NSLocalizedString(
+            "rewards.enabledBody",
+            bundle: .braveShared,
+            value: "You are supporting content creators",
+            comment: "Displayed when Brave Rewards is enabled"
+        )
+        public static let disabledBody = NSLocalizedString(
+            "rewards.disabledBody",
+            bundle: .braveShared,
+            value: "Turn on to support content creators",
+            comment: "Displayed when Brave Rewards is disabled"
+        )
+        public static let supportingPublisher = NSLocalizedString(
+            "rewards.supportingPublisher",
+            bundle: .braveShared,
+            value: "You are supporting content creators like this one.",
+            comment: "Displayed under verified publishers"
+        )
+        public static let totalSupportedCount = NSLocalizedString(
+            "rewards.totalSupportedCount",
+            bundle: .braveShared,
+            value: "Supported publishers and creators this month.",
+            comment: "Displayed next to a number representing the total number of publishers supported"
+        )
+        public static let walletTransferTitle = NSLocalizedString(
+            "rewards.walletTransferTitle",
+            bundle: .braveShared,
+            value: "Wallet Transfer",
+            comment: "Title of the legacy wallet transfer screen"
+        )
+        public static let walletTransferFailureAlertTitle = NSLocalizedString(
+            "rewards.walletTransferFailureAlertTitle",
+            bundle: .braveShared,
+            value: "Try Again",
+            comment: "Title on the alert presented if wallet transfer fails"
+        )
+        public static let walletTransferFailureAlertMessage = NSLocalizedString(
+            "rewards.walletTransferFailureAlertMessage",
+            bundle: .braveShared,
+            value: "Brave couldn’t connect, something broke, or we somehow goofed.",
+            comment: "Message on the alert presented if wallet transfer fails"
+        )
+        public static let walletTransferStepsTitle = NSLocalizedString(
+            "rewards.walletTransferStepsTitle",
+            bundle: .braveShared,
+            value: "Scan One-Time Transfer Code",
+            comment: "Title above the steps to use wallet transfer"
+        )
+        public static let walletTransferStepsBody = NSLocalizedString(
+            "rewards.walletTransferStepsBody",
+            bundle: .braveShared,
+            value: "Your Brave Rewards token balance can be transfered to an existing Brave Rewards desktop wallet once.\n\n1. Open Brave Desktop Browser\n2. Navigate to....\n3. Scan QR with phone\n4. Check your Desktop Rewards Summary",
+            comment: "Describes the steps for using wallet transfer"
+        )
+        public static let walletTransferCompleteTitle = NSLocalizedString(
+            "rewards.walletTransferCompleteTitle",
+            bundle: .braveShared,
+            value: "Balance trasfer has initiated",
+            comment: "Title shown above the confirmation message after completing a wallet transfer successfully"
+        )
+        public static let walletTransferCompleteBody = NSLocalizedString(
+            "rewards.walletTransferStepsBody",
+            bundle: .braveShared,
+            value: "Your transfer has initiated. Any existing BAT balance may take several minutes to appear in your desktop Brave Rewards wallet. Check your Rewards summary on Desktop for details when transfer has completed.\n\nYou may close this window and continue using Brave as your transfer is in progress.",
+            comment: "A confirmation message shown to the user after completing a wallet transfer successfully"
+        )
+        public static let legacyWalletTransfer = NSLocalizedString(
+            "rewards.legacyWalletTransfer",
+            bundle: .braveShared,
+            value: "Legacy Wallet Transfer",
+            comment: ""
+        )
+        public static let settingsToggleMessage = NSLocalizedString(
+            "rewards.settingsToggleMessage",
+            bundle: .braveShared,
+            value: "Support content creators and publishers automatically by enabling Brave Private Ads. Brave Private Ads are privacy-respecting ads that give back to content creators.",
+            comment: ""
+        )
+        public static let settingsFooterMessage = NSLocalizedString(
+            "rewards.settingsFooterMessage",
+            bundle: .braveShared,
+            value: "Brave Rewards payouts are temporarily unavailable on this device. Transfer your existing wallet funds to a desktop wallet to keep your tokens.",
+            comment: ""
+        )
+    }
+}

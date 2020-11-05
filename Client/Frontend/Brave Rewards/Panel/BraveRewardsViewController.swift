@@ -110,7 +110,7 @@ class BraveRewardsViewController: UIViewController, Themeable, PopoverContentCom
         } else {
             rewardsView.publisherView.faviconImageView.isHidden = true
         }
-        
+        rewardsView.subtitleLabel.text = rewards.isEnabled ? Strings.Rewards.enabledBody : Strings.Rewards.disabledBody
         rewardsView.rewardsToggle.addTarget(self, action: #selector(rewardsToggleValueChanged), for: .valueChanged)
         rewardsView.legacyWalletTransferButton.addTarget(self, action: #selector(tappedRewardsTransfer), for: .touchUpInside)
         
@@ -126,6 +126,7 @@ class BraveRewardsViewController: UIViewController, Themeable, PopoverContentCom
     @objc private func rewardsToggleValueChanged() {
         let isOn = rewardsView.rewardsToggle.isOn
         rewards.isEnabled = isOn
+        rewardsView.subtitleLabel.text = isOn ? Strings.Rewards.enabledBody : Strings.Rewards.disabledBody
         if rewardsView.rewardsToggle.isOn {
             rewardsView.supportedCountView.alpha = 0
         }

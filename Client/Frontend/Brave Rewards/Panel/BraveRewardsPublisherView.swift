@@ -5,6 +5,7 @@
 
 import Foundation
 import BraveUI
+import Shared
 
 class BraveRewardsPublisherView: UIStackView, Themeable {
     
@@ -27,7 +28,7 @@ class BraveRewardsPublisherView: UIStackView, Themeable {
     }
     
     let bodyLabel = UILabel().then {
-        $0.text = "You are supporting content creators like this one."
+        $0.text = Strings.Rewards.supportingPublisher
         $0.numberOfLines = 0
         $0.font = .systemFont(ofSize: 15, weight: .medium)
     }

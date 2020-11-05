@@ -4,6 +4,7 @@
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 import Foundation
+import Shared
 
 class BraveRewardsSupportedCountView: UIStackView, Themeable {
     
@@ -14,7 +15,7 @@ class BraveRewardsSupportedCountView: UIStackView, Themeable {
     }
     
     private let bodyLabel = UILabel().then {
-        $0.text = "Supported publishers and creators this month."
+        $0.text = Strings.Rewards.totalSupportedCount
         $0.numberOfLines = 0
         $0.font = .systemFont(ofSize: 13)
     }

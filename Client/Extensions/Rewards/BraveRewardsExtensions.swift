@@ -25,9 +25,9 @@ extension BraveRewards {
         }
     }
     
-    public func createWalletIfNeeded(_ completion: @escaping () -> Void) {
+    public func createWalletIfNeeded(_ completion: (() -> Void)? = nil) {
         if ledger.isWalletCreated {
-            completion()
+            completion?()
             return
         }
         if isCreatingWallet {
@@ -37,7 +37,7 @@ extension BraveRewards {
         isCreatingWallet = true
         ledger.createWalletAndFetchDetails { [weak self] success in
             self?.isCreatingWallet = false
-            completion()
+            completion?()
         }
     }
     

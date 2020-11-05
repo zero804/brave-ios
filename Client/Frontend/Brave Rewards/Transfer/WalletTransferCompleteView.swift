@@ -4,6 +4,7 @@
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 import Foundation
+import Shared
 
 extension WalletTransferCompleteViewController {
     class WalletTransferCompleteView: UIView, Themeable {
@@ -16,12 +17,12 @@ extension WalletTransferCompleteViewController {
             $0.isLayoutMarginsRelativeArrangement = true
         }
         private let titleLabel = UILabel().then {
-            $0.text = "Balance trasfer has initiated"
+            $0.text = Strings.Rewards.walletTransferCompleteTitle
             $0.numberOfLines = 0
             $0.font = .systemFont(ofSize: 17, weight: .semibold)
         }
         private let bodyLabel = UILabel().then {
-            $0.text = "Your transfer has initiated. Any existing BAT balance may take several minutes to appear in your desktop Brave Rewards wallet. Check your Rewards summary on Desktop for details when transfer has completed.\n\nYou may close this window and continue using Brave as your transfer is in progress."
+            $0.text = Strings.Rewards.walletTransferCompleteBody
             $0.numberOfLines = 0
             $0.font = .systemFont(ofSize: 17)
         }

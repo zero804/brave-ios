@@ -5,6 +5,7 @@
 
 import Foundation
 import BraveUI
+import Shared
 
 extension WalletTransferViewController {
     class WalletTransferView: UIView, Themeable {
@@ -20,12 +21,12 @@ extension WalletTransferViewController {
             $0.alignment = .leading
         }
         private let titleLabel = UILabel().then {
-            $0.text = "Scan One-Time Transfer Code"
+            $0.text = Strings.Rewards.walletTransferStepsTitle
             $0.font = .systemFont(ofSize: 17, weight: .semibold)
             $0.numberOfLines = 0
         }
         private let bodyLabel = UILabel().then {
-            $0.text = "Your Brave Rewards token balance can be transfered to an existing Brave Rewards desktop wallet once.\n\n1. Open Brave Desktop Browser\n2. Navigate to....\n3. Scan QR with phone\n4. Check your Desktop Rewards Summary"
+            $0.text = Strings.Rewards.walletTransferStepsBody
             $0.font = .systemFont(ofSize: 17)
             $0.numberOfLines = 0
         }

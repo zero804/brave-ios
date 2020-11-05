@@ -5,6 +5,7 @@
 
 import Foundation
 import BraveUI
+import Shared
 
 class LegacyWalletTransferButton: UIControl, Themeable {
     
@@ -15,13 +16,13 @@ class LegacyWalletTransferButton: UIControl, Themeable {
     }
     
     private let label = UILabel().then {
-        $0.text = "Legacy Wallet Transfer"
+        $0.text = Strings.Rewards.legacyWalletTransfer
         $0.font = .systemFont(ofSize: 16)
         $0.numberOfLines = 0
     }
     
     private let learnMoreLabel = UILabel().then {
-        $0.text = "Learn More"
+        $0.text = Strings.learnMore
         $0.font = .systemFont(ofSize: 16, weight: .semibold)
         $0.setContentHuggingPriority(.required, for: .horizontal)
     }

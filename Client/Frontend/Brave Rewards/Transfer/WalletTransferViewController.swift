@@ -5,6 +5,7 @@
 
 import Foundation
 import BraveRewards
+import Shared
 
 class WalletTransferViewController: UIViewController, Themeable {
     
@@ -35,7 +36,7 @@ class WalletTransferViewController: UIViewController, Themeable {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = "Wallet Transfer"
+        title = Strings.Rewards.walletTransferTitle
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(tappedDone))
         
         transferView.cameraView.scanCallback = { [weak self] paymentId in
@@ -44,8 +45,8 @@ class WalletTransferViewController: UIViewController, Themeable {
             self.legacyWallet.linkBraveWallet(paymentId: paymentId) { [weak self] result in
                 guard let self = self else { return }
                 if result != .ledgerOk {
-                    let alert = UIAlertController(title: "Error", message: "Failed (\(result.rawValue) - \(String(describing: result))", preferredStyle: .alert)
-                    alert.addAction(.init(title: "OK", style: .default, handler: { [unowned self] _ in
+                    let alert = UIAlertController(title: Strings.Rewards.walletTransferFailureAlertTitle, message: "\(Strings.Rewards.walletTransferFailureAlertMessage) (Error code: \(result.rawValue))", preferredStyle: .alert)
+                    alert.addAction(.init(title: Strings.OKString, style: .default, handler: { [unowned self] _ in
                         self.isTransferring = false
                     }))
                     self.present(alert, animated: true)
