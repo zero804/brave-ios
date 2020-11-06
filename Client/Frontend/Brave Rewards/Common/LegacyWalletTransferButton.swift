@@ -9,22 +9,29 @@ import Shared
 
 class LegacyWalletTransferButton: UIControl, Themeable {
     
-    private let topBorderView = UIView()
+    let dismissButton = Button(type: .system).then {
+        $0.setImage(UIImage(imageLiteralResourceName: "close-medium").template, for: .normal)
+        $0.tintColor = .white
+        $0.hitTestSlop = UIEdgeInsets(equalInset: -10)
+    }
     
     private let imageView = UIImageView(image: UIImage(imageLiteralResourceName: "rewards-qr-code").template).then {
         $0.setContentHuggingPriority(.required, for: .horizontal)
+        $0.tintColor = .white
     }
     
-    private let label = UILabel().then {
+    private let titleLabel = UILabel().then {
         $0.text = Strings.Rewards.legacyWalletTransfer
-        $0.font = .systemFont(ofSize: 16)
+        $0.font = .systemFont(ofSize: 18, weight: .medium)
         $0.numberOfLines = 0
+        $0.appearanceTextColor = .white
     }
     
-    private let learnMoreLabel = UILabel().then {
-        $0.text = Strings.learnMore
-        $0.font = .systemFont(ofSize: 16, weight: .semibold)
-        $0.setContentHuggingPriority(.required, for: .horizontal)
+    private let subtitleLabel = UILabel().then {
+        $0.text = Strings.Rewards.legacyWalletTransferSubtitle
+        $0.font = .systemFont(ofSize: 13)
+        $0.numberOfLines = 0
+        $0.appearanceTextColor = .white
     }
     
     override init(frame: CGRect) {
@@ -34,38 +41,44 @@ class LegacyWalletTransferButton: UIControl, Themeable {
             $0.alignment = .center
             $0.spacing = 14
             $0.isUserInteractionEnabled = false
+            $0.isLayoutMarginsRelativeArrangement = true
+            $0.layoutMargins = UIEdgeInsets(top: 14, left: 20, bottom: 14, right: 20)
         }
         
         isAccessibilityElement = true
         accessibilityTraits.insert(.button)
         
-        addSubview(topBorderView)
+        layer.cornerRadius = 8
+        if #available(iOS 13, *) {
+            layer.cornerCurve = .continuous
+        }
+        
+        backgroundColor = UIColor(rgb: 0x339AF0)
+        
         addSubview(stackView)
+        addSubview(dismissButton)
         
-        stackView.addArrangedSubview(imageView)
-        stackView.addArrangedSubview(label)
-        stackView.addArrangedSubview(learnMoreLabel)
+        stackView.addStackViewItems(
+            .view(imageView),
+            .view(UIStackView().then {
+                $0.axis = .vertical
+                $0.spacing = 4
+                $0.addStackViewItems(
+                    .view(titleLabel),
+                    .view(subtitleLabel)
+                )
+            })
+        )
         
-        accessibilityLabel = label.text
+        accessibilityLabel = titleLabel.text
         
-        topBorderView.snp.makeConstraints {
-            $0.top.leading.trailing.equalTo(self)
-            $0.height.equalTo(1.0 / UIScreen.main.scale)
-        }
         stackView.snp.makeConstraints {
-            $0.leading.equalTo(self).inset(20)
-            $0.top.bottom.equalTo(self).inset(14)
-            $0.trailing.equalTo(self).inset(20)
+            $0.top.leading.bottom.equalToSuperview()
+            $0.trailing.equalTo(dismissButton)
         }
-    }
-    
-    func applyTheme(_ theme: Theme) {
-        let isDark = theme.isDark
-        appearanceBackgroundColor = isDark ? Colors.grey900 : Colors.neutral000
-        topBorderView.backgroundColor = UIColor(white: isDark ? 1.0 : 0.0, alpha: 0.2)
-        imageView.tintColor = isDark ? Colors.grey300 : Colors.grey600
-        label.textColor = theme.colors.tints.home
-        learnMoreLabel.textColor = isDark ? Colors.blurple300 : Colors.blurple400
+        dismissButton.snp.makeConstraints {
+            $0.top.trailing.equalToSuperview().inset(5)
+        }
     }
     
     @available(*, unavailable)
@@ -76,8 +89,8 @@ class LegacyWalletTransferButton: UIControl, Themeable {
     override var isHighlighted: Bool {
         didSet {
             UIView.animate(withDuration: 0.15) {
-                self.label.alpha = self.isHighlighted ? 0.4 : 1.0
-                self.learnMoreLabel.alpha = self.isHighlighted ? 0.4 : 1.0
+                self.titleLabel.alpha = self.isHighlighted ? 0.4 : 1.0
+                self.subtitleLabel.alpha = self.isHighlighted ? 0.4 : 1.0
                 self.imageView.alpha = self.isHighlighted ? 0.4 : 1.0
             }
         }

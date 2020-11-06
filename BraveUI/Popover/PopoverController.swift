@@ -173,7 +173,7 @@ public class PopoverController: UIViewController {
     }
     
     override public var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
+        return .default
     }
     
     override public func viewDidLayoutSubviews() {

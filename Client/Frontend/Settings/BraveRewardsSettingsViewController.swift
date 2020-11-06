@@ -40,7 +40,7 @@ class BraveRewardsSettingsViewController: TableViewController {
         dataSource.sections = [
             .init(
                 rows: [
-                    Row(text: Strings.braveRewardsTitle,
+                    Row(text: Strings.Rewards.settingsToggleTitle,
                         detailText: Strings.Rewards.settingsToggleMessage,
                         accessory: .switchToggle(value: rewards.isEnabled, { [unowned self] isOn in
                             self.rewards.isEnabled = isOn

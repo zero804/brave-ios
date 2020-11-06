@@ -17,7 +17,7 @@ class BraveRewardsSupportedCountView: UIStackView, Themeable {
     private let bodyLabel = UILabel().then {
         $0.text = Strings.Rewards.totalSupportedCount
         $0.numberOfLines = 0
-        $0.font = .systemFont(ofSize: 13)
+        $0.font = .systemFont(ofSize: 15)
     }
     
     override init(frame: CGRect) {
@@ -25,8 +25,6 @@ class BraveRewardsSupportedCountView: UIStackView, Themeable {
         
         spacing = 16
         alignment = .center
-        layoutMargins = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 64)
-        isLayoutMarginsRelativeArrangement = true
         
         addStackViewItems(
             .view(countLabel),

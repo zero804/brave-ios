@@ -13,7 +13,6 @@ extension BraveRewardsViewController {
         
         let rewardsToggle = UISwitch().then {
             $0.setContentHuggingPriority(.required, for: .horizontal)
-            $0.appearanceOnTintColor = Colors.blurple400
         }
         private let titleLabel = UILabel().then {
             $0.text = Strings.braveRewardsTitle
@@ -23,28 +22,25 @@ extension BraveRewardsViewController {
             $0.text = Strings.Rewards.disabledBody
             $0.font = .systemFont(ofSize: 12)
         }
-        private let dividerView = UIView().then {
-            $0.snp.makeConstraints {
-                $0.height.equalTo(1.0 / UIScreen.main.scale)
-            }
-        }
+        
         let publisherView = BraveRewardsPublisherView()
-        let supportedCountView = BraveRewardsSupportedCountView()
+        let statusView = BraveRewardsStatusView()
         let legacyWalletTransferButton = LegacyWalletTransferButton()
         
         override init(frame: CGRect) {
             super.init(frame: frame)
             
             axis = .vertical
-            spacing = 0
+            spacing = 20
+            
+            isLayoutMarginsRelativeArrangement = true
+            layoutMargins = UIEdgeInsets(top: 20, left: 16, bottom: 20, right: 16)
             
             addStackViewItems(
                 .view(UIStackView().then {
                     $0.axis = .horizontal
                     $0.alignment = .center
                     $0.spacing = 12
-                    $0.isLayoutMarginsRelativeArrangement = true
-                    $0.layoutMargins = UIEdgeInsets(equalInset: 20)
                     $0.addStackViewItems(
                         .view(UIStackView().then {
                             $0.axis = .vertical
@@ -58,10 +54,15 @@ extension BraveRewardsViewController {
                         .view(rewardsToggle)
                     )
                 }),
-                .view(dividerView),
-                .view(publisherView),
-                .view(supportedCountView),
-                .view(legacyWalletTransferButton)
+                .view(UIStackView().then {
+                    $0.axis = .vertical
+                    $0.spacing = 8
+                    $0.addStackViewItems(
+                        .view(legacyWalletTransferButton),
+                        .view(statusView)
+                    )
+                }),
+                .view(publisherView)
             )
         }
         
@@ -74,9 +75,8 @@ extension BraveRewardsViewController {
             let isDark = theme.isDark
             titleLabel.textColor = isDark ? UIColor.white : UIColor.black
             subtitleLabel.textColor = isDark ? UIColor.lightGray : UIColor.gray
-            dividerView.backgroundColor = UIColor(white: isDark ? 1.0 : 0.0, alpha: 0.2)
             publisherView.applyTheme(theme)
-            supportedCountView.applyTheme(theme)
+            statusView.applyTheme(theme)
             legacyWalletTransferButton.applyTheme(theme)
             backgroundColor = theme.isDark ? UIColor(rgb: 0x17171f) : UIColor.white
         }

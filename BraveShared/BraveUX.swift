@@ -7,6 +7,7 @@ public struct BraveUX {
     public static let braveTodayPrivacyURL = URL(string: "https://brave.com/privacy/#brave-today")!
     public static let braveOffersURL = URL(string: "https://offers.brave.com/")!
     public static let braveRewardsLearnMoreURL = URL(string: "https://brave.com/rewards-ios/")!
+    public static let braveRewardsUnverifiedPublisherLearnMoreURL = URL(string: "https://brave.com/faq-rewards/#unclaimed-funds")!
     public static let braveTermsOfUseURL = URL(string: "https://www.brave.com/terms_of_use")!
     public static let prefKeyOptInDialogWasSeen = "OptInDialogWasSeen"
     public static let prefKeyUserAllowsTelemetry = "userallowstelemetry"

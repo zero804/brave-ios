@@ -22,15 +22,24 @@ class BraveRewardsPublisherView: UIStackView, Themeable {
     }
     
     let hostLabel = UILabel().then {
-        $0.font = .systemFont(ofSize: 18)
-        $0.textAlignment = .left
+        $0.font = .systemFont(ofSize: 19)
+        $0.textAlignment = .center
         $0.numberOfLines = 0
+        // Stop it from becoming like 10 lines with 1 letter per line
+        $0.setContentCompressionResistancePriority(.init(999), for: .horizontal)
     }
     
     let bodyLabel = UILabel().then {
-        $0.text = Strings.Rewards.supportingPublisher
+        $0.text = Strings.Rewards.unverifiedPublisher
         $0.numberOfLines = 0
-        $0.font = .systemFont(ofSize: 15, weight: .medium)
+        $0.textAlignment = .center
+        $0.font = .systemFont(ofSize: 16)
+    }
+    
+    let learnMoreButton = Button(type: .system).then {
+        $0.setTitle(Strings.learnMore, for: .normal)
+        $0.appearanceTintColor = Colors.blurple400
+        $0.isHidden = true
     }
     
     func applyTheme(_ theme: Theme) {
@@ -41,17 +50,19 @@ class BraveRewardsPublisherView: UIStackView, Themeable {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        layoutMargins = UIEdgeInsets(equalInset: 20)
-        isLayoutMarginsRelativeArrangement = true
         axis = .vertical
-        spacing = 12
+        alignment = .center
+        spacing = 8
+        isLayoutMarginsRelativeArrangement = true
+        layoutMargins = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
 
         addStackViewItems(
             .view(UIStackView(arrangedSubviews: [faviconImageView, hostLabel]).then {
                 $0.spacing = 8
                 $0.alignment = .center
             }),
-            .view(bodyLabel)
+            .view(bodyLabel),
+            .view(learnMoreButton)
         )
     }
     

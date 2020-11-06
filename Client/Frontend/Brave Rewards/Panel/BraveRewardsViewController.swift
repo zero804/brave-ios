@@ -12,18 +12,39 @@ import Shared
 private let log = Logger.rewardsLogger
 
 class BraveRewardsViewController: UIViewController, Themeable, PopoverContentComponent {
+    enum Action {
+        case rewardsTransferTapped
+        case unverifiedPublisherLearnMoreTapped
+    }
+    
     let tab: Tab
     let rewards: BraveRewards
     let legacyWallet: BraveLedger?
-    var rewardsTransferTapped: (() -> Void)?
+    var actionHandler: ((Action) -> Void)?
     
     private var ledgerObserver: LedgerObserver?
     private var publisher: PublisherInfo? {
         didSet {
-            rewardsView.publisherView.isHidden = publisher?.status != .verified
+            let isVerified = publisher?.status == .verified
+            rewardsView.publisherView.learnMoreButton.isHidden = isVerified
             rewardsView.publisherView.hostLabel.text = publisher?.displayName
+            rewardsView.publisherView.bodyLabel.text = isVerified ? Strings.Rewards.supportingPublisher : Strings.Rewards.unverifiedPublisher
+            if !isVerified {
+                rewardsView.publisherView.faviconImageView.clearMonogramFavicon()
+                rewardsView.publisherView.faviconImageView.image = #imageLiteral(resourceName: "rewards-panel-unverified-pub").withRenderingMode(.alwaysOriginal)
+                rewardsView.publisherView.faviconImageView.contentMode = .center
+            } else {
+                if let url = tab.url {
+                    rewardsView.publisherView.faviconImageView.contentMode = .scaleAspectFit
+                    rewardsView.publisherView.faviconImageView.loadFavicon(for: url)
+                } else {
+                    rewardsView.publisherView.faviconImageView.isHidden = true
+                }
+            }
         }
     }
+    
+    private var supportedListCount: Int = 0
     
     init(tab: Tab, rewards: BraveRewards, legacyWallet: BraveLedger?) {
         self.tab = tab
@@ -75,44 +96,45 @@ class BraveRewardsViewController: UIViewController, Themeable, PopoverContentCom
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        rewards.ledger.fetchPromotions(nil)
-        
-        if let url = tab.url, !url.isLocal {
-            rewards.ledger.fetchPublisherActivity(from: url, faviconURL: nil, publisherBlob: nil, tabId: UInt64(tab.rewardsId))
-        } else {
-            rewardsView.publisherView.isHidden = true
-        }
-        
         rewardsView.rewardsToggle.isOn = rewards.isEnabled
         
         if !rewards.isEnabled {
-            rewardsView.supportedCountView.isHidden = true
+            rewardsView.statusView.setVisibleStatus(status: .rewardsOff, animated: false)
+            rewardsView.publisherView.isHidden = true
+        } else {
+            if let url = tab.url, !url.isLocal {
+                rewardsView.publisherView.hostLabel.text = url.baseDomain
+                rewards.ledger.fetchPublisherActivity(from: url, faviconURL: nil, publisherBlob: nil, tabId: UInt64(tab.rewardsId))
+            } else {
+                rewardsView.publisherView.isHidden = true
+            }
+            rewards.ledger.fetchPromotions(nil)
+            rewards.ledger.listAutoContributePublishers { [weak self] list in
+                guard let self = self else { return }
+                self.supportedListCount = list.count
+                self.rewardsView.statusView.setVisibleStatus(status: list.isEmpty ? .rewardsOnNoCount : .rewardsOn, animated: false)
+                self.rewardsView.statusView.countView.countLabel.text = "\(list.count)"
+            }
         }
         
         rewardsView.legacyWalletTransferButton.isHidden = true
-        if let legacyWallet = legacyWallet {
-            legacyWallet.transferrableAmount({ [weak self] total in
-                guard let self = self else { return }
-                if total > 0 {
-                    self.rewardsView.legacyWalletTransferButton.isHidden = false
-                }
-            })
+        if !Preferences.Rewards.dismissedLegacyWalletTransfer.value {
+            if let legacyWallet = legacyWallet {
+                legacyWallet.transferrableAmount({ [weak self] total in
+                    guard let self = self else { return }
+                    if total > 0 {
+                        self.rewardsView.legacyWalletTransferButton.isHidden = false
+                    }
+                })
+            }
         }
         
-        rewards.ledger.listAutoContributePublishers { [weak self] list in
-            guard let self = self else { return }
-            self.rewardsView.supportedCountView.countLabel.text = "\(list.count)"
-        }
-        
-        rewardsView.publisherView.hostLabel.text = publisher?.displayName
-        if let url = tab.url {
-            rewardsView.publisherView.faviconImageView.loadFavicon(for: url)
-        } else {
-            rewardsView.publisherView.faviconImageView.isHidden = true
-        }
+        rewardsView.publisherView.hostLabel.text = publisher?.displayName ?? tab.url?.baseDomain
+        rewardsView.publisherView.learnMoreButton.addTarget(self, action: #selector(tappedUnverifiedPubLearnMore), for: .touchUpInside)
         rewardsView.subtitleLabel.text = rewards.isEnabled ? Strings.Rewards.enabledBody : Strings.Rewards.disabledBody
         rewardsView.rewardsToggle.addTarget(self, action: #selector(rewardsToggleValueChanged), for: .valueChanged)
         rewardsView.legacyWalletTransferButton.addTarget(self, action: #selector(tappedRewardsTransfer), for: .touchUpInside)
+        rewardsView.legacyWalletTransferButton.dismissButton.addTarget(self, action: #selector(tappedDismissRewardsTransfer), for: .touchUpInside)
         
         view.snp.makeConstraints {
             $0.width.equalTo(360)
@@ -128,15 +150,31 @@ class BraveRewardsViewController: UIViewController, Themeable, PopoverContentCom
         rewards.isEnabled = isOn
         rewardsView.subtitleLabel.text = isOn ? Strings.Rewards.enabledBody : Strings.Rewards.disabledBody
         if rewardsView.rewardsToggle.isOn {
-            rewardsView.supportedCountView.alpha = 0
+            rewardsView.statusView.setVisibleStatus(status: supportedListCount > 0 ? .rewardsOn : .rewardsOnNoCount)
+        } else {
+            rewardsView.statusView.setVisibleStatus(status: .rewardsOff)
         }
-        UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: [.beginFromCurrentState]) { [self] in
-            rewardsView.supportedCountView.isHidden = !rewardsView.rewardsToggle.isOn
-            rewardsView.supportedCountView.alpha = rewardsView.rewardsToggle.isOn ? 1 : 0
+        if publisher != nil {
+            UIView.animate(withDuration: 0.15) {
+                self.rewardsView.publisherView.isHidden = !self.rewardsView.rewardsToggle.isOn
+                self.rewardsView.publisherView.alpha = self.rewardsView.rewardsToggle.isOn ? 1.0 : 0.0
+            }
         }
     }
     
     @objc private func tappedRewardsTransfer() {
-        rewardsTransferTapped?()
+        actionHandler?(.rewardsTransferTapped)
+    }
+    
+    @objc private func tappedDismissRewardsTransfer() {
+        Preferences.Rewards.dismissedLegacyWalletTransfer.value = true
+        UIView.animate(withDuration: 0.15) {
+            self.rewardsView.legacyWalletTransferButton.isHidden = true
+            self.rewardsView.legacyWalletTransferButton.alpha = 0.0
+        }
+    }
+    
+    @objc private func tappedUnverifiedPubLearnMore() {
+        actionHandler?(.unverifiedPublisherLearnMoreTapped)
     }
 }

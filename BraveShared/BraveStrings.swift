@@ -1524,25 +1524,31 @@ extension Strings {
         public static let enabledBody = NSLocalizedString(
             "rewards.enabledBody",
             bundle: .braveShared,
-            value: "You are supporting content creators",
+            value: "You are helping support content creators",
             comment: "Displayed when Brave Rewards is enabled"
         )
         public static let disabledBody = NSLocalizedString(
             "rewards.disabledBody",
             bundle: .braveShared,
-            value: "Turn on to support content creators",
+            value: "Turn on to help support content creators",
             comment: "Displayed when Brave Rewards is disabled"
         )
         public static let supportingPublisher = NSLocalizedString(
             "rewards.supportingPublisher",
             bundle: .braveShared,
-            value: "You are supporting content creators like this one.",
+            value: "You are helping support content creators like this one.",
             comment: "Displayed under verified publishers"
+        )
+        public static let unverifiedPublisher = NSLocalizedString(
+            "rewards.unverifiedPublisher",
+            bundle: .braveShared,
+            value: "This creator has not verified and will not be included in creator support",
+            comment: "Displayed under unverified publishers"
         )
         public static let totalSupportedCount = NSLocalizedString(
             "rewards.totalSupportedCount",
             bundle: .braveShared,
-            value: "Supported publishers and creators this month.",
+            value: "Number of content creators you are helping support this month.",
             comment: "Displayed next to a number representing the total number of publishers supported"
         )
         public static let walletTransferTitle = NSLocalizedString(
@@ -1591,6 +1597,18 @@ extension Strings {
             "rewards.legacyWalletTransfer",
             bundle: .braveShared,
             value: "Legacy Wallet Transfer",
+            comment: ""
+        )
+        public static let legacyWalletTransferSubtitle = NSLocalizedString(
+            "rewards.legacyWalletTransferSubtitle",
+            bundle: .braveShared,
+            value: "One-time transfer-out existing tokens",
+            comment: ""
+        )
+        public static let settingsToggleTitle = NSLocalizedString(
+            "rewards.settingsToggleTitle",
+            bundle: .braveShared,
+            value: "Enable Brave Rewards",
             comment: ""
         )
         public static let settingsToggleMessage = NSLocalizedString(
