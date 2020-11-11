@@ -912,7 +912,14 @@ class BrowserViewController: UIViewController {
     }
     
     private func presentDefaultBrowserIntroScreen() {
-        present(DefaultBrowserIntroCalloutViewController(), animated: true)
+        let vc = DefaultBrowserIntroCalloutViewController()
+        let idiom = UIDevice.current.userInterfaceIdiom
+        if #available(iOS 13.0, *) {
+            vc.modalPresentationStyle = idiom == .phone ? .pageSheet : .formSheet
+        } else {
+            vc.modalPresentationStyle = idiom == .phone ? .fullScreen : .formSheet
+        }
+        present(vc, animated: true)
     }
 
     // THe logic for shouldShowWhatsNewTab is as follows: If we do not have the LatestAppVersionProfileKey in
