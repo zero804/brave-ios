@@ -184,7 +184,7 @@ class BrowserViewController: UIViewController {
         if !BraveRewards.isAvailable {
             // Disable rewards services in case previous user already enabled
             // rewards in previous build
-            rewards.ledger.isEnabled = false
+            //rewards.ledger.isEnabled = false
             rewards.ads.isEnabled = false
         }
         rewardsObserver = LedgerObserver(ledger: rewards.ledger)
@@ -368,14 +368,14 @@ class BrowserViewController: UIViewController {
             guard let self = self, self.isViewLoaded else { return }
             self.updateRewardsButtonState()
         }
-        rewardsObserver.rewardsEnabledStateUpdated = { [weak self] _ in
-            self?.updateRewardsButtonState()
-        }
+//        rewardsObserver.rewardsEnabledStateUpdated = { [weak self] _ in
+//            self?.updateRewardsButtonState()
+//        }
     }
     
     // Display first ad when the user gets back to this controller if they havent seen one before
     func displayMyFirstAdIfAvailable() {
-        if !rewards.ledger.isEnabled || !rewards.ads.isEnabled { return }
+        if true { return }
         if Preferences.Rewards.myFirstAdShown.value { return }
         // Check if ads are eligible
         if BraveAds.isCurrentLocaleSupported() {

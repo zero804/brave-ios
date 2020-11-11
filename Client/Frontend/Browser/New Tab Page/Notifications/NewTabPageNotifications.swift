@@ -24,7 +24,7 @@ class NewTabPageNotifications {
     
     func notificationToShow(isShowingBackgroundImage: Bool,
                             isShowingSponseredImage: Bool) -> NotificationType? {
-        let isRewardsEnabled = rewards.ledger.isEnabled
+        let isRewardsEnabled = false
         
         if Preferences.NewTabPage.attemptToShowClaimRewardsNotification.value
             && isRewardsEnabled

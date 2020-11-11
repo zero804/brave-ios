@@ -45,20 +45,20 @@ class BraveRewardsSettingsViewController: TableViewController {
             ])
         ]
         
-        if rewards.ledger.isWalletCreated {
-            dataSource.sections += [
-                Section(rows: [
-                    Row(text: Strings.openBraveRewardsSettings, selection: { [unowned self] in
-                        self.tappedShowRewardsSettings?()
-                    }, cellClass: ButtonCell.self)
-                ]),
-                Section(rows: [
-                    Row(text: Strings.RewardsInternals.title, selection: {
-                        let controller = RewardsInternalsViewController(rewards: self.rewards)
-                        self.navigationController?.pushViewController(controller, animated: true)
-                    }, accessory: .disclosureIndicator)
-                ])
-            ]
-        }
+//        if rewards.ledger.isWalletCreated {
+//            dataSource.sections += [
+//                Section(rows: [
+//                    Row(text: Strings.openBraveRewardsSettings, selection: { [unowned self] in
+//                        self.tappedShowRewardsSettings?()
+//                    }, cellClass: ButtonCell.self)
+//                ]),
+//                Section(rows: [
+//                    Row(text: Strings.RewardsInternals.title, selection: {
+//                        let controller = RewardsInternalsViewController(rewards: self.rewards)
+//                        self.navigationController?.pushViewController(controller, animated: true)
+//                    }, accessory: .disclosureIndicator)
+//                ])
+//            ]
+//        }
     }
 }

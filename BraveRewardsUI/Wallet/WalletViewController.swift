@@ -164,17 +164,17 @@ class WalletViewController: UIViewController, RewardsSummaryProtocol {
       height += contentView.bounds.height
     }
     
-    if state.ledger.isEnabled {
-      if isLocal && rewardsSummaryView.rows.isEmpty {
-        // 20 = offset between header view and content view
-        // FIXME: Generate this height without using 20 or manual math
-        height = rewardsSummaryView.scrollView.contentSize.height +
-          rewardsSummaryView.scrollView.frame.origin.y + 20 +
-          walletView.headerView.bounds.height
-      } else {
-        height = RewardsUX.preferredPanelSize.height
-      }
-    }
+//    if state.ledger.isEnabled {
+//      if isLocal && rewardsSummaryView.rows.isEmpty {
+//        // 20 = offset between header view and content view
+//        // FIXME: Generate this height without using 20 or manual math
+//        height = rewardsSummaryView.scrollView.contentSize.height +
+//          rewardsSummaryView.scrollView.frame.origin.y + 20 +
+//          walletView.headerView.bounds.height
+//      } else {
+//        height = RewardsUX.preferredPanelSize.height
+//      }
+//    }
     
     let newSize = CGSize(width: RewardsUX.preferredPanelSize.width, height: height)
     if preferredContentSize != newSize {
@@ -339,7 +339,7 @@ class WalletViewController: UIViewController, RewardsSummaryProtocol {
   }
   
   func reloadUIState() {
-    if state.ledger.isEnabled {
+    if false {
       if isLocal {
         rewardsSummaryView.rewardsSummaryButton.isEnabled = false
         
@@ -450,7 +450,7 @@ class WalletViewController: UIViewController, RewardsSummaryProtocol {
   }
   
   @objc private func tappedEnableBraveRewards() {
-    state.ledger.isEnabled = true
+//    state.ledger.isEnabled = true
     reloadUIState()
   }
   

@@ -91,16 +91,16 @@ class NTPLearnMoreViewController: BottomSheetViewController {
 // MARK: - NTPLearnMoreDelegate
 extension NTPLearnMoreViewController: NTPLearnMoreViewDelegate {
     func buttonTapped(type: NTPButtonType) {
-        switch type {
-        case .rewards:
-            if rewards.ledger.isWalletCreated {
-                rewards.ledger.isEnabled = true
-            } else {
-                rewards.ledger.createWalletAndFetchDetails { _ in }
-            }
-        case .ads:
-            rewards.ads.isEnabled = true
-        }
+//        switch type {
+//        case .rewards:
+//            if rewards.ledger.isWalletCreated {
+//                rewards.ledger.isEnabled = true
+//            } else {
+//                rewards.ledger.createWalletAndFetchDetails { _ in }
+//            }
+//        case .ads:
+//            rewards.ads.isEnabled = true
+//        }
         
         self.close()
     }

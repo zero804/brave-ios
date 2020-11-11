@@ -56,7 +56,7 @@ class SettingsViewController: UIViewController {
          $0.adsSection.status = .unsupportedRegion
       }
       $0.adsSection.toggleSwitch.isOn = state.ads.isEnabled
-      $0.rewardsToggleSection.toggleSwitch.isOn = state.ledger.isEnabled
+//      $0.rewardsToggleSection.toggleSwitch.isOn = state.ledger.isEnabled
       $0.autoContributeSection.toggleSwitch.isOn = state.ledger.isAutoContributeEnabled
     }
     
@@ -87,22 +87,22 @@ class SettingsViewController: UIViewController {
   // MARK: -
   
   private func updateVisualStateOfSections(animated: Bool) {
-    let ledger = state.ledger
-    settingsView.do {
-      $0.rewardsToggleSection.setRewardsEnabled(ledger.isEnabled, animated: animated)
-      $0.adsSection.setSectionEnabled(
-        ledger.isEnabled && state.ads.isEnabled,
-        hidesToggle: !ledger.isEnabled,
-        animated: animated
-      )
-      $0.autoContributeSection.setSectionEnabled(
-        ledger.isEnabled && ledger.isAutoContributeEnabled,
-        hidesToggle: !ledger.isEnabled,
-        animated: animated
-      )
-      $0.monthlyTipsSection.setSectionEnabled(ledger.isEnabled, animated: animated)
-      $0.tipsSection.setSectionEnabled(ledger.isEnabled, animated: animated)
-    }
+//    let ledger = state.ledger
+//    settingsView.do {
+//      $0.rewardsToggleSection.setRewardsEnabled(ledger.isEnabled, animated: animated)
+//      $0.adsSection.setSectionEnabled(
+//        ledger.isEnabled && state.ads.isEnabled,
+//        hidesToggle: !ledger.isEnabled,
+//        animated: animated
+//      )
+//      $0.autoContributeSection.setSectionEnabled(
+//        ledger.isEnabled && ledger.isAutoContributeEnabled,
+//        hidesToggle: !ledger.isEnabled,
+//        animated: animated
+//      )
+//      $0.monthlyTipsSection.setSectionEnabled(ledger.isEnabled, animated: animated)
+//      $0.tipsSection.setSectionEnabled(ledger.isEnabled, animated: animated)
+//    }
   }
   
   // MARK: - Actions
@@ -136,7 +136,7 @@ class SettingsViewController: UIViewController {
   }
   
   @objc private func rewardsSwitchValueChanged() {
-    state.ledger.isEnabled = settingsView.rewardsToggleSection.toggleSwitch.isOn
+//    state.ledger.isEnabled = settingsView.rewardsToggleSection.toggleSwitch.isOn
     updateVisualStateOfSections(animated: true)
     NotificationCenter.default.post(name: .adsOrRewardsToggledInSettings, object: nil)
   }

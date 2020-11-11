@@ -23,15 +23,15 @@ public class RewardsPanelController: PopoverNavigationController {
     
     super.init()
     
-    if !rewards.ledger.isWalletCreated {
-      viewControllers = [CreateWalletViewController(state: state)]
-    } else {
-      var vcs: [UIViewController] = [WalletViewController(state: state)]
-      if initialPage == .settings {
-        vcs.append(SettingsViewController(state: state))
-      }
-      viewControllers = vcs
-    }
+//    if !rewards.ledger.isWalletCreated {
+//      viewControllers = [CreateWalletViewController(state: state)]
+//    } else {
+//      var vcs: [UIViewController] = [WalletViewController(state: state)]
+//      if initialPage == .settings {
+//        vcs.append(SettingsViewController(state: state))
+//      }
+//      viewControllers = vcs
+//    }
   }
   
   private var errorOverlayView: UIView?

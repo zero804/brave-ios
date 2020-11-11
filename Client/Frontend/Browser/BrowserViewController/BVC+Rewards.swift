@@ -32,7 +32,7 @@ extension BrowserViewController {
             self.topToolbar.locationView.rewardsButton.isHidden = true
             return
         }
-        let isRewardsEnabled = rewards.ledger.isEnabled
+        let isRewardsEnabled = false
         self.topToolbar.locationView.rewardsButton.isHidden = (!isRewardsEnabled && Preferences.Rewards.hideRewardsIcon.value) || PrivateBrowsingManager.shared.isPrivateBrowsing
         let isVerifiedBadgeVisible = self.publisher?.status == .verified || self.publisher?.status == .connected
         let isLocal = self.tabManager.selectedTab?.url?.isLocal == true
@@ -169,7 +169,7 @@ extension BrowserViewController {
     func paymentRequested(_ request: PaymentRequest, _ completionHandler: @escaping (_ response: PaymentRequestResponse) -> Void) {
         UIDevice.current.forcePortraitIfIphone(for: UIApplication.shared)
         
-        if !rewards.ledger.isEnabled {
+        if false {
             let enableRewards = SKUEnableRewardsViewController(
                 rewards: rewards,
                 termsURLTapped: { [weak self] in
