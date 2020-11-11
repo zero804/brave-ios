@@ -30,73 +30,92 @@ class DefaultBrowserIntroCalloutViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        view.backgroundColor = .white
+        
         setupViews()
+        
+        cancelButton.addTarget(self, action: #selector(cancelAction), for: .touchUpInside)
+        openSettingsButton.addTarget(self, action: #selector(openSettingsAction), for: .touchUpInside)
+    }
+    
+    @objc func cancelAction() {
+        dismiss(animated: true)
+    }
+    
+    @objc func openSettingsAction() {
+        guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else {
+            return
+        }
+        UIApplication.shared.open(settingsUrl)
+        
+        cancelAction()
     }
 
     private func setupViews() {
-        let contentStackView = UIStackView().then {
-            $0.axis = .vertical
-            $0.distribution = .equalSpacing
-        }
-        
-        let image = UIImageView(image: #imageLiteral(resourceName: "default_browser_intro")).then {
-            $0.contentMode = .scaleAspectFit
-            $0.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
-        }
-        
-        contentStackView.addArrangedSubview(image)
-        
-        let textButtonStackView = UIStackView().then {
-            $0.axis = .vertical
-        }
-        
         let textStackView = UIStackView().then {
             $0.axis = .vertical
             $0.spacing = 16
+            
+            $0.addStackViewItems(
+                .view(UILabel().then {
+                    $0.text = Strings.defaultBrowserIntroPrimaryText
+                    $0.numberOfLines = 0
+                    $0.font = .systemFont(ofSize: 28, weight: .regular)
+                    $0.textAlignment = .center
+                    $0.appearanceTextColor = .black
+                }),
+                .view(UILabel().then {
+                    $0.text = Strings.defaultBrowserIntroSecondaryText
+                    $0.numberOfLines = 0
+                    $0.textAlignment = .center
+                    $0.font = .systemFont(ofSize: 17, weight: .regular)
+                    $0.appearanceTextColor = .black
+                }),
+                .view(UILabel().then {
+                    $0.text = Strings.defaultBrowserIntroTertiaryText
+                    $0.numberOfLines = 0
+                    $0.textAlignment = .center
+                    $0.font = .systemFont(ofSize: 17, weight: .regular)
+                    $0.appearanceTextColor = #colorLiteral(red: 0.5254901961, green: 0.5568627451, blue: 0.5882352941, alpha: 1)
+                })
+            )
         }
-        
-        let primaryText = UILabel().then {
-            $0.text = Strings.defaultBrowserIntroPrimaryText
-            $0.numberOfLines = 0
-            $0.font = .systemFont(ofSize: 28, weight: .regular)
-            $0.textAlignment = .center
-        }
-        
-        let secondaryText = UILabel().then {
-            $0.text = Strings.defaultBrowserIntroSecondaryText
-            $0.numberOfLines = 0
-            $0.textAlignment = .center
-            $0.font = .systemFont(ofSize: 17, weight: .regular)
-        }
-        
-        let tertiaryText = UILabel().then {
-            $0.text = Strings.defaultBrowserIntroTertiaryText
-            $0.numberOfLines = 0
-            $0.textAlignment = .center
-            $0.font = .systemFont(ofSize: 17, weight: .regular)
-            $0.textColor = #colorLiteral(red: 0.5254901961, green: 0.5568627451, blue: 0.5882352941, alpha: 1)
-        }
-        
-        
-        
-        textStackView.addStackViewItems(.view(primaryText), .view(secondaryText), .view(tertiaryText))
         
         let buttonsStackView = UIStackView().then {
             $0.axis = .vertical
+            
+            $0.addStackViewItems(
+                .view(openSettingsButton),
+                .customSpace(8),
+                .view(cancelButton)
+            )
         }
         
-        buttonsStackView.addStackViewItems(.view(openSettingsButton), .customSpace(8), .view(cancelButton))
+        let contentStackView = UIStackView().then {
+            $0.axis = .vertical
+            
+            $0.addStackViewItems(
+                .view(textStackView),
+                .customSpace(24),
+                .view(buttonsStackView))
+        }
         
-        textButtonStackView.addStackViewItems(.view(textStackView), .customSpace(24), .view(buttonsStackView))
+        let mainStackView = UIStackView().then {
+            $0.axis = .vertical
+            $0.distribution = .equalSpacing
+            
+            $0.addStackViewItems(
+                .view(UIImageView(image: #imageLiteral(resourceName: "default_browser_intro")).then {
+                    $0.contentMode = .scaleAspectFit
+                    $0.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
+                }),
+                .view(contentStackView)
+            )
+        }
         
-        contentStackView.addArrangedSubview(textButtonStackView)
-        view.addSubview(contentStackView)
-        
-        contentStackView.snp.makeConstraints {
+        view.addSubview(mainStackView)
+        mainStackView.snp.makeConstraints {
             $0.edges.equalToSuperview().inset(36)
         }
-        
-        view.backgroundColor = .white
     }
 }
