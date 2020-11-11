@@ -36,9 +36,12 @@ class DefaultBrowserIntroCalloutViewController: UIViewController {
         
         cancelButton.addTarget(self, action: #selector(cancelAction), for: .touchUpInside)
         openSettingsButton.addTarget(self, action: #selector(openSettingsAction), for: .touchUpInside)
+        
+        presentationController?.delegate = self
     }
     
     @objc func cancelAction() {
+        Preferences.General.defaultBrowserIntroScreenDismissed.value = true
         dismiss(animated: true)
     }
     
@@ -117,5 +120,11 @@ class DefaultBrowserIntroCalloutViewController: UIViewController {
         mainStackView.snp.makeConstraints {
             $0.edges.equalToSuperview().inset(36)
         }
+    }
+}
+
+extension DefaultBrowserIntroCalloutViewController: UIAdaptivePresentationControllerDelegate {
+    func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
+        Preferences.General.defaultBrowserIntroScreenDismissed.value = true
     }
 }

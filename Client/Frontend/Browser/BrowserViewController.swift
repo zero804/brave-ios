@@ -912,7 +912,7 @@ class BrowserViewController: UIViewController {
     }
     
     private func presentDefaultBrowserIntroScreen() {
-        let vc = DefaultBrowserIntroCalloutViewController()
+        let vc = DefaultBrowserIntroCalloutViewController() 
         let idiom = UIDevice.current.userInterfaceIdiom
         if #available(iOS 13.0, *) {
             vc.modalPresentationStyle = idiom == .phone ? .pageSheet : .formSheet

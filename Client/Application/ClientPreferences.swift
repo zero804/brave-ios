@@ -68,8 +68,13 @@ extension Preferences {
         /// Whether or not link preview upon long press action should be shown.
         static let enableLinkPreview = Option<Bool>(key: "general.night-mode", default: true)
         
+        /// Whether the default browser callout on new tab page was dismissed.
         static let defaultBrowserCalloutDismissed =
             Option<Bool>(key: "general.default-browser-callout-dismissed", default: false)
+        
+        /// Whether a popup to try default browser feature was dismissed by the user.
+        static let defaultBrowserIntroScreenDismissed =
+            Option<Bool>(key: "general.default-browser-intro-dismissed", default: false)
     }
     final class Search {
         /// Whether or not to show suggestions while the user types
