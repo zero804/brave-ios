@@ -9,6 +9,10 @@ import Shared
 
 class BraveRewardsPublisherView: UIStackView, Themeable {
     
+    struct UX {
+        static let hostLabelFontSize: CGFloat = 19.0
+    }
+    
     let faviconImageView = UIImageView().then {
         $0.snp.makeConstraints {
             $0.size.equalTo(24)
@@ -22,7 +26,7 @@ class BraveRewardsPublisherView: UIStackView, Themeable {
     }
     
     let hostLabel = UILabel().then {
-        $0.font = .systemFont(ofSize: 19)
+        $0.font = .systemFont(ofSize: UX.hostLabelFontSize)
         $0.textAlignment = .center
         $0.numberOfLines = 0
         // Stop it from becoming like 10 lines with 1 letter per line
@@ -61,7 +65,11 @@ class BraveRewardsPublisherView: UIStackView, Themeable {
                 $0.spacing = 8
                 $0.alignment = .center
             }),
-            .view(bodyLabel),
+            .view(UIStackView(arrangedSubviews: [bodyLabel]).then {
+                $0.isLayoutMarginsRelativeArrangement = true
+                $0.layoutMargins = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
+            }),
+            .customSpace(4),
             .view(learnMoreButton)
         )
     }

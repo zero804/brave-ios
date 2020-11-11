@@ -16,4 +16,21 @@ extension PublisherInfo {
         }
         return "\(name) \(String(format: RewardsOnProviderText, providerDisplayString))"
     }
+    
+    /// The display name to show when showing Publisher names (example: "X on GitHub", "Y on
+    /// YouTube", or "reddit.com" for publishers that dont have individual content providers)
+    func attributedDisplayName(fontSize: CGFloat) -> NSAttributedString {
+        if provider.isEmpty || name.isEmpty {
+            return NSAttributedString(string: id, attributes: [.font: UIFont.systemFont(ofSize: fontSize)])
+        }
+        let string = NSMutableAttributedString(
+            string: "\(name) \(String(format: RewardsOnProviderText, providerDisplayString))",
+            attributes: [.font: UIFont.systemFont(ofSize: fontSize)]
+        )
+        let range = NSRange(name.startIndex..<name.endIndex, in: name)
+        if range.length > 0 {
+            string.addAttribute(.font, value: UIFont.systemFont(ofSize: fontSize, weight: .semibold), range: range)
+        }
+        return string
+    }
 }

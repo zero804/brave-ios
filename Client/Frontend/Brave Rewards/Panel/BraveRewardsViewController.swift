@@ -27,7 +27,7 @@ class BraveRewardsViewController: UIViewController, Themeable, PopoverContentCom
         didSet {
             let isVerified = publisher?.status == .verified
             rewardsView.publisherView.learnMoreButton.isHidden = isVerified
-            rewardsView.publisherView.hostLabel.text = publisher?.displayName
+            rewardsView.publisherView.hostLabel.attributedText = publisher?.attributedDisplayName(fontSize: BraveRewardsPublisherView.UX.hostLabelFontSize)
             rewardsView.publisherView.bodyLabel.text = isVerified ? Strings.Rewards.supportingPublisher : Strings.Rewards.unverifiedPublisher
             if !isVerified {
                 rewardsView.publisherView.faviconImageView.clearMonogramFavicon()
@@ -129,7 +129,11 @@ class BraveRewardsViewController: UIViewController, Themeable, PopoverContentCom
             }
         }
         
-        rewardsView.publisherView.hostLabel.text = publisher?.displayName ?? tab.url?.baseDomain
+        if let displayName = publisher?.attributedDisplayName(fontSize: BraveRewardsPublisherView.UX.hostLabelFontSize) {
+            rewardsView.publisherView.hostLabel.attributedText = displayName
+        } else {
+            rewardsView.publisherView.hostLabel.text = tab.url?.baseDomain
+        }
         rewardsView.publisherView.learnMoreButton.addTarget(self, action: #selector(tappedUnverifiedPubLearnMore), for: .touchUpInside)
         rewardsView.subtitleLabel.text = rewards.isEnabled ? Strings.Rewards.enabledBody : Strings.Rewards.disabledBody
         rewardsView.rewardsToggle.addTarget(self, action: #selector(rewardsToggleValueChanged), for: .valueChanged)
