@@ -166,7 +166,10 @@ class RewardsDebugSettingsViewController: TableViewController {
                     Row(text: "Internals", selection: { [unowned self] in
                         let controller = RewardsInternalsDebugViewController(ledger: self.rewards.ledger)
                         self.navigationController?.pushViewController(controller, animated: true)
-                    }, accessory: .disclosureIndicator)
+                    }, accessory: .disclosureIndicator),
+                    Row(text: "Fetch & Claim Promotions", selection: { [unowned self] in
+                        self.fetchAndClaimPromotions()
+                    }, cellClass: ButtonCell.self)
                 ]
             ),
             Section(
@@ -229,6 +232,41 @@ class RewardsDebugSettingsViewController: TableViewController {
                 ]
             )
         ]
+    }
+    
+    private func fetchAndClaimPromotions() {
+        rewards.ledger.fetchPromotions { [weak self] promotions in
+            guard let self = self else { return }
+            let activePromotions = promotions.filter { $0.status == .active }
+            if activePromotions.isEmpty {
+                let alert = UIAlertController(title: "Promotions", message: "No Active Promotions Found", preferredStyle: .alert)
+                alert.addAction(.init(title: "OK", style: .default, handler: nil))
+                self.present(alert, animated: true)
+                return
+            }
+            let group = DispatchGroup()
+            var successCount: Int = 0
+            var claimedAmount: Double = 0
+            var failuresCount: Int = 0
+            for promo in activePromotions {
+                group.enter()
+                self.rewards.ledger.claimPromotion(promo) { success in
+                    if success {
+                        successCount += 1
+                        claimedAmount += promo.approximateValue
+                    } else {
+                        failuresCount += 1
+                    }
+                    group.leave()
+                }
+            }
+            group.notify(queue: .main) { [weak self] in
+                guard let self = self else { return }
+                let alert = UIAlertController(title: "Promotions", message: "Claimed: \(claimedAmount) BAT in \(successCount) Grants. (\(failuresCount) failures)", preferredStyle: .alert)
+                alert.addAction(.init(title: "OK", style: .default, handler: nil))
+                self.present(alert, animated: true)
+            }
+        }
     }
     
     private func createLegacyLedger() {

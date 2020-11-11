@@ -144,6 +144,12 @@ class BraveRewardsViewController: UIViewController, Themeable, PopoverContentCom
             $0.width.equalTo(360)
             $0.height.equalTo(rewardsView)
         }
+        
+        if !AppConstants.buildChannel.isPublic {
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tappedHostLabel(_:)))
+            rewardsView.publisherView.hostLabel.isUserInteractionEnabled = true
+            rewardsView.publisherView.hostLabel.addGestureRecognizer(tapGesture)
+        }
     }
     
     // MARK: - Actions
@@ -180,5 +186,22 @@ class BraveRewardsViewController: UIViewController, Themeable, PopoverContentCom
     
     @objc private func tappedUnverifiedPubLearnMore() {
         actionHandler?(.unverifiedPublisherLearnMoreTapped)
+    }
+    
+    // MARK: - Debug Actions
+    
+    @objc private func tappedHostLabel(_ gesture: UITapGestureRecognizer) {
+        if gesture.state != .ended { return }
+        guard let publisher = publisher else { return }
+        rewards.ledger.refreshPublisher(withId: publisher.id) { [weak self] status in
+            guard let self = self else { return }
+            let copy = publisher.copy() as! PublisherInfo // swiftlint:disable:this force_cast
+            copy.status = status
+            self.publisher = copy
+            
+            let alert = UIAlertController(title: nil, message: "Refreshed", preferredStyle: .alert)
+            alert.addAction(.init(title: "OK", style: .default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
     }
 }
