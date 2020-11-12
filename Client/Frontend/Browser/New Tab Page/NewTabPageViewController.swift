@@ -90,7 +90,7 @@ class NewTabPageViewController: UIViewController, Themeable {
     private let layout = NewTabPageFlowLayout()
     private let collectionView: NewTabCollectionView
     private weak var tab: Tab?
-    private let rewards: BraveRewards
+//    private let rewards: BraveRewards
     
     private var background: NewTabPageBackground
     private let backgroundView = NewTabPageBackgroundView()
@@ -99,18 +99,17 @@ class NewTabPageViewController: UIViewController, Themeable {
     private let feedDataSource: FeedDataSource
     private let feedOverlayView = NewTabPageFeedOverlayView()
     
-    private let notifications: NewTabPageNotifications
+//    private let notifications: NewTabPageNotifications
     
     init(tab: Tab,
          profile: Profile,
          dataSource: NTPDataSource,
-         feedDataSource: FeedDataSource,
-         rewards: BraveRewards) {
+         feedDataSource: FeedDataSource) {
         self.tab = tab
-        self.rewards = rewards
+//        self.rewards = rewards
         self.feedDataSource = feedDataSource
         background = NewTabPageBackground(dataSource: dataSource)
-        notifications = NewTabPageNotifications(rewards: rewards)
+//        notifications = NewTabPageNotifications(rewards: rewards)
         collectionView = NewTabCollectionView(frame: .zero, collectionViewLayout: layout)
         super.init(nibName: nil, bundle: nil)
         
@@ -407,56 +406,56 @@ class NewTabPageViewController: UIViewController, Themeable {
             isShowingSponseredImage = true
         }
         
-        guard let notification = notifications.notificationToShow(
-            isShowingBackgroundImage: background.currentBackground != nil,
-            isShowingSponseredImage: isShowingSponseredImage
-            ) else {
-                return
-        }
-        
-        var vc: UIViewController?
-        
-        switch notification {
-        case .brandedImages(let state):
-            if Preferences.NewTabPage.atleastOneNTPNotificationWasShowed.value { return }
-            
-            guard let notificationVC = NTPNotificationViewController(state: state, rewards: rewards) else { return }
-            
-            notificationVC.closeHandler = { [weak self] in
-                self?.notificationController = nil
-            }
-            
-            notificationVC.learnMoreHandler = { [weak self] in
-                self?.delegate?.brandedImageCalloutActioned(state)
-            }
-            
-            vc = notificationVC
-        case .claimRewards:
-            if !Preferences.NewTabPage.attemptToShowClaimRewardsNotification.value { return }
-            
-            let claimRewardsVC = ClaimRewardsNTPNotificationViewController(rewards: rewards)
-            claimRewardsVC.closeHandler = { [weak self] in
-                Preferences.NewTabPage.attemptToShowClaimRewardsNotification.value = false
-                self?.notificationController = nil
-            }
-            
-            vc = claimRewardsVC
-        }
-        
-        guard let viewController = vc else { return }
-        notificationController = viewController
-        visibleNotification = notification
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [weak self] in
-            guard let self = self else { return }
-            
-            if case .brandedImages = notification {
-                Preferences.NewTabPage.atleastOneNTPNotificationWasShowed.value = true
-            }
-            
-            self.addChild(viewController)
-            self.view.addSubview(viewController.view)
-        }
+//        guard let notification = notifications.notificationToShow(
+//            isShowingBackgroundImage: background.currentBackground != nil,
+//            isShowingSponseredImage: isShowingSponseredImage
+//            ) else {
+//                return
+//        }
+//
+//        var vc: UIViewController?
+//
+//        switch notification {
+//        case .brandedImages(let state):
+//            if Preferences.NewTabPage.atleastOneNTPNotificationWasShowed.value { return }
+//
+//            guard let notificationVC = NTPNotificationViewController(state: state, rewards: rewards) else { return }
+//
+//            notificationVC.closeHandler = { [weak self] in
+//                self?.notificationController = nil
+//            }
+//
+//            notificationVC.learnMoreHandler = { [weak self] in
+//                self?.delegate?.brandedImageCalloutActioned(state)
+//            }
+//
+//            vc = notificationVC
+//        case .claimRewards:
+//            if !Preferences.NewTabPage.attemptToShowClaimRewardsNotification.value { return }
+//
+//            let claimRewardsVC = ClaimRewardsNTPNotificationViewController(rewards: rewards)
+//            claimRewardsVC.closeHandler = { [weak self] in
+//                Preferences.NewTabPage.attemptToShowClaimRewardsNotification.value = false
+//                self?.notificationController = nil
+//            }
+//
+//            vc = claimRewardsVC
+//        }
+//
+//        guard let viewController = vc else { return }
+//        notificationController = viewController
+//        visibleNotification = notification
+//
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [weak self] in
+//            guard let self = self else { return }
+//
+//            if case .brandedImages = notification {
+//                Preferences.NewTabPage.atleastOneNTPNotificationWasShowed.value = true
+//            }
+//
+//            self.addChild(viewController)
+//            self.view.addSubview(viewController.view)
+//        }
     }
     
     private func hideNotification() {

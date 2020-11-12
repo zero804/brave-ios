@@ -37,96 +37,96 @@ extension BrowserViewController {
         let isVerifiedBadgeVisible = self.publisher?.status == .verified || self.publisher?.status == .connected
         let isLocal = self.tabManager.selectedTab?.url?.isLocal == true
         self.topToolbar.locationView.rewardsButton.isVerified = isRewardsEnabled && !isLocal && isVerifiedBadgeVisible
-        self.topToolbar.locationView.rewardsButton.notificationCount = self.rewards.ledger.notifications.count
+//        self.topToolbar.locationView.rewardsButton.notificationCount = self.rewards.ledger.notifications.count
         self.topToolbar.locationView.rewardsButton.forceShowBadge = !Preferences.Rewards.panelOpened.value
     }
 
     func showBraveRewardsPanel(initialPage: RewardsPanelController.InitialPage = .default) {
-        Preferences.Rewards.panelOpened.value = true
-        updateRewardsButtonState()
-        
-        UIDevice.current.forcePortraitIfIphone(for: UIApplication.shared)
-        
-        guard let tab = tabManager.selectedTab, let url = tab.webView?.url else { return }
-        let braveRewardsPanel = RewardsPanelController(
-            rewards,
-            tabId: UInt64(tab.rewardsId),
-            url: url,
-            faviconURL: url,
-            delegate: self,
-            dataSource: self,
-            initialPage: initialPage
-        )
-        
-        let popover = PopoverController(contentController: braveRewardsPanel, contentSizeBehavior: .preferredContentSize)
-        popover.addsConvenientDismissalMargins = false
-        popover.present(from: topToolbar.locationView.rewardsButton, on: self)
-        popover.popoverDidDismiss = { [weak self] _ in
-            guard let self = self else { return }
-            if let tabId = self.tabManager.selectedTab?.rewardsId, self.rewards.ledger.selectedTabId == 0 {
-                // Show the tab currently visible
-                self.rewards.ledger.selectedTabId = tabId
-            }
-            self.displayMyFirstAdIfAvailable()
-        }
-        // Hide the current tab
-        rewards.ledger.selectedTabId = 0
-        // Fetch new promotions
-        rewards.ledger.fetchPromotions(nil)
+//        Preferences.Rewards.panelOpened.value = true
+//        updateRewardsButtonState()
+//
+//        UIDevice.current.forcePortraitIfIphone(for: UIApplication.shared)
+//
+//        guard let tab = tabManager.selectedTab, let url = tab.webView?.url else { return }
+//        let braveRewardsPanel = RewardsPanelController(
+//            rewards,
+//            tabId: UInt64(tab.rewardsId),
+//            url: url,
+//            faviconURL: url,
+//            delegate: self,
+//            dataSource: self,
+//            initialPage: initialPage
+//        )
+//
+//        let popover = PopoverController(contentController: braveRewardsPanel, contentSizeBehavior: .preferredContentSize)
+//        popover.addsConvenientDismissalMargins = false
+//        popover.present(from: topToolbar.locationView.rewardsButton, on: self)
+//        popover.popoverDidDismiss = { [weak self] _ in
+//            guard let self = self else { return }
+//            if let tabId = self.tabManager.selectedTab?.rewardsId, self.rewards.ledger.selectedTabId == 0 {
+//                // Show the tab currently visible
+//                self.rewards.ledger.selectedTabId = tabId
+//            }
+//            self.displayMyFirstAdIfAvailable()
+//        }
+//        // Hide the current tab
+//        rewards.ledger.selectedTabId = 0
+//        // Fetch new promotions
+//        rewards.ledger.fetchPromotions(nil)
     }
     
     func authorizeUpholdWallet(from tab: Tab, queryItems items: [String: String]) {
-        rewards.ledger.authorizeExternalWallet(
-            ofType: .uphold,
-            queryItems: items) { result, redirectURL in
-                switch result {
-                case .ledgerOk:
-                    // Fetch the wallet
-                    self.rewards.ledger.fetchUpholdWallet { _ in
-                        if let redirectURL = redirectURL {
-                            // Requires verification
-                            let request = URLRequest(url: redirectURL)
-                            tab.loadRequest(request)
-                        } else {
-                            // Done
-                            self.tabManager.removeTab(tab)
-                            self.showBraveRewardsPanel()
-                        }
-                    }
-                case .batNotAllowed:
-                    // Uphold account doesn't support BAT...
-                    let popup = AlertPopupView(
-                        imageView: nil,
-                        title: Strings.userWalletBATNotAllowedTitle,
-                        message: Strings.userWalletBATNotAllowedMessage,
-                        titleWeight: .semibold,
-                        titleSize: 18.0
-                    )
-                    popup.addButton(title: Strings.userWalletBATNotAllowedLearnMore, type: .link, fontSize: 14.0) { () -> PopupViewDismissType in
-                        if let url = URL(string: "https://uphold.com/en/brave/support") {
-                            tab.loadRequest(URLRequest(url: url))
-                        }
-                        return .flyDown
-                    }
-                    popup.addButton(title: Strings.userWalletCloseButtonTitle, type: .primary, fontSize: 14.0) { () -> PopupViewDismissType in
-                        return .flyDown
-                    }
-                    popup.showWithType(showType: .flyUp)
-                default:
-                    // Some other issue occured with authorization
-                    let popup = AlertPopupView(
-                        imageView: nil,
-                        title: Strings.userWalletGenericErrorTitle,
-                        message: Strings.userWalletGenericErrorMessage,
-                        titleWeight: .semibold,
-                        titleSize: 18.0
-                    )
-                    popup.addButton(title: Strings.userWalletCloseButtonTitle, type: .primary, fontSize: 14.0) { () -> PopupViewDismissType in
-                        return .flyDown
-                    }
-                    popup.showWithType(showType: .flyUp)
-                }
-        }
+//        rewards.ledger.authorizeExternalWallet(
+//            ofType: .uphold,
+//            queryItems: items) { result, redirectURL in
+//                switch result {
+//                case .ledgerOk:
+//                    // Fetch the wallet
+//                    self.rewards.ledger.fetchUpholdWallet { _ in
+//                        if let redirectURL = redirectURL {
+//                            // Requires verification
+//                            let request = URLRequest(url: redirectURL)
+//                            tab.loadRequest(request)
+//                        } else {
+//                            // Done
+//                            self.tabManager.removeTab(tab)
+//                            self.showBraveRewardsPanel()
+//                        }
+//                    }
+//                case .batNotAllowed:
+//                    // Uphold account doesn't support BAT...
+//                    let popup = AlertPopupView(
+//                        imageView: nil,
+//                        title: Strings.userWalletBATNotAllowedTitle,
+//                        message: Strings.userWalletBATNotAllowedMessage,
+//                        titleWeight: .semibold,
+//                        titleSize: 18.0
+//                    )
+//                    popup.addButton(title: Strings.userWalletBATNotAllowedLearnMore, type: .link, fontSize: 14.0) { () -> PopupViewDismissType in
+//                        if let url = URL(string: "https://uphold.com/en/brave/support") {
+//                            tab.loadRequest(URLRequest(url: url))
+//                        }
+//                        return .flyDown
+//                    }
+//                    popup.addButton(title: Strings.userWalletCloseButtonTitle, type: .primary, fontSize: 14.0) { () -> PopupViewDismissType in
+//                        return .flyDown
+//                    }
+//                    popup.showWithType(showType: .flyUp)
+//                default:
+//                    // Some other issue occured with authorization
+//                    let popup = AlertPopupView(
+//                        imageView: nil,
+//                        title: Strings.userWalletGenericErrorTitle,
+//                        message: Strings.userWalletGenericErrorMessage,
+//                        titleWeight: .semibold,
+//                        titleSize: 18.0
+//                    )
+//                    popup.addButton(title: Strings.userWalletCloseButtonTitle, type: .primary, fontSize: 14.0) { () -> PopupViewDismissType in
+//                        return .flyDown
+//                    }
+//                    popup.showWithType(showType: .flyUp)
+//                }
+//        }
     }
     
     @objc func resetNTPNotification() {
@@ -167,36 +167,36 @@ extension BrowserViewController {
     // MARK: - SKUS
     
     func paymentRequested(_ request: PaymentRequest, _ completionHandler: @escaping (_ response: PaymentRequestResponse) -> Void) {
-        UIDevice.current.forcePortraitIfIphone(for: UIApplication.shared)
-        
-        if false {
-            let enableRewards = SKUEnableRewardsViewController(
-                rewards: rewards,
-                termsURLTapped: { [weak self] in
-                    if let url = URL(string: DisclaimerLinks.termsOfUseURL) {
-                        self?.loadNewTabWithURL(url)
-                    }
-                }
-            )
-            present(enableRewards, animated: true)
-            completionHandler(.cancelled)
-            return
-        }
-        
-        guard let publisher = publisher else { return }
-        let controller = SKUPurchaseViewController(
-            rewards: self.rewards,
-            publisher: publisher,
-            request: request,
-            responseHandler: completionHandler,
-            openBraveTermsOfSale: { [weak self] in
-                if let url = URL(string: DisclaimerLinks.termsOfSaleURL) {
-                    self?.loadNewTabWithURL(url)
-                }
-            }
-        )
-        present(controller, animated: true)
-        
+//        UIDevice.current.forcePortraitIfIphone(for: UIApplication.shared)
+//        
+//        if false {
+//            let enableRewards = SKUEnableRewardsViewController(
+//                rewards: rewards,
+//                termsURLTapped: { [weak self] in
+//                    if let url = URL(string: DisclaimerLinks.termsOfUseURL) {
+//                        self?.loadNewTabWithURL(url)
+//                    }
+//                }
+//            )
+//            present(enableRewards, animated: true)
+//            completionHandler(.cancelled)
+//            return
+//        }
+//        
+//        guard let publisher = publisher else { return }
+//        let controller = SKUPurchaseViewController(
+//            rewards: self.rewards,
+//            publisher: publisher,
+//            request: request,
+//            responseHandler: completionHandler,
+//            openBraveTermsOfSale: { [weak self] in
+//                if let url = URL(string: DisclaimerLinks.termsOfSaleURL) {
+//                    self?.loadNewTabWithURL(url)
+//                }
+//            }
+//        )
+//        present(controller, animated: true)
+//        
     }
 }
 

@@ -139,8 +139,8 @@ class BrowserViewController: UIViewController {
     
     let safeBrowsing: SafeBrowsing?
     
-    let rewards: BraveRewards
-    let rewardsObserver: LedgerObserver
+//    let rewards: BraveRewards
+//    let rewardsObserver: LedgerObserver
     private var notificationsHandler: AdsNotificationHandler?
     private(set) var publisher: PublisherInfo?
     
@@ -154,46 +154,46 @@ class BrowserViewController: UIViewController {
         self.crashedLastSession = crashedLastSession
         self.safeBrowsing = safeBrowsingManager
 
-        let configuration: BraveRewardsConfiguration
-        if AppConstants.buildChannel.isPublic {
-            configuration = .production
-        } else {
-            if let override = Preferences.Rewards.EnvironmentOverride(rawValue: Preferences.Rewards.environmentOverride.value), override != .none {
-                switch override {
-                case .dev:
-                    configuration = .default
-                case .staging:
-                    configuration = .staging
-                case .prod:
-                    configuration = .production
-                default:
-                    configuration = .staging
-                }
-            } else {
-                configuration = AppConstants.buildChannel == .debug ? .staging : .production
-            }
-        }
-
-        configuration.buildChannel = BraveAdsBuildChannel().then {
-          $0.name = AppConstants.buildChannel.rawValue
-          $0.isRelease = AppConstants.buildChannel == .release
-        }
-
-        Self.migrateAdsConfirmations(for: configuration)
-        rewards = BraveRewards(configuration: configuration)
-        if !BraveRewards.isAvailable {
-            // Disable rewards services in case previous user already enabled
-            // rewards in previous build
-            //rewards.ledger.isEnabled = false
-            rewards.ads.isEnabled = false
-        }
-        rewardsObserver = LedgerObserver(ledger: rewards.ledger)
-        deviceCheckClient = DeviceCheckClient(environment: configuration.environment)
+//        let configuration: BraveRewardsConfiguration
+//        if AppConstants.buildChannel.isPublic {
+//            configuration = .production
+//        } else {
+//            if let override = Preferences.Rewards.EnvironmentOverride(rawValue: Preferences.Rewards.environmentOverride.value), override != .none {
+//                switch override {
+//                case .dev:
+//                    configuration = .default
+//                case .staging:
+//                    configuration = .staging
+//                case .prod:
+//                    configuration = .production
+//                default:
+//                    configuration = .staging
+//                }
+//            } else {
+//                configuration = AppConstants.buildChannel == .debug ? .staging : .production
+//            }
+//        }
+//
+//        configuration.buildChannel = BraveAdsBuildChannel().then {
+//          $0.name = AppConstants.buildChannel.rawValue
+//          $0.isRelease = AppConstants.buildChannel == .release
+//        }
+//
+//        Self.migrateAdsConfirmations(for: configuration)
+//        rewards = BraveRewards(configuration: configuration)
+//        if !BraveRewards.isAvailable {
+//            // Disable rewards services in case previous user already enabled
+//            // rewards in previous build
+//            //rewards.ledger.isEnabled = false
+//            rewards.ads.isEnabled = false
+//        }
+//        rewardsObserver = LedgerObserver(ledger: rewards.ledger)
+//        deviceCheckClient = DeviceCheckClient(environment: configuration.environment)
 
         super.init(nibName: nil, bundle: nil)
         didInit()
         
-        rewards.delegate = self
+//        rewards.delegate = self
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -254,40 +254,40 @@ class BrowserViewController: UIViewController {
         // Lists need to be compiled before attempting tab restoration
         contentBlockListDeferred = ContentBlockerHelper.compileBundledLists()
         
-        setupRewardsObservers()
+//        setupRewardsObservers()
         
-        if !Preferences.Rewards.checkedPreviousCycleForAdsViewing.value {
-            Preferences.Rewards.checkedPreviousCycleForAdsViewing.value = true
-            if rewards.ads.hasViewedAdsInPreviousCycle() {
-                MonthlyAdsGrantReminder.schedule(for: .previous)
-            }
-        }
+//        if !Preferences.Rewards.checkedPreviousCycleForAdsViewing.value {
+//            Preferences.Rewards.checkedPreviousCycleForAdsViewing.value = true
+//            if rewards.ads.hasViewedAdsInPreviousCycle() {
+//                MonthlyAdsGrantReminder.schedule(for: .previous)
+//            }
+//        }
         
         Preferences.NewTabPage.attemptToShowClaimRewardsNotification.value = true
         
-        notificationsHandler = AdsNotificationHandler(ads: rewards.ads, presentingController: self)
-        notificationsHandler?.canShowNotifications = { [weak self] in
-            guard let self = self else { return false }
-            return !PrivateBrowsingManager.shared.isPrivateBrowsing &&
-                !self.topToolbar.inOverlayMode
-        }
-        notificationsHandler?.actionOccured = { [weak self] notification, action in
-            guard let self = self else { return }
-            if action == .opened {
-                var url = URL(string: notification.targetURL)
-                if url == nil, let percentEncodedURLString =
-                    notification.targetURL.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) {
-                    // Try to percent-encode the string and try that
-                    url = URL(string: percentEncodedURLString)
-                }
-                guard let targetURL = url else {
-                    assertionFailure("Invalid target URL for creative instance id: \(notification.creativeInstanceID)")
-                    return
-                }
-                let request = URLRequest(url: targetURL)
-                self.tabManager.addTabAndSelect(request, isPrivate: PrivateBrowsingManager.shared.isPrivateBrowsing)
-            }
-        }
+//        notificationsHandler = AdsNotificationHandler(ads: rewards.ads, presentingController: self)
+//        notificationsHandler?.canShowNotifications = { [weak self] in
+//            guard let self = self else { return false }
+//            return !PrivateBrowsingManager.shared.isPrivateBrowsing &&
+//                !self.topToolbar.inOverlayMode
+//        }
+//        notificationsHandler?.actionOccured = { [weak self] notification, action in
+//            guard let self = self else { return }
+//            if action == .opened {
+//                var url = URL(string: notification.targetURL)
+//                if url == nil, let percentEncodedURLString =
+//                    notification.targetURL.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) {
+//                    // Try to percent-encode the string and try that
+//                    url = URL(string: percentEncodedURLString)
+//                }
+//                guard let targetURL = url else {
+//                    assertionFailure("Invalid target URL for creative instance id: \(notification.creativeInstanceID)")
+//                    return
+//                }
+//                let request = URLRequest(url: targetURL)
+//                self.tabManager.addTabAndSelect(request, isPrivate: PrivateBrowsingManager.shared.isPrivateBrowsing)
+//            }
+//        }
         
         backgroundDataSource.initializeFavorites = { sites in
             DispatchQueue.main.async {
@@ -341,37 +341,37 @@ class BrowserViewController: UIViewController {
         }
     }
     
-    let deviceCheckClient: DeviceCheckClient?
+//    let deviceCheckClient: DeviceCheckClient?
     
-    private func setupRewardsObservers() {
-        rewards.ledger.add(rewardsObserver)
-        rewardsObserver.walletInitalized = { [weak self] result in
-            guard let self = self, let client = self.deviceCheckClient else { return }
-            if result == .walletCreated {
-                self.rewards.ledger.setupDeviceCheckEnrollment(client) { }
-                
-                if self.notificationsHandler?.shouldShowNotifications() == true {
-                    self.displayMyFirstAdIfAvailable()
-                }
-            }
-        }
-        rewardsObserver.fetchedPanelPublisher = { [weak self] publisher, tabId in
-            guard let self = self, self.isViewLoaded, let tab = self.tabManager.selectedTab, tab.rewardsId == tabId else { return }
-            self.publisher = publisher
-            self.updateRewardsButtonState()
-        }
-        rewardsObserver.notificationAdded = { [weak self] _ in
-            guard let self = self, self.isViewLoaded else { return }
-            self.updateRewardsButtonState()
-        }
-        rewardsObserver.notificationsRemoved = { [weak self] _ in
-            guard let self = self, self.isViewLoaded else { return }
-            self.updateRewardsButtonState()
-        }
-//        rewardsObserver.rewardsEnabledStateUpdated = { [weak self] _ in
-//            self?.updateRewardsButtonState()
+//    private func setupRewardsObservers() {
+//        rewards.ledger.add(rewardsObserver)
+//        rewardsObserver.walletInitalized = { [weak self] result in
+//            guard let self = self, let client = self.deviceCheckClient else { return }
+//            if result == .walletCreated {
+//                self.rewards.ledger.setupDeviceCheckEnrollment(client) { }
+//
+//                if self.notificationsHandler?.shouldShowNotifications() == true {
+//                    self.displayMyFirstAdIfAvailable()
+//                }
+//            }
 //        }
-    }
+//        rewardsObserver.fetchedPanelPublisher = { [weak self] publisher, tabId in
+//            guard let self = self, self.isViewLoaded, let tab = self.tabManager.selectedTab, tab.rewardsId == tabId else { return }
+//            self.publisher = publisher
+//            self.updateRewardsButtonState()
+//        }
+//        rewardsObserver.notificationAdded = { [weak self] _ in
+//            guard let self = self, self.isViewLoaded else { return }
+//            self.updateRewardsButtonState()
+//        }
+//        rewardsObserver.notificationsRemoved = { [weak self] _ in
+//            guard let self = self, self.isViewLoaded else { return }
+//            self.updateRewardsButtonState()
+//        }
+////        rewardsObserver.rewardsEnabledStateUpdated = { [weak self] _ in
+////            self?.updateRewardsButtonState()
+////        }
+//    }
     
     // Display first ad when the user gets back to this controller if they havent seen one before
     func displayMyFirstAdIfAvailable() {
@@ -781,9 +781,9 @@ class BrowserViewController: UIViewController {
         updateTabCountUsingTabManager(tabManager)
         clipboardBarDisplayHandler?.checkIfShouldDisplayBar()
         
-        if let tabId = tabManager.selectedTab?.rewardsId, rewards.ledger.selectedTabId == 0 {
-            rewards.ledger.selectedTabId = tabId
-        }
+//        if let tabId = tabManager.selectedTab?.rewardsId, rewards.ledger.selectedTabId == 0 {
+//            rewards.ledger.selectedTabId = tabId
+//        }
     }
     
     fileprivate lazy var checkCrashRestoration: () -> Void = {
@@ -860,7 +860,7 @@ class BrowserViewController: UIViewController {
             
             guard let onboarding = OnboardingNavigationController(
                 profile: profile,
-                rewards: rewards,
+                rewards: nil,
                 theme: Theme.of(tabManager.selectedTab)
                 ) else { return }
             
@@ -935,7 +935,7 @@ class BrowserViewController: UIViewController {
         screenshotHelper.viewIsVisible = false
         super.viewWillDisappear(animated)
         
-        rewards.ledger.selectedTabId = 0
+//        rewards.ledger.selectedTabId = 0
     }
 
     override func viewDidDisappear(_ animated: Bool) {
@@ -1054,8 +1054,7 @@ class BrowserViewController: UIViewController {
             let ntpController = NewTabPageViewController(tab: selectedTab,
                                                          profile: profile,
                                                          dataSource: backgroundDataSource,
-                                                         feedDataSource: feedDataSource,
-                                                         rewards: rewards)
+                                                         feedDataSource: feedDataSource)
             ntpController.delegate = self
             selectedTab.newTabPageViewController = ntpController
         }
@@ -1450,8 +1449,8 @@ class BrowserViewController: UIViewController {
             if let rewardsURL = rewardsXHRLoadURL,
                 url.host == rewardsURL.host,
                 url.isMediaSiteURL {
-                tabManager.selectedTab?.reportPageNaviagtion(to: rewards)
-                tabManager.selectedTab?.reportPageLoad(to: rewards)
+//                tabManager.selectedTab?.reportPageNaviagtion(to: rewards)
+//                tabManager.selectedTab?.reportPageLoad(to: rewards)
             }
         }
         
@@ -2340,9 +2339,9 @@ extension BrowserViewController: TabDelegate {
         
         tab.addContentScript(WindowRenderHelperScript(tab: tab), name: WindowRenderHelperScript.name())
         
-        tab.addContentScript(RewardsReporting(rewards: rewards, tab: tab), name: RewardsReporting.name())
-        tab.addContentScript(AdsMediaReporting(rewards: rewards, tab: tab), name: AdsMediaReporting.name())
-        
+//        tab.addContentScript(RewardsReporting(rewards: rewards, tab: tab), name: RewardsReporting.name())
+//        tab.addContentScript(AdsMediaReporting(rewards: rewards, tab: tab), name: AdsMediaReporting.name())
+//
         #if !NO_SKUS
         tab.addContentScript(PaymentRequestExtension(rewards: rewards, tab: tab, paymentRequested: self.paymentRequested), name: PaymentRequestExtension.name())
         #endif
@@ -2542,7 +2541,7 @@ extension BrowserViewController: TabManagerDelegate {
         }
         updateTabsBarVisibility()
         
-        rewards.reportTabClosed(tabId: tab.rewardsId)
+//        rewards.reportTabClosed(tabId: tab.rewardsId)
     }
 
     func tabManagerDidAddTabs(_ tabManager: TabManager) {
@@ -3591,17 +3590,17 @@ extension BrowserViewController: NewTabPageDelegate {
     func brandedImageCalloutActioned(_ state: BrandedImageCalloutState) {
         guard state.hasDetailViewController else { return }
         
-        let vc = NTPLearnMoreViewController(state: state, rewards: rewards)
-        
-        vc.linkHandler = { [weak self] url in
-            self?.tabManager.selectedTab?.loadRequest(PrivilegedRequest(url: url) as URLRequest)
-        }
-        
-        addChild(vc)
-        view.addSubview(vc.view)
-        vc.view.snp.remakeConstraints {
-            $0.right.top.bottom.leading.equalToSuperview()
-        }
+//        let vc = NTPLearnMoreViewController(state: state, rewards: rewards)
+//        
+//        vc.linkHandler = { [weak self] url in
+//            self?.tabManager.selectedTab?.loadRequest(PrivilegedRequest(url: url) as URLRequest)
+//        }
+//        
+//        addChild(vc)
+//        view.addSubview(vc.view)
+//        vc.view.snp.remakeConstraints {
+//            $0.right.top.bottom.leading.equalToSuperview()
+//        }
     }
     
     func tappedQRCodeButton(url: URL) {
