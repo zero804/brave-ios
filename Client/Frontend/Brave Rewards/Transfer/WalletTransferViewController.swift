@@ -45,7 +45,7 @@ class WalletTransferViewController: UIViewController, Themeable {
             self.legacyWallet.linkBraveWallet(paymentId: paymentId) { [weak self] result in
                 guard let self = self else { return }
                 if result != .ledgerOk {
-                    let alert = UIAlertController(title: Strings.Rewards.walletTransferFailureAlertTitle, message: "\(Strings.Rewards.walletTransferFailureAlertMessage) (Error code: \(result.rawValue))", preferredStyle: .alert)
+                    let alert = UIAlertController(title: Strings.Rewards.walletTransferFailureAlertTitle, message: "\(Strings.Rewards.walletTransferFailureAlertMessage) (\(result.rawValue))", preferredStyle: .alert)
                     alert.addAction(.init(title: Strings.OKString, style: .default, handler: { [unowned self] _ in
                         self.isTransferring = false
                     }))

@@ -20,14 +20,6 @@ class OnboardingRewardsAgreementViewController: OnboardingViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let isAdsRegionSupported = BraveAds.isCurrentLocaleSupported()
-        
-        let adSupportedRegionText = Preferences.Rewards.isUsingBAP.value == true ? Strings.OBRewardsDetailInAdRegionJapan : Strings.OBRewardsDetailInAdRegion
-        contentView.updateSubtitleText(isAdsRegionSupported ?
-            adSupportedRegionText : Strings.OBRewardsDetailOutsideAdRegion,
-                                       boldWords: isAdsRegionSupported ? 5 : 1,
-                                       for: theme)
-        
         contentView.turnOnButton.addTarget(self, action: #selector(onTurnOn), for: .touchUpInside)
         contentView.skipButton.addTarget(self, action: #selector(skipTapped), for: .touchUpInside)
         
@@ -46,9 +38,7 @@ class OnboardingRewardsAgreementViewController: OnboardingViewController {
     
     @objc
     private func onTurnOn() {
-        rewards?.ledger.createWalletAndFetchDetails { _ in
-            //TODO: Handle errors at a later date and possibly elsewhere..
-        }
+        rewards?.isEnabled = true
         
         self.continueTapped()
     }

@@ -44,7 +44,6 @@ class OnboardingNavigationController: UINavigationController {
     enum OnboardingType {
         case newUser(OnboardingProgress)
         case existingUserRewardsOff(OnboardingProgress)
-        case existingUserRewardsOn(OnboardingProgress)
         
         /// Returns a list of onboarding screens for given type.
         /// Screens should be sorted in order of which they are presented to the user.
@@ -71,17 +70,11 @@ class OnboardingNavigationController: UINavigationController {
                         return []
                     }
                     return [.rewardsAgreement]
-                case .existingUserRewardsOn(let progress):
-                    //The user already made it to rewards and agreed so they should only see ads countdown
-                    if progress == .rewards {
-                        return []
-                    }
-                    return [.existingRewardsTurnOnAds]
                 }
             } else {
                 switch self {
                 case .newUser: return [.searchEnginePicker, .shieldsInfo]
-                case .existingUserRewardsOff, .existingUserRewardsOn: return []
+                case .existingUserRewardsOff: return []
                 }
             }
         }
@@ -91,7 +84,6 @@ class OnboardingNavigationController: UINavigationController {
         case privacyConsent
         case searchEnginePicker
         case shieldsInfo
-        case existingRewardsTurnOnAds
         case rewardsAgreement
         
         /// Returns new ViewController associated with the screen type
@@ -102,8 +94,6 @@ class OnboardingNavigationController: UINavigationController {
                 return OnboardingSearchEnginesViewController(profile: profile, rewards: rewards, theme: theme)
             case .shieldsInfo:
                 return OnboardingShieldsViewController(profile: profile, rewards: rewards, theme: theme)
-            case .existingRewardsTurnOnAds:
-                return OnboardingAdsAvailableController(profile: profile, rewards: rewards, theme: theme)
             case .rewardsAgreement:
                 return OnboardingRewardsAgreementViewController(profile: profile, rewards: rewards, theme: theme)
             }
@@ -114,7 +104,6 @@ class OnboardingNavigationController: UINavigationController {
             case .privacyConsent: return OnboardingPrivacyConsentViewController.self
             case .searchEnginePicker: return OnboardingSearchEnginesViewController.self
             case .shieldsInfo: return OnboardingShieldsViewController.self
-            case .existingRewardsTurnOnAds: return OnboardingAdsAvailableController.self
             case .rewardsAgreement: return OnboardingRewardsAgreementViewController.self
             }
         }

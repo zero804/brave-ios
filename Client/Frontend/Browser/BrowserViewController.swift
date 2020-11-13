@@ -437,6 +437,8 @@ class BrowserViewController: UIViewController {
                 if self.notificationsHandler?.shouldShowNotifications() == true {
                     self.displayMyFirstAdIfAvailable()
                 }
+                
+                self.updateRewardsButtonState()
             }
         }
         rewardsObserver.promotionsAdded = { [weak self] promotions in
@@ -933,10 +935,10 @@ class BrowserViewController: UIViewController {
             }
             
             // 60 days has passed since the user last saw the onboarding.. it's time to show the onboarding again..
-            if daysUntilNextPrompt <= Date() {
+            if daysUntilNextPrompt <= Date() && !isRewardsEnabled {
                 guard let onboarding = OnboardingNavigationController(
                     profile: profile,
-                    onboardingType: rewards.ledger.isEnabled ? .existingUserRewardsOn(currentProgress) : .existingUserRewardsOff(currentProgress),
+                    onboardingType: .existingUserRewardsOff(currentProgress),
                     rewards: rewards,
                     theme: Theme.of(tabManager.selectedTab)
                     ) else { return }
@@ -956,9 +958,9 @@ class BrowserViewController: UIViewController {
             &&
             (Preferences.General.basicOnboardingProgress.value == OnboardingProgress.searchEngine.rawValue) {
             
-            guard let onboarding = OnboardingNavigationController(
+            guard !isRewardsEnabled, let onboarding = OnboardingNavigationController(
                 profile: profile,
-                onboardingType: isRewardsEnabled ? .existingUserRewardsOn(currentProgress) : .existingUserRewardsOff(currentProgress),
+                onboardingType: .existingUserRewardsOff(currentProgress),
                 rewards: rewards,
                 theme: Theme.of(tabManager.selectedTab)
                 ) else { return }
@@ -974,9 +976,9 @@ class BrowserViewController: UIViewController {
             &&
             (Preferences.General.basicOnboardingProgress.value == OnboardingProgress.none.rawValue) {
             
-            guard let onboarding = OnboardingNavigationController(
+            guard !isRewardsEnabled, let onboarding = OnboardingNavigationController(
                 profile: profile,
-                onboardingType: isRewardsEnabled ? .existingUserRewardsOn(currentProgress) : .existingUserRewardsOff(currentProgress),
+                onboardingType: .existingUserRewardsOff(currentProgress),
                 rewards: rewards,
                 theme: Theme.of(tabManager.selectedTab)
                 ) else { return }
@@ -3796,7 +3798,7 @@ extension BrowserViewController: OnboardingControllerDelegate {
             case .newUser:
                 Preferences.General.basicOnboardingProgress.value = OnboardingProgress.searchEngine.rawValue
                 
-            case .existingUserRewardsOff, .existingUserRewardsOn:
+            case .existingUserRewardsOff:
                 break
                 
             default:
