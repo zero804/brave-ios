@@ -3797,10 +3797,8 @@ extension BrowserViewController: OnboardingControllerDelegate {
             switch onboardingController.onboardingType {
             case .newUser:
                 Preferences.General.basicOnboardingProgress.value = OnboardingProgress.searchEngine.rawValue
-                
             case .existingUserRewardsOff:
                 break
-                
             default:
                 break
             }

@@ -31,7 +31,7 @@ extension WalletTransferViewController {
             $0.numberOfLines = 0
         }
         let learnMoreButton = UIButton(type: .system).then {
-            $0.setTitle("Learn More", for: .normal)
+            $0.setTitle(Strings.learnMore, for: .normal)
             $0.setTitleColor(Colors.blurple400, for: .normal)
             $0.titleLabel?.font = .systemFont(ofSize: 17)
         }

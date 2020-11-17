@@ -17,8 +17,8 @@ extension PublisherInfo {
         return "\(name) \(String(format: RewardsOnProviderText, providerDisplayString))"
     }
     
-    /// The display name to show when showing Publisher names (example: "X on GitHub", "Y on
-    /// YouTube", or "reddit.com" for publishers that dont have individual content providers)
+    /// The attributed display name to show when showing Publisher names where the publishers name
+    /// is bolded. (i.e. "**X** on GitHub")
     func attributedDisplayName(fontSize: CGFloat) -> NSAttributedString {
         if provider.isEmpty || name.isEmpty {
             return NSAttributedString(string: id, attributes: [.font: UIFont.systemFont(ofSize: fontSize)])

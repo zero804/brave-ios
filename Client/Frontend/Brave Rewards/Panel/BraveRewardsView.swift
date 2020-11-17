@@ -73,12 +73,12 @@ extension BraveRewardsViewController {
         
         func applyTheme(_ theme: Theme) {
             let isDark = theme.isDark
-            titleLabel.textColor = isDark ? UIColor.white : UIColor.black
-            subtitleLabel.textColor = isDark ? UIColor.lightGray : UIColor.gray
+            titleLabel.textColor = isDark ? .white : .black
+            subtitleLabel.textColor = isDark ? .lightGray : .gray
             publisherView.applyTheme(theme)
             statusView.applyTheme(theme)
             legacyWalletTransferButton.applyTheme(theme)
-            backgroundColor = theme.isDark ? UIColor(rgb: 0x17171f) : UIColor.white
+            backgroundColor = theme.isDark ? BraveUX.popoverDarkBackground : .white
         }
     }
 }

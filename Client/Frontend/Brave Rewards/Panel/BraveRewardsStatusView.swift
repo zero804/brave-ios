@@ -5,6 +5,7 @@
 
 import UIKit
 import BraveUI
+import Shared
 
 class BraveRewardsStatusView: UIView, Themeable {
     enum VisibleStatus {
@@ -24,14 +25,14 @@ class BraveRewardsStatusView: UIView, Themeable {
     
     private let onView = StatusLabelView(
         image: #imageLiteral(resourceName: "rewards-panel-on").template,
-        text: "Thank you for helping support content creators as you browse!"
+        text: Strings.Rewards.enabledStatusBody
     ).then {
         $0.isHidden = true
     }
     
     private let offView = StatusLabelView(
         image: #imageLiteral(resourceName: "rewards-panel-off").template,
-        text: "Using Brave Rewards helps support content creators as you browse."
+        text: Strings.Rewards.disabledStatusBody
     )
     
     func setVisibleStatus(status: VisibleStatus, animated: Bool = true) {

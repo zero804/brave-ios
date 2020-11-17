@@ -1544,6 +1544,18 @@ extension Strings {
             value: "This creator has not verified and will not be included in creator support",
             comment: "Displayed under unverified publishers"
         )
+        public static let enabledStatusBody = NSLocalizedString(
+            "rewards.enabledStatusBody",
+            bundle: .braveShared,
+            value: "Thank you for helping support content creators as you browse!",
+            comment: "Displayed in the status container when rewards is enabled but you're not currently supporting any publishers (0 AC count)"
+        )
+        public static let disabledStatusBody = NSLocalizedString(
+            "rewards.disabledStatusBody",
+            bundle: .braveShared,
+            value: "Using Brave Rewards helps support content creators as you browse.",
+            comment: "Displayed in the status container when rewards is disabled"
+        )
         public static let totalSupportedCount = NSLocalizedString(
             "rewards.totalSupportedCount",
             bundle: .braveShared,

@@ -53,23 +53,21 @@ class BraveRewardsSettingsViewController: TableViewController {
         
         if let legacyWallet = legacyWallet {
             legacyWallet.transferrableAmount({ [weak self] total in
-                guard let self = self else { return }
-                if total > 0 {
-                    self.dataSource.sections.insert(.init(
-                        header: .title(Strings.Rewards.walletTransferTitle),
-                        rows: [
-                            Row(text: Strings.Rewards.legacyWalletTransfer, selection: { [unowned self] in
-                                guard let legacyWallet = self.legacyWallet else { return }
-                                let controller = WalletTransferViewController(legacyWallet: legacyWallet)
-                                controller.learnMoreHandler = { [weak self] in
-                                    self?.walletTransferLearnMoreTapped?()
-                                }
-                                let container = UINavigationController(rootViewController: controller)
-                                self.present(container, animated: true)
-                            }, image: UIImage(imageLiteralResourceName: "rewards-qr-code").template)
-                        ]
-                    ), at: 1)
-                }
+                guard let self = self, total > 0 else { return }
+                self.dataSource.sections.insert(.init(
+                    header: .title(Strings.Rewards.walletTransferTitle),
+                    rows: [
+                        Row(text: Strings.Rewards.legacyWalletTransfer, selection: { [unowned self] in
+                            guard let legacyWallet = self.legacyWallet else { return }
+                            let controller = WalletTransferViewController(legacyWallet: legacyWallet)
+                            controller.learnMoreHandler = { [weak self] in
+                                self?.walletTransferLearnMoreTapped?()
+                            }
+                            let container = UINavigationController(rootViewController: controller)
+                            self.present(container, animated: true)
+                        }, image: UIImage(imageLiteralResourceName: "rewards-qr-code").template)
+                    ]
+                ), at: 1)
             })
         }
         

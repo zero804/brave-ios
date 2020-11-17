@@ -4,6 +4,7 @@
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 import UIKit
+import Shared
 
 class WalletTransferCompleteViewController: UIViewController, Themeable {
     
@@ -21,7 +22,7 @@ class WalletTransferCompleteViewController: UIViewController, Themeable {
         
         navigationItem.hidesBackButton = true
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(tappedDone))
-        title = "Wallet Transfer"
+        title = Strings.Rewards.walletTransferTitle
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
