@@ -1767,6 +1767,7 @@ class BrowserViewController: UIViewController {
         bookmarkViewController.toolbarUrlActionsDelegate = self
         
         presentSettingsNavigation(with: bookmarkViewController)
+        bookmarkViewController.showLastVisitedFolder()
     }
     
     func openAddBookmark() {

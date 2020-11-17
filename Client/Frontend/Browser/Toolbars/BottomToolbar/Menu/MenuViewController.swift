@@ -345,6 +345,7 @@ class MenuViewController: UITableViewController {
         vc.toolbarUrlActionsDelegate = bvc
         
         open(vc, doneButton: DoneButton(style: .done, position: .right))
+        vc.showLastVisitedFolder()
     }
     
     private func openDownloads() {

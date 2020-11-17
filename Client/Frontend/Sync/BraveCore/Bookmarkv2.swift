@@ -6,6 +6,7 @@
 import Foundation
 import Data
 import BraveRewards
+import BraveShared
 import CoreData
 import Shared
 
@@ -86,18 +87,62 @@ class Bookmarkv2: WebsitePresentable {
     
     public var order: Int16 {
         let defaultOrder = 0 //taken from CoreData
-        
-        guard let children = bookmarkNode.parent?.children else {
+
+        //MUST Use childCount instead of children.count! for performance
+        guard let count = bookmarkNode.parent?.childCount, count > 0 else {
             return Int16(defaultOrder)
         }
-        
-        return Int16(children.firstIndex(where: { $0.guid == self.bookmarkNode.guid }) ?? defaultOrder)
+
+        //Do NOT change this to self.parent.children.indexOf(where: { self.id == $0.id })
+        //Swift's performance on `Array` is abominable!
+        //Therefore we call a native function `index(ofChild:)` to return the index.
+        return Int16(self.parent?.bookmarkNode.index(ofChild: self.bookmarkNode) ?? defaultOrder)
     }
     
     public func delete() {
         if self.canBeDeleted {
             Bookmarkv2.bookmarksAPI.removeBookmark(bookmarkNode)
         }
+    }
+    
+    public static func lastFolderPath() -> [Bookmarkv2] {
+        if let nodeId = Preferences.Chromium.lastBookmarksFolderNodeId.value,
+           var folderNode = Bookmarkv2.bookmarksAPI.getNodeById(nodeId),
+           folderNode.isVisible {
+            
+            // We don't ever display the root node
+            // It is the mother of all nodes
+            let rootNodeGuid = bookmarksAPI.rootNode?.guid
+            
+            var nodes = [BookmarkNode]()
+            nodes.append(folderNode)
+            
+            while true {
+                if let parent = folderNode.parent, parent.isVisible, parent.guid != rootNodeGuid {
+                    nodes.append(parent)
+                    folderNode = parent
+                    continue
+                }
+                break
+            }
+            return nodes.map({ Bookmarkv2($0) }).reversed()
+        }
+        
+        return []
+    }
+}
+
+class BraveBookmarkFolder: Bookmarkv2 {
+    public let indentationLevel: Int
+    
+    private override init(_ bookmarkNode: BookmarkNode) {
+        self.indentationLevel = 0
+        super.init(bookmarkNode)
+    }
+    
+    public init(_ bookmarkFolder: BookmarkFolder) {
+        self.indentationLevel = bookmarkFolder.indentationLevel
+        super.init(bookmarkFolder.bookmarkNode)
     }
 }
 
