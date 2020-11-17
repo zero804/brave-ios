@@ -69,10 +69,6 @@ class BookmarksViewController: SiteTableViewController, ToolbarUrlActionsProtoco
         self.title = folder?.displayTitle ?? Strings.bookmarks
         self.bookmarksFRC = Bookmarkv2.frc(parent: folder)
         self.bookmarksFRC?.delegate = self
-        
-        if let folder = folder {
-            Preferences.Chromium.lastBookmarksFolderNodeId.value = folder.objectID
-        }
     }
   
     required init?(coder aDecoder: NSCoder) {
@@ -86,6 +82,8 @@ class BookmarksViewController: SiteTableViewController, ToolbarUrlActionsProtoco
 
         setUpToolbar()
         updateEditBookmarksButtonStatus()
+        
+        self.showLastVisitedFolder()
     }
     
     private func updateEditBookmarksButtonStatus() {
@@ -125,22 +123,24 @@ class BookmarksViewController: SiteTableViewController, ToolbarUrlActionsProtoco
         setToolbarItems(items, animated: true)
     }
     
-    public func showLastVisitedFolder() {
-        var folders = Bookmarkv2.lastFolderPath()
-        while !folders.isEmpty {
-            let nextController = BookmarksViewController(folder: folders.removeFirst(), isPrivateBrowsing: isPrivateBrowsing)
-            nextController.profile = profile
-            nextController.bookmarksDidChange = bookmarksDidChange
-            nextController.toolbarUrlActionsDelegate = toolbarUrlActionsDelegate
-            
-            // Show `Done` button on nested folder levels.
-            nextController.navigationItem.setRightBarButton(navigationItem.rightBarButtonItem, animated: false)
-            self.navigationController?.pushViewController(nextController, animated: false)
+    private func showLastVisitedFolder() {
+        DispatchQueue.main.async {
+            guard let navigationController = self.navigationController else { return }
+            let index = navigationController.viewControllers.firstIndex(of: self) ?? 0
+            if index <= 0 && self.currentFolder != nil {
+                let nextController = BookmarksViewController(folder: self.currentFolder?.parent, isPrivateBrowsing: self.isPrivateBrowsing)
+                nextController.profile = self.profile
+                nextController.bookmarksDidChange = self.bookmarksDidChange
+                nextController.toolbarUrlActionsDelegate = self.toolbarUrlActionsDelegate
+                nextController.navigationItem.setRightBarButton(self.navigationItem.rightBarButtonItem, animated: true)
+                navigationController.viewControllers.insert(nextController, at: index)
+                nextController.loadViewIfNeeded()
+            }
         }
     }
     
     override func navigationShouldPopOnBackButton() -> Bool {
-        Preferences.Chromium.lastBookmarksFolderNodeId.value = self.currentFolder?.parent?.objectID
+        Preferences.Chromium.lastBookmarksFolderNodeId.value = self.currentFolder?.parent?.objectID ?? -1
         return true
     }
   
@@ -163,9 +163,21 @@ class BookmarksViewController: SiteTableViewController, ToolbarUrlActionsProtoco
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-    navigationController?.setToolbarHidden(false, animated: true)
-    reloadData()
-    switchTableEditingMode(true)
+    
+    view.addSubview(spinner)
+    spinner.snp.makeConstraints {
+        $0.center.equalTo(self.view.snp.center)
+    }
+    spinner.startAnimating()
+    spinner.isHidden = false
+    
+    Bookmarkv2.waitForBookmarkModelLoaded({
+        self.navigationController?.setToolbarHidden(false, animated: true)
+        self.reloadData()
+        self.switchTableEditingMode(true)
+        self.spinner.stopAnimating()
+        self.spinner.removeFromSuperview()
+    })
   }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -417,6 +429,7 @@ class BookmarksViewController: SiteTableViewController, ToolbarUrlActionsProtoco
         //show editing view for bookmark item
         self.showEditBookmarkController(bookmark: bookmark)
       } else {
+        Preferences.Chromium.lastBookmarksFolderNodeId.value = bookmark.objectID
         let nextController = BookmarksViewController(folder: bookmark, isPrivateBrowsing: isPrivateBrowsing)
         nextController.profile = profile
         nextController.bookmarksDidChange = bookmarksDidChange

@@ -1761,13 +1761,12 @@ class BrowserViewController: UIViewController {
     
     private func showBookmarkController() {
         let bookmarkViewController = BookmarksViewController(
-            folder: nil,
+            folder: Bookmarkv2.lastVisitedFolder(),
             isPrivateBrowsing: PrivateBrowsingManager.shared.isPrivateBrowsing)
         
         bookmarkViewController.toolbarUrlActionsDelegate = self
         
         presentSettingsNavigation(with: bookmarkViewController)
-        bookmarkViewController.showLastVisitedFolder()
     }
     
     func openAddBookmark() {

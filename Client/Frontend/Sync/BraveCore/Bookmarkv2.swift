@@ -105,6 +105,36 @@ class Bookmarkv2: WebsitePresentable {
         }
     }
     
+    // Returns the last visited folder
+    // If no folder was visited, returns the mobile bookmarks folder
+    // If the root folder was visited, returns nil
+    public static func lastVisitedFolder() -> Bookmarkv2? {
+        guard let nodeId = Preferences.Chromium.lastBookmarksFolderNodeId.value else {
+            // Default folder is the mobile node..
+            if let mobileNode = bookmarksAPI.mobileNode {
+                return Bookmarkv2(mobileNode)
+            }
+            return nil
+        }
+        
+        // Display root folder instead of mobile node..
+        if nodeId == -1 {
+            return nil
+        }
+        
+        // Display last visited folder..
+        if let folderNode = Bookmarkv2.bookmarksAPI.getNodeById(nodeId),
+           folderNode.isVisible {
+            return Bookmarkv2(folderNode)
+        }
+        
+        // Default folder is the mobile node..
+        if let mobileNode = bookmarksAPI.mobileNode {
+            return Bookmarkv2(mobileNode)
+        }
+        return nil
+    }
+    
     public static func lastFolderPath() -> [Bookmarkv2] {
         if let nodeId = Preferences.Chromium.lastBookmarksFolderNodeId.value,
            var folderNode = Bookmarkv2.bookmarksAPI.getNodeById(nodeId),
@@ -126,6 +156,11 @@ class Bookmarkv2: WebsitePresentable {
                 break
             }
             return nodes.map({ Bookmarkv2($0) }).reversed()
+        }
+        
+        // Default folder is the mobile node..
+        if let mobileNode = bookmarksAPI.mobileNode {
+            return [Bookmarkv2(mobileNode)]
         }
         
         return []
@@ -265,5 +300,25 @@ extension Bookmarkv2 {
     
     public func removeFavIconObserver() {
         observer = nil
+    }
+    
+    public static func waitForBookmarkModelLoaded(_ completion: @escaping () -> Void) {
+        if bookmarksAPI.isLoaded {
+            DispatchQueue.main.async {
+                completion()
+            }
+        } else {
+            var observer: BookmarkModelListener?
+            observer = Bookmarkv2.bookmarksAPI.add(BookmarkModelStateObserver({
+                if case .modelLoaded = $0 {
+                    observer?.destroy()
+                    observer = nil
+                    
+                    DispatchQueue.main.async {
+                        completion()
+                    }
+                }
+            }))
+        }
     }
 }
