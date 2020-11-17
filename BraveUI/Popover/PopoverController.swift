@@ -194,7 +194,10 @@ public class PopoverController: UIViewController {
             contentController.view.frame = rect
             
         case .autoLayout:
-            if !contentController.extendEdgeIntoArrow {
+            if contentController.extendEdgeIntoArrow {
+                autoLayoutTopConstraint?.constant = 0
+                autoLayoutBottomConstraint?.constant = 0
+            } else {
                 if containerView.arrowDirection == .up {
                     autoLayoutBottomConstraint?.constant = 0
                     autoLayoutTopConstraint?.constant = PopoverUX.arrowSize.height
@@ -202,9 +205,6 @@ public class PopoverController: UIViewController {
                     autoLayoutTopConstraint?.constant = 0
                     autoLayoutBottomConstraint?.constant = PopoverUX.arrowSize.height
                 }
-            } else {
-                autoLayoutTopConstraint?.constant = 0
-                autoLayoutBottomConstraint?.constant = 0
             }
         }
     }
