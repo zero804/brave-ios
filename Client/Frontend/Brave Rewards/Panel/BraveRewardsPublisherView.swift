@@ -47,8 +47,8 @@ class BraveRewardsPublisherView: UIStackView, Themeable {
     }
     
     func applyTheme(_ theme: Theme) {
-        hostLabel.textColor = theme.isDark ? .white : .black
-        bodyLabel.textColor = theme.isDark ? .white : .black
+        hostLabel.appearanceTextColor = theme.isDark ? .white : .black
+        bodyLabel.appearanceTextColor = theme.isDark ? .white : .black
     }
     
     override init(frame: CGRect) {

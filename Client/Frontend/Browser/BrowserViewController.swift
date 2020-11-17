@@ -432,12 +432,7 @@ class BrowserViewController: UIViewController {
         rewardsObserver.walletInitalized = { [weak self] result in
             guard let self = self, let client = self.deviceCheckClient else { return }
             if result == .walletCreated {
-                self.rewards.ledger.setupDeviceCheckEnrollment(client) { }
-                
-                if self.notificationsHandler?.shouldShowNotifications() == true {
-                    self.displayMyFirstAdIfAvailable()
-                }
-                
+                self.rewards.ledger.setupDeviceCheckEnrollment(client) { }                
                 self.updateRewardsButtonState()
             }
         }
@@ -450,25 +445,6 @@ class BrowserViewController: UIViewController {
         }
     }
     
-    // Display first ad when the user gets back to this controller if they havent seen one before
-    func displayMyFirstAdIfAvailable() {
-        if !rewards.ledger.isEnabled || !rewards.ads.isEnabled { return }
-        if Preferences.Rewards.myFirstAdShown.value { return }
-        // Check if ads are eligible
-        if BraveAds.isCurrentLocaleSupported() {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                if Preferences.Rewards.myFirstAdShown.value { return }
-                Preferences.Rewards.myFirstAdShown.value = true
-                 AdsViewController.displayFirstAd(on: self) { [weak self] action, url in
-                    if action == .opened {
-                        let request = URLRequest(url: url)
-                        self?.tabManager.addTabAndSelect(request, isPrivate: PrivateBrowsingManager.shared.isPrivateBrowsing)
-                    }
-                }
-            }
-        }
-    }
-
     override var preferredStatusBarStyle: UIStatusBarStyle {
         let isDark = Theme.of(tabManager.selectedTab).isDark
         if isDark {

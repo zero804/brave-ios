@@ -9,8 +9,14 @@ import BraveUI
 import Shared
 
 extension BraveRewardsViewController {
-    class BraveRewardsView: UIStackView, Themeable {
+    class BraveRewardsView: UIView, Themeable {
         
+        private let stackView = UIStackView().then {
+            $0.axis = .vertical
+            $0.spacing = 20
+            $0.isLayoutMarginsRelativeArrangement = true
+            $0.layoutMargins = UIEdgeInsets(top: 20, left: 16, bottom: 20, right: 16)
+        }
         let rewardsToggle = UISwitch().then {
             $0.setContentHuggingPriority(.required, for: .horizontal)
         }
@@ -30,15 +36,12 @@ extension BraveRewardsViewController {
         override init(frame: CGRect) {
             super.init(frame: frame)
             
-            axis = .vertical
-            spacing = 20
-            
-            isLayoutMarginsRelativeArrangement = true
-            layoutMargins = UIEdgeInsets(top: 20, left: 16, bottom: 20, right: 16)
-            
-            addStackViewItems(
+            addSubview(stackView)
+            stackView.snp.makeConstraints {
+                $0.edges.equalToSuperview()
+            }
+            stackView.addStackViewItems(
                 .view(UIStackView().then {
-                    $0.axis = .horizontal
                     $0.alignment = .center
                     $0.spacing = 12
                     $0.addStackViewItems(
@@ -73,8 +76,8 @@ extension BraveRewardsViewController {
         
         func applyTheme(_ theme: Theme) {
             let isDark = theme.isDark
-            titleLabel.textColor = isDark ? .white : .black
-            subtitleLabel.textColor = isDark ? .lightGray : .gray
+            titleLabel.appearanceTextColor = isDark ? .white : .black
+            subtitleLabel.appearanceTextColor = isDark ? .lightGray : .gray
             publisherView.applyTheme(theme)
             statusView.applyTheme(theme)
             legacyWalletTransferButton.applyTheme(theme)
