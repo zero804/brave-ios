@@ -64,6 +64,7 @@ class BraveRewardsSettingsViewController: TableViewController {
                                 self?.walletTransferLearnMoreTapped?()
                             }
                             let container = UINavigationController(rootViewController: controller)
+                            container.modalPresentationStyle = .formSheet
                             self.present(container, animated: true)
                         }, image: UIImage(imageLiteralResourceName: "rewards-qr-code").template)
                     ]

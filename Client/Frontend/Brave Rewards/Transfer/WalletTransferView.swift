@@ -52,8 +52,12 @@ extension WalletTransferViewController {
             )
             
             cameraView.snp.makeConstraints {
-                $0.top.leading.trailing.equalTo(self.safeAreaLayoutGuide).inset(10)
+                $0.top.equalTo(self.safeAreaLayoutGuide).inset(10)
+                $0.leading.greaterThanOrEqualTo(self.safeAreaLayoutGuide).inset(10)
+                $0.trailing.lessThanOrEqualTo(self.safeAreaLayoutGuide).inset(10)
+                $0.centerX.equalToSuperview()
                 $0.height.equalTo(cameraView.snp.width)
+                $0.width.lessThanOrEqualTo(375)
             }
             
             scrollView.snp.makeConstraints {

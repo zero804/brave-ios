@@ -69,6 +69,7 @@ extension BrowserViewController {
                         }
                     }
                     let container = UINavigationController(rootViewController: controller)
+                    container.modalPresentationStyle = .formSheet
                     self?.present(container, animated: true)
                 }
             case .unverifiedPublisherLearnMoreTapped:
