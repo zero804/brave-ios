@@ -214,7 +214,7 @@ extension Tab {
         
         let group = DispatchGroup()
         group.enter()
-        webView.evaluateJavaScript("document.documentElement.outerHTML.toString()", completionHandler: { html, _ in
+        webView.evaluateSafeJavaScript(functionName: "document.documentElement.outerHTML.toString", args: [], completionHandler: { html, _ in
             htmlBlob = html as? String
             group.leave()
         })
