@@ -1559,7 +1559,9 @@ class BrowserViewController: UIViewController {
             return
         }
         if NoImageModeHelper.isActivated {
-            webView.evaluateSafeJavaScript(functionName: "__firefox__.NoImageMode.setEnabled", args: ["true"], completionHandler: nil)
+            webView.evaluateSafeJavascript(functionName: "__firefox__.NoImageMode.setEnabled", args: ["true"], sandboxed: true, completion: { _, _ in
+                return
+            })
         }
     }
 
@@ -2427,11 +2429,11 @@ extension BrowserViewController: TabDelegate {
         webView.uiDelegate = self
 
         let formPostHelper = FormPostHelper(tab: tab)
-        tab.addContentScript(formPostHelper, name: FormPostHelper.name())
+        tab.addContentScript(formPostHelper, name: FormPostHelper.name(), sandboxed: true)
 
         let readerMode = ReaderMode(tab: tab)
         readerMode.delegate = self
-        tab.addContentScript(readerMode, name: ReaderMode.name())
+        tab.addContentScript(readerMode, name: ReaderMode.name(), sandboxed: true)
 
         // only add the logins helper if the tab is not a private browsing tab
         if !tab.isPrivate {
@@ -2470,22 +2472,22 @@ extension BrowserViewController: TabDelegate {
         tab.addContentScript(LocalRequestHelper(), name: LocalRequestHelper.name())
 
         tab.contentBlocker.setupTabTrackingProtection()
-        tab.addContentScript(tab.contentBlocker, name: ContentBlockerHelper.name())
+        tab.addContentScript(tab.contentBlocker, name: ContentBlockerHelper.name(), sandboxed: false)
 
-        tab.addContentScript(FocusHelper(tab: tab), name: FocusHelper.name())
+        tab.addContentScript(FocusHelper(tab: tab), name: FocusHelper.name(), sandboxed: false)
         
-        tab.addContentScript(FingerprintingProtection(tab: tab), name: FingerprintingProtection.name())
+        tab.addContentScript(FingerprintingProtection(tab: tab), name: FingerprintingProtection.name(), sandboxed: false)
         
-        tab.addContentScript(BraveGetUA(tab: tab), name: BraveGetUA.name())
+        tab.addContentScript(BraveGetUA(tab: tab), name: BraveGetUA.name(), sandboxed: false)
 
-        tab.addContentScript(U2FExtensions(tab: tab), name: U2FExtensions.name())
+        tab.addContentScript(U2FExtensions(tab: tab), name: U2FExtensions.name(), sandboxed: false)
         
-        tab.addContentScript(ResourceDownloadManager(tab: tab), name: ResourceDownloadManager.name())
+        tab.addContentScript(ResourceDownloadManager(tab: tab), name: ResourceDownloadManager.name(), sandboxed: true)
         
-        tab.addContentScript(WindowRenderHelperScript(tab: tab), name: WindowRenderHelperScript.name())
+        tab.addContentScript(WindowRenderHelperScript(tab: tab), name: WindowRenderHelperScript.name(), sandboxed: true)
         
-        tab.addContentScript(RewardsReporting(rewards: rewards, tab: tab), name: RewardsReporting.name())
-        tab.addContentScript(AdsMediaReporting(rewards: rewards, tab: tab), name: AdsMediaReporting.name())
+        tab.addContentScript(RewardsReporting(rewards: rewards, tab: tab), name: RewardsReporting.name(), sandboxed: true)
+        tab.addContentScript(AdsMediaReporting(rewards: rewards, tab: tab), name: AdsMediaReporting.name(), sandboxed: true)
         
         #if !NO_SKUS
         tab.addContentScript(PaymentRequestExtension(rewards: rewards, tab: tab, paymentRequested: self.paymentRequested), name: PaymentRequestExtension.name())

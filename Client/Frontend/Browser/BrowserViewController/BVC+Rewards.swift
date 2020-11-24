@@ -10,6 +10,7 @@ import BraveShared
 import BraveUI
 import Storage
 import XCGLogger
+import WebKit
 
 private let log = Logger.rewardsLogger
 
@@ -214,7 +215,8 @@ extension Tab {
         
         let group = DispatchGroup()
         group.enter()
-        webView.evaluateSafeJavaScript(functionName: "document.documentElement.outerHTML.toString", args: [], completionHandler: { html, _ in
+        
+        webView.evaluateSafeJavascript(functionName: "document.documentElement.outerHTML.toString", args: [], completion: { html, _ in
             htmlBlob = html as? String
             group.leave()
         })

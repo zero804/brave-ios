@@ -732,7 +732,6 @@
 		7482205C1DBAB56300EEEA72 /* MailProviders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7482205B1DBAB56300EEEA72 /* MailProviders.swift */; };
 		74B195441CF503FC007F36EF /* RecentlyClosedTabs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74B195431CF503FC007F36EF /* RecentlyClosedTabs.swift */; };
 		74E36D781B71323500D69DA1 /* SettingsContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74E36D771B71323500D69DA1 /* SettingsContentViewController.swift */; };
-		78A9D0942407B3110077576C /* BraveGetUA.js in Resources */ = {isa = PBXBuildFile; fileRef = 78A9D0922407B3110077576C /* BraveGetUA.js */; };
 		78A9D0962407B4A90077576C /* BraveGetUA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78A9D0952407B4A90077576C /* BraveGetUA.swift */; };
 		78BA4B602472F9F900BD0897 /* UserReferralProgramTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78BA4B5C2472F8C100BD0897 /* UserReferralProgramTests.swift */; };
 		7B10AA9F1E3A15020002DD08 /* DataExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B10AA9E1E3A15020002DD08 /* DataExtensions.swift */; };
@@ -982,6 +981,7 @@
 		F84B22041A0910F600AAB793 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F84B21E51A0910F600AAB793 /* AppDelegate.swift */; };
 		F84B220B1A0910F600AAB793 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F84B21EF1A0910F600AAB793 /* Images.xcassets */; };
 		F91785DB255F38D6002976F2 /* WKWebViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F91785DA255F38D6002976F2 /* WKWebViewExtensions.swift */; };
+		F91EAD57256C90720056C8CC /* BraveGetUA.js in Resources */ = {isa = PBXBuildFile; fileRef = F91EAD56256C90720056C8CC /* BraveGetUA.js */; };
 		F930CDAC227000F200A23FE1 /* U2F.js in Resources */ = {isa = PBXBuildFile; fileRef = F930CDAB227000F200A23FE1 /* U2F.js */; };
 		F930CDAE2270015C00A23FE1 /* U2FExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F930CDAD2270015C00A23FE1 /* U2FExtensions.swift */; };
 		F930CDB82270040D00A23FE1 /* WebAuthnClientData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F930CDB72270040D00A23FE1 /* WebAuthnClientData.swift */; };
@@ -2450,6 +2450,7 @@
 		F84B21EF1A0910F600AAB793 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		F84B22431A09165600AAB793 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F91785DA255F38D6002976F2 /* WKWebViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKWebViewExtensions.swift; sourceTree = "<group>"; };
+		F91EAD56256C90720056C8CC /* BraveGetUA.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = BraveGetUA.js; sourceTree = "<group>"; };
 		F926647A234D4EF400359492 /* CoreNFC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreNFC.framework; path = System/Library/Frameworks/CoreNFC.framework; sourceTree = SDKROOT; };
 		F930CDAB227000F200A23FE1 /* U2F.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = U2F.js; sourceTree = "<group>"; };
 		F930CDAD2270015C00A23FE1 /* U2FExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = U2FExtensions.swift; sourceTree = "<group>"; };
@@ -4211,6 +4212,7 @@
 				F9B23EE123F61173000EB3D8 /* PaymentRequest.js */,
 				5E4E078224A0E4D700B01720 /* YoutubeAdblock.js */,
 				0A64384D24FD4E43000E80A3 /* ArchiveIsCompat.js */,
+				F91EAD56256C90720056C8CC /* BraveGetUA.js */,
 			);
 			path = UserScripts;
 			sourceTree = "<group>";
@@ -5532,6 +5534,7 @@
 				7B2142FE1E5E055000CDD3FC /* InfoPlist.strings in Resources */,
 				E69922171B94E3EF007C480D /* Licenses.html in Resources */,
 				5D5374A223846FFC00A2B587 /* anders-jilden.jpg in Resources */,
+				F91EAD57256C90720056C8CC /* BraveGetUA.js in Resources */,
 				E4CD9F5B1A71506C00318571 /* Reader.css in Resources */,
 				D0FCF8061FE4772D004A7995 /* AllFramesAtDocumentEnd.js in Resources */,
 				27658273217130D900754B2F /* DigiCertHighAssurance.cer in Resources */,
@@ -5543,7 +5546,6 @@
 				F9F859702533CE52000CEB24 /* LoginsHelper.js in Resources */,
 				27F56F8D24E447020018F2F9 /* DateTools.bundle in Resources */,
 				5D53749E23846FFC00A2B587 /* louis-kim.jpg in Resources */,
-				78A9D0942407B3110077576C /* BraveGetUA.js in Resources */,
 				27658271217130D900754B2F /* GlobalSign_r1.cer in Resources */,
 				39F4C0FA2045D87400746155 /* FocusHelper.js in Resources */,
 				E4B7B7861A793CF20022C5E0 /* FiraSans-UltraLight.ttf in Resources */,

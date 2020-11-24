@@ -440,8 +440,8 @@ class Tab: NSObject {
         webView.customUserAgent = desktopMode ? UserAgent.desktop : UserAgent.mobile
     }
 
-    func addContentScript(_ helper: TabContentScript, name: String, sandboxed: Bool) {
-        contentScriptManager.addContentScript(helper, name: name, forTab: self, sandboxed: Bool)
+    func addContentScript(_ helper: TabContentScript, name: String, sandboxed: Bool = true) {
+        contentScriptManager.addContentScript(helper, name: name, forTab: self, sandboxed: sandboxed)
     }
 
     func getContentScript(name: String) -> TabContentScript? {
@@ -597,7 +597,7 @@ private class TabContentScriptManager: NSObject, WKScriptMessageHandler {
         }
     }
 
-    func addContentScript(_ helper: TabContentScript, name: String, forTab tab: Tab, sandboxed: Bool) {
+    func addContentScript(_ helper: TabContentScript, name: String, forTab tab: Tab, sandboxed: Bool = true) {
         if let _ = helpers[name] {
             assertionFailure("Duplicate helper added: \(name)")
         }
