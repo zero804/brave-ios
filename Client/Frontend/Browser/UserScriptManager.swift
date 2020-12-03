@@ -120,15 +120,7 @@ class UserScriptManager {
         }
         return WKUserScript(source: source, injectionTime: .atDocumentStart, forMainFrameOnly: true)
     }()
-    
-    private let userAgentUserScript: WKUserScript? = {
-        guard let path = Bundle.main.path(forResource: "BraveGetUA", ofType: "js"), let source = try? String(contentsOfFile: path) else {
-            log.error("Failed to load GetUA user script")
-            return nil
-        }
-        return WKUserScript(source: source, injectionTime: .atDocumentStart, forMainFrameOnly: false)
-    }()
-    
+
     private let fingerprintingProtectionUserScript: WKUserScript? = {
         guard let path = Bundle.main.path(forResource: "FingerprintingProtection", ofType: "js"), let source = try? String(contentsOfFile: path) else {
             log.error("Failed to load fingerprinting protection user script")
@@ -293,10 +285,6 @@ class UserScriptManager {
                 $0.addUserScript(script)
             }
 
-            if let script = userAgentUserScript {
-                $0.addUserScript(script)
-            }
-            
             if let script = readerModeUserScript {
                 $0.addUserScript(script)
             }

@@ -4217,7 +4217,6 @@
 				F9B23EE123F61173000EB3D8 /* PaymentRequest.js */,
 				5E4E078224A0E4D700B01720 /* YoutubeAdblock.js */,
 				0A64384D24FD4E43000E80A3 /* ArchiveIsCompat.js */,
-				F91EAD56256C90720056C8CC /* BraveGetUA.js */,
 			);
 			path = UserScripts;
 			sourceTree = "<group>";
@@ -4253,6 +4252,7 @@
 		D0FCF7EC1FE44DBD004A7995 /* AtDocumentStart */ = {
 			isa = PBXGroup;
 			children = (
+				F91EAD56256C90720056C8CC /* BraveGetUA.js */,
 				D0C95DF9200EAE5E00E4E51C /* NoImageModeHelper.js */,
 				F9E0F38A25772E57003A6A30 /* ReaderMode.js */,
 				F9E0F3A7257739B1003A6A30 /* TrackingProtectionStats.js */,
