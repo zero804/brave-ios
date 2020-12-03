@@ -994,6 +994,10 @@
 		F9B23EE223F61173000EB3D8 /* PaymentRequest.js in Resources */ = {isa = PBXBuildFile; fileRef = F9B23EE123F61173000EB3D8 /* PaymentRequest.js */; };
 		F9B23EE523F613E8000EB3D8 /* PaymentRequestExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B23EE423F613E8000EB3D8 /* PaymentRequestExtension.swift */; };
 		F9C6B7D623886EF8003F7D16 /* SceneObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9C6B7D523886EF8003F7D16 /* SceneObserver.swift */; };
+		F9E0F38B25772E57003A6A30 /* ReaderMode.js in Resources */ = {isa = PBXBuildFile; fileRef = F9E0F38A25772E57003A6A30 /* ReaderMode.js */; };
+		F9E0F3A8257739B1003A6A30 /* TrackingProtectionStats.js in Resources */ = {isa = PBXBuildFile; fileRef = F9E0F3A7257739B1003A6A30 /* TrackingProtectionStats.js */; };
+		F9E0F3B4257878C1003A6A30 /* PrintHandler.js in Resources */ = {isa = PBXBuildFile; fileRef = F9E0F3B3257878C1003A6A30 /* PrintHandler.js */; };
+		F9E0F3BF25787E2C003A6A30 /* __firefox__.js in Resources */ = {isa = PBXBuildFile; fileRef = F9E0F3BE25787E2C003A6A30 /* __firefox__.js */; };
 		F9F859702533CE52000CEB24 /* LoginsHelper.js in Resources */ = {isa = PBXBuildFile; fileRef = D0C95DF5200EADD500E4E51C /* LoginsHelper.js */; };
 		F9F8597C2533CEBC000CEB24 /* DownloadHelper.js in Resources */ = {isa = PBXBuildFile; fileRef = F9F8597B2533CEBC000CEB24 /* DownloadHelper.js */; };
 		FA6B2AC21D41F02D00429414 /* Punycode.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6B2AC11D41F02D00429414 /* Punycode.swift */; };
@@ -2177,7 +2181,6 @@
 		74B195431CF503FC007F36EF /* RecentlyClosedTabs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecentlyClosedTabs.swift; sourceTree = "<group>"; };
 		74C027441B2A348C001B1E88 /* SessionData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionData.swift; sourceTree = "<group>"; };
 		74E36D771B71323500D69DA1 /* SettingsContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsContentViewController.swift; sourceTree = "<group>"; };
-		78A9D0922407B3110077576C /* BraveGetUA.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = BraveGetUA.js; sourceTree = "<group>"; };
 		78A9D0952407B4A90077576C /* BraveGetUA.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BraveGetUA.swift; sourceTree = "<group>"; };
 		78BA4B5C2472F8C100BD0897 /* UserReferralProgramTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserReferralProgramTests.swift; sourceTree = "<group>"; };
 		7B10AA9E1E3A15020002DD08 /* DataExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataExtensions.swift; sourceTree = "<group>"; };
@@ -2243,7 +2246,6 @@
 		C8F457A91F1FDD9B000CB895 /* BrowserViewController+KeyCommands.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BrowserViewController+KeyCommands.swift"; sourceTree = "<group>"; };
 		CE7F115E1F3CCEF900ABFC0B /* RemoteDevices.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteDevices.swift; sourceTree = "<group>"; };
 		D000661320472890009BA6F6 /* __firefox__.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = __firefox__.js; sourceTree = "<group>"; };
-		D0006623204728A8009BA6F6 /* TrackingProtectionStats.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = TrackingProtectionStats.js; sourceTree = "<group>"; };
 		D018F93D1F44A7190098F8CA /* Schema.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Schema.swift; sourceTree = "<group>"; };
 		D029A04820A62DB0001DB72F /* TemporaryDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemporaryDocument.swift; sourceTree = "<group>"; };
 		D03F8EB12004014E003C2224 /* FaviconHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaviconHandler.swift; sourceTree = "<group>"; };
@@ -2258,14 +2260,12 @@
 		D0C95DF1200EAD3000E4E51C /* FindInPage.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = FindInPage.js; sourceTree = "<group>"; };
 		D0C95DF5200EADD500E4E51C /* LoginsHelper.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = LoginsHelper.js; sourceTree = "<group>"; };
 		D0C95DF9200EAE5E00E4E51C /* NoImageModeHelper.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = NoImageModeHelper.js; sourceTree = "<group>"; };
-		D0C95E03200FCA8800E4E51C /* ReaderMode.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = ReaderMode.js; sourceTree = "<group>"; };
 		D0C95E0D200FD3B200E4E51C /* PrintHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrintHelper.swift; sourceTree = "<group>"; };
 		D0C95E33200FDB3200E4E51C /* MetadataHelper.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = MetadataHelper.js; sourceTree = "<group>"; };
 		D0C95E35200FDC5400E4E51C /* MetadataParserHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetadataParserHelper.swift; sourceTree = "<group>"; };
 		D0C95EF5201A55A800E4E51C /* BrowserViewController+UIDropInteractionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BrowserViewController+UIDropInteractionDelegate.swift"; sourceTree = "<group>"; };
 		D0E55C4E1FB4FD23006DC274 /* FormPostHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormPostHelper.swift; sourceTree = "<group>"; };
 		D0FCF7F41FE45842004A7995 /* UserScriptManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserScriptManager.swift; sourceTree = "<group>"; };
-		D0FCF7F61FE45E5D004A7995 /* PrintHandler.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = PrintHandler.js; sourceTree = "<group>"; };
 		D0FCF8031FE4772C004A7995 /* AllFramesAtDocumentEnd.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = AllFramesAtDocumentEnd.js; sourceTree = "<group>"; };
 		D0FCF8041FE4772D004A7995 /* MainFrameAtDocumentEnd.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = MainFrameAtDocumentEnd.js; sourceTree = "<group>"; };
 		D0FCF8051FE4772D004A7995 /* MainFrameAtDocumentStart.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = MainFrameAtDocumentStart.js; sourceTree = "<group>"; };
@@ -2464,6 +2464,10 @@
 		F9B23EE123F61173000EB3D8 /* PaymentRequest.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = PaymentRequest.js; sourceTree = "<group>"; };
 		F9B23EE423F613E8000EB3D8 /* PaymentRequestExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentRequestExtension.swift; sourceTree = "<group>"; };
 		F9C6B7D523886EF8003F7D16 /* SceneObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneObserver.swift; sourceTree = "<group>"; };
+		F9E0F38A25772E57003A6A30 /* ReaderMode.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = ReaderMode.js; sourceTree = "<group>"; };
+		F9E0F3A7257739B1003A6A30 /* TrackingProtectionStats.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = TrackingProtectionStats.js; sourceTree = "<group>"; };
+		F9E0F3B3257878C1003A6A30 /* PrintHandler.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = PrintHandler.js; sourceTree = "<group>"; };
+		F9E0F3BE25787E2C003A6A30 /* __firefox__.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = __firefox__.js; sourceTree = "<group>"; };
 		F9F8597B2533CEBC000CEB24 /* DownloadHelper.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = DownloadHelper.js; sourceTree = "<group>"; };
 		FA6B2AC11D41F02D00429414 /* Punycode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Punycode.swift; sourceTree = "<group>"; };
 		FA9293D31D6580E100AC8D33 /* QRCodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRCodeViewController.swift; sourceTree = "<group>"; };
@@ -4200,6 +4204,7 @@
 		D0FCF7E71FE44CA9004A7995 /* UserScripts */ = {
 			isa = PBXGroup;
 			children = (
+				F9838EF325797C530051FA21 /* Sandboxed */,
 				279C75C021A5B37D001CD1CB /* FingerprintingProtection.js */,
 				D0FCF7E81FE44D8F004A7995 /* AllFrames */,
 				D0FCF7E91FE44DA2004A7995 /* MainFrame */,
@@ -4241,7 +4246,6 @@
 				D000661320472890009BA6F6 /* __firefox__.js */,
 				D03F8F24200EACD8003C2224 /* ContextMenu.js */,
 				39F4C0F92045D87400746155 /* FocusHelper.js */,
-				D0FCF7F61FE45E5D004A7995 /* PrintHandler.js */,
 			);
 			path = AtDocumentEnd;
 			sourceTree = "<group>";
@@ -4249,10 +4253,9 @@
 		D0FCF7EC1FE44DBD004A7995 /* AtDocumentStart */ = {
 			isa = PBXGroup;
 			children = (
-				78A9D0922407B3110077576C /* BraveGetUA.js */,
 				D0C95DF9200EAE5E00E4E51C /* NoImageModeHelper.js */,
-				D0C95E03200FCA8800E4E51C /* ReaderMode.js */,
-				D0006623204728A8009BA6F6 /* TrackingProtectionStats.js */,
+				F9E0F38A25772E57003A6A30 /* ReaderMode.js */,
+				F9E0F3A7257739B1003A6A30 /* TrackingProtectionStats.js */,
 			);
 			path = AtDocumentStart;
 			sourceTree = "<group>";
@@ -4860,6 +4863,31 @@
 				F9C6B7D523886EF8003F7D16 /* SceneObserver.swift */,
 			);
 			path = WebAuthN;
+			sourceTree = "<group>";
+		};
+		F9838EF325797C530051FA21 /* Sandboxed */ = {
+			isa = PBXGroup;
+			children = (
+				F9838EF525797E1A0051FA21 /* AllFrames */,
+			);
+			path = Sandboxed;
+			sourceTree = "<group>";
+		};
+		F9838EF425797C6D0051FA21 /* AtDocumentEnd */ = {
+			isa = PBXGroup;
+			children = (
+				F9E0F3BE25787E2C003A6A30 /* __firefox__.js */,
+				F9E0F3B3257878C1003A6A30 /* PrintHandler.js */,
+			);
+			path = AtDocumentEnd;
+			sourceTree = "<group>";
+		};
+		F9838EF525797E1A0051FA21 /* AllFrames */ = {
+			isa = PBXGroup;
+			children = (
+				F9838EF425797C6D0051FA21 /* AtDocumentEnd */,
+			);
+			path = AllFrames;
 			sourceTree = "<group>";
 		};
 		F9B23EE323F61380000EB3D8 /* PaymentRequest */ = {
@@ -5526,6 +5554,7 @@
 				F35B8D2B1D6380EA008E3D61 /* SessionRestore.html in Resources */,
 				5E4845C022DE381200372022 /* WindowRenderHelper.js in Resources */,
 				3BC659591E5BA505006D560F /* top_sites.json in Resources */,
+				F9E0F3A8257739B1003A6A30 /* TrackingProtectionStats.js in Resources */,
 				E4B7B7631A793CF20022C5E0 /* CharisSILI.ttf in Resources */,
 				E4CD9F541A71506400318571 /* Reader.html in Resources */,
 				C6345ECB2113B3A000CFB983 /* SearchPlugins in Resources */,
@@ -5583,6 +5612,8 @@
 				5D5374A823846FFC00A2B587 /* annie-spratt.jpg in Resources */,
 				E4A961381AC06FA50069AD6F /* ReaderViewLoading.html in Resources */,
 				59C8119922D754D4005D5BBC /* BraveShared.strings in Resources */,
+				F9E0F3B4257878C1003A6A30 /* PrintHandler.js in Resources */,
+				F9E0F38B25772E57003A6A30 /* ReaderMode.js in Resources */,
 				E4ECCDAE1AB131770005E717 /* FiraSans-Medium.ttf in Resources */,
 				F9B23EE223F61173000EB3D8 /* PaymentRequest.js in Resources */,
 				E4424B3C1AC71FB400F44C38 /* FiraSans-Book.ttf in Resources */,
@@ -5601,6 +5632,7 @@
 				5EE4CF5B2540868E00BC4509 /* Bookmarks.html in Resources */,
 				D03F8F23200EAC1F003C2224 /* AllFramesAtDocumentStart.js in Resources */,
 				0AA21E4A2302C4CC00358988 /* webauth_verify_key.json in Resources */,
+				F9E0F3BF25787E2C003A6A30 /* __firefox__.js in Resources */,
 				279C75C821A5B37D001CD1CB /* FingerprintingProtection.js in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

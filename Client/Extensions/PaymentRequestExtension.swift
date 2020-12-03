@@ -49,11 +49,11 @@ extension PaymentRequestExtension: TabContentScript {
     
     private func sendPaymentRequestError(errorName: String, errorMessage: String) {
         ensureMainThread {
-            self.tab?.webView?.evaluateJavaScript("PaymentRequestCallback\(self.token).paymentreq_postCreate('', '\(errorName)', '\(errorMessage)')") { _, error in
+            self.tab?.webView?.evaluateSafeJavascript(functionName: "PaymentRequestCallback\(self.token).payemntreq_postCreate", args: ["", errorName, errorMessage], completion: { _, error in
                     if error != nil {
                         log.error(error)
                     }
-                }
+            })
         }
     }
     
@@ -93,11 +93,11 @@ extension PaymentRequestExtension: TabContentScript {
                     }
                 case .completed(let orderId):
                     ensureMainThread {
-                        self.tab?.webView?.evaluateJavaScript("PaymentRequestCallback\(self.token).paymentreq_postCreate('\(orderId)', '', '')") { _, error in
-                            if error != nil {
-                                log.error(error)
-                            }
-                        }
+                        self.tab?.webView?.evaluateSafeJavascript(functionName: "PaymentRequestCallback\(self.token).paymentreq_postCreate", args: [orderId, "", ""], completion: { _, error in
+                                if error != nil {
+                                    log.error(error)
+                                }
+                        })
                     }
                 }
             }

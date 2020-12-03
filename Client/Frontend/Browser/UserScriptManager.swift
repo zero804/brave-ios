@@ -93,19 +93,32 @@ class UserScriptManager {
     // MARK: -
     
     private let packedUserScripts: [WKUserScript] = {
-        [(WKUserScriptInjectionTime.atDocumentStart, mainFrameOnly: false),
-         (WKUserScriptInjectionTime.atDocumentEnd, mainFrameOnly: false),
-         (WKUserScriptInjectionTime.atDocumentStart, mainFrameOnly: true),
-         (WKUserScriptInjectionTime.atDocumentEnd, mainFrameOnly: true)].compactMap { arg in
-            let (injectionTime, mainFrameOnly) = arg
-            let name = (mainFrameOnly ? "MainFrame" : "AllFrames") + "AtDocument" + (injectionTime == .atDocumentStart ? "Start" : "End")
+        [(WKUserScriptInjectionTime.atDocumentStart, mainFrameOnly: false, sandboxed: false),
+         (WKUserScriptInjectionTime.atDocumentEnd, mainFrameOnly: false, sandboxed: false),
+         (WKUserScriptInjectionTime.atDocumentEnd, mainFrameOnly: false, sandboxed: true),
+         (WKUserScriptInjectionTime.atDocumentStart, mainFrameOnly: true, sandboxed: false),
+         (WKUserScriptInjectionTime.atDocumentEnd, mainFrameOnly: true, sandboxed: false)].compactMap { arg in
+            let (injectionTime, mainFrameOnly, sandboxed) = arg
+            let name = (mainFrameOnly ? "MainFrame" : "AllFrames") + "AtDocument" + (injectionTime == .atDocumentStart ? "Start" : "End") + (sandboxed ? "Sandboxed" : "")
             if let path = Bundle.main.path(forResource: name, ofType: "js"),
                 let source = try? NSString(contentsOfFile: path, encoding: String.Encoding.utf8.rawValue) as String {
                 let wrappedSource = "(function() { const SECURITY_TOKEN = '\(UserScriptManager.securityToken)'; \(source) })()"
-                return WKUserScript.createInDefaultContentWorld(source: wrappedSource, injectionTime: injectionTime, forMainFrameOnly: mainFrameOnly)
+                if sandboxed {
+                    return WKUserScript.createInDefaultContentWorld(source: wrappedSource, injectionTime: injectionTime, forMainFrameOnly: mainFrameOnly)
+                } else {
+                    return WKUserScript(source: wrappedSource, injectionTime: injectionTime, forMainFrameOnly: mainFrameOnly)
+                }
             }
             return nil
         }
+    }()
+    
+    private let readerModeUserScript: WKUserScript? = {
+        guard let path = Bundle.main.path(forResource: "ReaderMode", ofType: "js"), let source = try? String(contentsOfFile: path) else {
+            log.error("Failed to load reader mode user script")
+            return nil
+        }
+        return WKUserScript(source: source, injectionTime: .atDocumentStart, forMainFrameOnly: true)
     }()
     
     private let userAgentUserScript: WKUserScript? = {
@@ -281,6 +294,10 @@ class UserScriptManager {
             }
 
             if let script = userAgentUserScript {
+                $0.addUserScript(script)
+            }
+            
+            if let script = readerModeUserScript {
                 $0.addUserScript(script)
             }
 

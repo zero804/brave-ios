@@ -209,8 +209,8 @@ class LoginsHelper: TabContentScript {
             }
 
             let json = JSON(jsonObj)
-            let src = "window.__firefox__.logins.inject(\(json.stringValue()!))"
-            self.tab?.webView?.evaluateJavaScript(src, completionHandler: { (obj, err) -> Void in
+            self.tab?.webView?.evaluateSafeJavascript(functionName: "window.__firefox__.logins.inject", args: [json.stringValue()!], sandboxed: false, escapeArgs: false, completion: { (obj, err) -> Void in
+                log.debug(err)
             })
         }
     }

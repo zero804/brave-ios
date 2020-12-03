@@ -17,8 +17,8 @@ extension WKUserContentController {
 }
 
 extension WKUserScript {
-    public class func createInDefaultContentWorld(source: String, injectionTime: WKUserScriptInjectionTime, forMainFrameOnly: Bool, sandboxed: Bool = true) -> WKUserScript {
-        if #available(iOS 14.0, *), sandboxed {
+    public class func createInDefaultContentWorld(source: String, injectionTime: WKUserScriptInjectionTime, forMainFrameOnly: Bool) -> WKUserScript {
+        if #available(iOS 14.0, *) {
             return WKUserScript(source: source, injectionTime: injectionTime, forMainFrameOnly: forMainFrameOnly, in: .defaultClient)
         } else {
             return WKUserScript(source: source, injectionTime: injectionTime, forMainFrameOnly: forMainFrameOnly)
@@ -27,15 +27,15 @@ extension WKUserScript {
 }
 
 public extension WKWebView {
-    private func generateJavascriptFunctionString(functionName: String, args: [Any]) -> String {
+    private func generateJavascriptFunctionString(functionName: String, args: [Any], escapeArgs: Bool = true) -> String {
         let argsJS = args
-          .map { "'\(String(describing: $0).escapeHTML())'" }
+          .map { escapeArgs ? "'\(String(describing: $0).escapeHTML())'" : "\($0)"}
           .joined(separator: ", ")
         return "\(functionName)(\(argsJS))"
     }
 
-    func evaluateSafeJavascript(functionName: String, args: [Any], sandboxed: Bool = true, completion: @escaping ((Any?, Error?) -> Void)) {
-        let javascript = generateJavascriptFunctionString(functionName: functionName, args: args)
+    func evaluateSafeJavascript(functionName: String, args: [Any], sandboxed: Bool = true, escapeArgs: Bool = true, completion: @escaping ((Any?, Error?) -> Void)) {
+        let javascript = generateJavascriptFunctionString(functionName: functionName, args: args, escapeArgs: escapeArgs)
         if #available(iOS 14.0, *), sandboxed {
             evaluateJavaScript(javascript, in: nil, in: .defaultClient) { result  in
                 switch result {

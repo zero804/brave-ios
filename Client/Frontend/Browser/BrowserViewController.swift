@@ -1559,7 +1559,7 @@ class BrowserViewController: UIViewController {
             return
         }
         if NoImageModeHelper.isActivated {
-            webView.evaluateSafeJavascript(functionName: "__firefox__.NoImageMode.setEnabled", args: ["true"], sandboxed: true, completion: { _, _ in
+            webView.evaluateSafeJavascript(functionName: "__firefox__.NoImageMode.setEnabled", args: ["true"], completion: { _, _ in
                 return
             })
         }
@@ -2429,16 +2429,16 @@ extension BrowserViewController: TabDelegate {
         webView.uiDelegate = self
 
         let formPostHelper = FormPostHelper(tab: tab)
-        tab.addContentScript(formPostHelper, name: FormPostHelper.name(), sandboxed: true)
+        tab.addContentScript(formPostHelper, name: FormPostHelper.name())
 
         let readerMode = ReaderMode(tab: tab)
         readerMode.delegate = self
-        tab.addContentScript(readerMode, name: ReaderMode.name(), sandboxed: true)
+        tab.addContentScript(readerMode, name: ReaderMode.name(), sandboxed: false)
 
         // only add the logins helper if the tab is not a private browsing tab
         if !tab.isPrivate {
             let logins = LoginsHelper(tab: tab, profile: profile)
-            tab.addContentScript(logins, name: LoginsHelper.name())
+            tab.addContentScript(logins, name: LoginsHelper.name(), sandboxed: false)
         }
 
         let contextMenuHelper = ContextMenuHelper(tab: tab)
@@ -2474,7 +2474,7 @@ extension BrowserViewController: TabDelegate {
         tab.contentBlocker.setupTabTrackingProtection()
         tab.addContentScript(tab.contentBlocker, name: ContentBlockerHelper.name(), sandboxed: false)
 
-        tab.addContentScript(FocusHelper(tab: tab), name: FocusHelper.name(), sandboxed: false)
+        tab.addContentScript(FocusHelper(tab: tab), name: FocusHelper.name())
         
         tab.addContentScript(FingerprintingProtection(tab: tab), name: FingerprintingProtection.name(), sandboxed: false)
         
@@ -2482,15 +2482,15 @@ extension BrowserViewController: TabDelegate {
 
         tab.addContentScript(U2FExtensions(tab: tab), name: U2FExtensions.name(), sandboxed: false)
         
-        tab.addContentScript(ResourceDownloadManager(tab: tab), name: ResourceDownloadManager.name(), sandboxed: true)
+        tab.addContentScript(ResourceDownloadManager(tab: tab), name: ResourceDownloadManager.name())
         
-        tab.addContentScript(WindowRenderHelperScript(tab: tab), name: WindowRenderHelperScript.name(), sandboxed: true)
+        tab.addContentScript(WindowRenderHelperScript(tab: tab), name: WindowRenderHelperScript.name())
         
-        tab.addContentScript(RewardsReporting(rewards: rewards, tab: tab), name: RewardsReporting.name(), sandboxed: true)
-        tab.addContentScript(AdsMediaReporting(rewards: rewards, tab: tab), name: AdsMediaReporting.name(), sandboxed: true)
+        tab.addContentScript(RewardsReporting(rewards: rewards, tab: tab), name: RewardsReporting.name())
+        tab.addContentScript(AdsMediaReporting(rewards: rewards, tab: tab), name: AdsMediaReporting.name())
         
         #if !NO_SKUS
-        tab.addContentScript(PaymentRequestExtension(rewards: rewards, tab: tab, paymentRequested: self.paymentRequested), name: PaymentRequestExtension.name())
+        tab.addContentScript(PaymentRequestExtension(rewards: rewards, tab: tab, paymentRequested: self.paymentRequested), name: PaymentRequestExtension.name(), sandboxed: false)
         #endif
     }
 
