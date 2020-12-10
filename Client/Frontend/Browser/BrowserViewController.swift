@@ -2454,7 +2454,7 @@ extension BrowserViewController: TabDelegate {
 
         let findInPageHelper = FindInPageHelper(tab: tab)
         findInPageHelper.delegate = self
-        tab.addContentScript(findInPageHelper, name: FindInPageHelper.name())
+        tab.addContentScript(findInPageHelper, name: FindInPageHelper.name(), sandboxed: false)
 
         let noImageModeHelper = NoImageModeHelper(tab: tab)
         tab.addContentScript(noImageModeHelper, name: NoImageModeHelper.name())
